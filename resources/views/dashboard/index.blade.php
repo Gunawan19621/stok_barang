@@ -1,8 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Dashboard')
 @section('content')
-    {{-- <div class="container-fluid"> --}}
-    <!-- Content Row -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
@@ -34,7 +32,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 14px;">
-                                <strong>Peminjaman</strong></div>
+                                <strong>Peminjaman</strong>
+                            </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">73</div>
                         </div>
                         <div class="col-auto">
@@ -154,5 +153,4 @@
             </div>
         </div>
     </div>
-    {{-- </div> --}}
 @endsection

@@ -12,7 +12,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/') }}">
+        <a class="nav-link" href="{{ url('/dashboard2') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -22,17 +22,17 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/transaksi') }}">
+        <a class="nav-link" href="{{ url('/dashboard/transaksi') }}">
             <span class="ml-4">Transaksi</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/peminjaman') }}">
+        <a class="nav-link" href="{{ url('/dashboard/peminjaman') }}">
             <span class="ml-4">Peminjaman</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/pengembalian') }}">
+        <a class="nav-link" href="{{ url('/dashboard/pengembalian') }}">
             <span class="ml-4">Pengembalian</span>
         </a>
     </li>
@@ -47,12 +47,12 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/pengadaan') }}">
+        <a class="nav-link" href="{{ url('/dashboard/pengadaan') }}">
             <span class="ml-4">Pengadaan</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/settingPlatform') }}">
+        <a class="nav-link" href="{{ url('/dashboard/settingPlatform') }}">
             <span class="ml-4">Setting Platform</span>
         </a>
     </li>

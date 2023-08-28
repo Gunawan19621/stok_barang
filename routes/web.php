@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengembalianController;
+use App\Http\Controllers\PengadaanController;
+use App\Http\Controllers\SettingPlatformController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,51 +19,45 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::get('/forgot_password', function () {
-    return view('forgot_password');
-});
-
 Route::get('/', function () {
-    return view('dashboard.index');
+    return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('layouts.main');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard2', function () {
+//     return view('dashboard.index');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile-update', [ProfileController::class, 'updatePhoto'])->name('profile-update');
+    Route::get('/setting', [ProfileController::class, 'setting'])->name('profile.setting');
 });
 
+Route::group(['prefix' => 'dashboard'], function () {
+    //Halaman dashboard
+    Route::middleware('auth')->get('', function () {
+        return view('dashboard.index');
+    });
 
-Route::get('/transaksi', function () {
-    return view('dashboard.transaksi');
+    //Halaman Transaksi
+    Route::middleware('auth')->resource('/transaksi', TransaksiController::class);
+
+    //Halaman Peminjaman
+    Route::middleware('auth')->resource('/peminjaman', PeminjamanController::class);
+
+    //Halaman Pengembalian
+    Route::middleware('auth')->resource('/pengembalian', PengembalianController::class);
+
+    //Halaman Pengadaan
+    Route::middleware('auth')->resource('/pengadaan', PengadaanController::class);
+
+    //Halaman Setting Platform
+    Route::middleware('auth')->resource('/settingPlatform', SettingPlatformController::class);
 });
 
-Route::get('/peminjaman', function () {
-    return view('dashboard.peminjaman');
-});
-
-Route::get('/pengembalian', function () {
-    return view('dashboard.pengembalian');
-});
-
-Route::get('/pengadaan', function () {
-    return view('addons.pengadaan');
-});
-
-Route::get('/pengadaan', function () {
-    return view('addons.pengadaan');
-});
-
-Route::get('/settingPlatform', function () {
-    return view('addons.settingPlatform');
-});
-
-Route::get('/profil', function () {
-    return view('profil.profil');
-});
+require __DIR__ . '/auth.php';

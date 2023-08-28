@@ -11,3 +11,6 @@
 <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
 <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
 <script src="{{ asset('assets/js/demo/chart-bar-demo.js') }}"></script>
+
+<!-- untuk update foto profile -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -63,21 +63,42 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin keluar?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Pilih "Logout" di bawah ini jika Anda siap untuk mengakhiri sesi Anda saat ini.
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ url('/login') }}">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="btn btn-danger" style="cursor: pointer" type="submit">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     @include('layouts.script')
+
+    <!-- update data foto -->
+    <script>
+        $(document).ready(function() {
+            $('#photo').change(function() {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('.profile-image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+            $('.profile-image').click(function() {
+                $('.form-control-file').click();
+            });
+        });
+    </script>
+    <!-- End update data foto -->
 </body>
 
 </html>
