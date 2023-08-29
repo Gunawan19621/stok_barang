@@ -23,18 +23,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/dashboard2', function () {
-//     return view('dashboard.index');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/profile/update', [ProfileController::class, 'updateprofile'])->name('update.updateprofile');
+    Route::put('/profile/{id}', [ProfileController::class, 'updateprofile'])->name('profile.updateprofile');
+    // Route::put('/profile/{id}', 'ProfileController@updateprofile')->name('profile.update');
     Route::post('/profile-update', [ProfileController::class, 'updatePhoto'])->name('profile-update');
     Route::get('/setting', [ProfileController::class, 'setting'])->name('profile.setting');
 });

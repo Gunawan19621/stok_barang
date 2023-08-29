@@ -29,39 +29,67 @@ class ProfileController extends Controller
     }
 
     //Proses update Profile
-    public function update(UpdatePenggunaRequest $request, $id)
+    public function updateprofile(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255|min:3|regex:/^[a-zA-Z\s]+$/',
+            'email' => 'required|email|max:255|min:3',
+            'phone' => 'required|numeric|digits_between:10,13',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'tgl_lahir' => 'date',
+            'jenis_kelamin' => 'required|in:L,P',
+            'agama' => 'required|in:Islam,Kristen,Katolik,Hindu,Budha,Konghucu',
+            'alamat' => 'required|string|max:255|min:3',
+        ]);
+
         try {
             $pengguna = User::findOrFail($id);
-            $pengguna->update($request->validated());
-            return redirect()->route('profile.edit')->with('success', 'Profil pengguna berhasil perbaharui');
+
+            // Handle foto upload if provided
+            if ($request->hasFile('foto')) {
+                // Upload and update foto
+                $fotoPath = $request->file('foto')->store('profile_photos', 'public');
+                $pengguna->foto = $fotoPath;
+            }
+
+            // Update other fields
+            $pengguna->name = $request->name;
+            $pengguna->email = $request->email;
+            $pengguna->phone = $request->phone;
+            $pengguna->tgl_lahir = $request->tgl_lahir;
+            $pengguna->jenis_kelamin = $request->jenis_kelamin;
+            $pengguna->agama = $request->agama;
+            $pengguna->alamat = $request->alamat;
+
+            $pengguna->save();
+
+            return redirect()->back()->with('success', 'Profil pengguna berhasil diperbarui');
         } catch (\Throwable $th) {
-            dd($th);
-            return redirect()->route('pengguna.index')->with('error', 'Data pengguna gagal diubah');
+            // Uncomment this line to see the error details
+            // dd($th);
+            return redirect()->back()->with('error', 'Data pengguna gagal diubah');
         }
     }
-    // public function updateprofile(Request $request)
     // {
     //     // dd('oke');
-    //     $messages = [
-    //         'tgl_lahir.date_format' => 'Format tanggal lahir harus sesuai dengan d/m/Y.',
-    //     ];
-
+    //     $request->validate([
+    //         'name' => 'required|string|max:255|min:3|regex:/^[a-zA-Z\s]+$/',
+    //         'email' => 'required|email|max:255|min:3',
+    //         'phone' => 'required|numeric|digits_between:10,13',
+    //         'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    //         'tgl_lahir' => 'date',
+    //         'jenis_kelamin' => 'required|in:L,P',
+    //         'agama' => 'required|in:Islam,Kristen,Katolik,Hindu,Budha,Konghucu',
+    //         'alamat' => 'required|string|max:255|min:3',
+    //     ]);
+    //     // dd($request);
     //     try {
-    //         $request->validate([
-    //             'name' => 'required',
-    //             'email' => 'required',
-    //             'phone' => 'required',
-    //             'tgl_lahir' => 'date',
-    //             'jenis_kelamin' => 'required',
-    //             'agama' => 'required',
-    //             'alamat' => 'required',
-    //         ], $messages);
-    //         // dd($request->all());
-    //         return back()->with('success', 'Profil berhasil di update.');
+    //         $pengguna = User::findOrFail($id);
+    //         $pengguna->update($request->validated());
+    //         return redirect()->back()->with('success', 'Profil pengguna berhasil diperbarui');
     //     } catch (\Throwable $th) {
-    //         // dd($th);
-    //         return back()->with('eror', 'Profil gagal di update.');
+    //         dd($th);
+    //         return redirect()->back()->with('error', 'Data pengguna gagal diubah');
     //     }
     // }
 

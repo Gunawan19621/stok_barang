@@ -11,6 +11,17 @@
     <title>SB Admin 2 - Dashboard</title>
     @include('layouts.link')
 </head>
+{{-- <style>
+    /* CSS untuk membuat alert mengambang */
+    .floating-alert {
+        position: fixed;
+        /* height: 100%; */
+        width: 80%;
+        top: 100px;
+        right: 30px;
+        z-index: 9999;
+    }
+</style> --}}
 
 <body id="page-top">
     @stack('style')
@@ -29,6 +40,26 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <!-- allert update data foto -->
+                    {{-- @if (session()->has('success'))
+                        <div id="success-alert" class="alert alert-success floating-alert">
+                            {{ session()->get('success') }}
+                        </div>
+                    @elseif(session()->has('error'))
+                        <div id="error-alert" class="alert alert-danger floating-alert">
+                            X {{ session()->get('error') }}
+                        </div>
+                    @endif --}}
+                    @if (session()->has('success'))
+                        <div id="success-alert" class="alert alert-success">
+                            {{ session()->get('success') }}
+                        </div>
+                    @elseif(session()->has('error'))
+                        <div id="success-alert" class="alert alert-danger">
+                            X {{ session()->get('error') }}
+                        </div>
+                    @endif
+                    <!-- allert update data foto -->
                     @yield('content')
                 </div>
                 <!-- /.container-fluid -->
@@ -82,6 +113,18 @@
     </div>
 
     @include('layouts.script')
+
+    <!-- Batas waktu alert -->
+    <script>
+        // Hapus alert setelah 3 detik
+        setTimeout(function() {
+            var successAlert = document.getElementById('success-alert');
+            if (successAlert) {
+                successAlert.remove();
+            }
+        }, 3000); // 3000 milidetik = 3 detik
+    </script>
+    <!-- Batas waktu alert -->
 
     <!-- update data foto -->
     <script>

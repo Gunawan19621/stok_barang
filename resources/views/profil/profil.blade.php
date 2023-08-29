@@ -3,8 +3,10 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('update.updateprofile') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('profile.updateprofile', auth()->user()->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="col-9">
                         <label for="name" class="col-form-label" style="font-size: 14px;">Nama</label>
