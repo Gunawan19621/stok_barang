@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UpdatePenggunaRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -27,6 +28,43 @@ class ProfileController extends Controller
         return view('profil.profil');
     }
 
+    //Proses update Profile
+    public function update(UpdatePenggunaRequest $request, $id)
+    {
+        try {
+            $pengguna = User::findOrFail($id);
+            $pengguna->update($request->validated());
+            return redirect()->route('profile.edit')->with('success', 'Profil pengguna berhasil perbaharui');
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()->route('pengguna.index')->with('error', 'Data pengguna gagal diubah');
+        }
+    }
+    // public function updateprofile(Request $request)
+    // {
+    //     // dd('oke');
+    //     $messages = [
+    //         'tgl_lahir.date_format' => 'Format tanggal lahir harus sesuai dengan d/m/Y.',
+    //     ];
+
+    //     try {
+    //         $request->validate([
+    //             'name' => 'required',
+    //             'email' => 'required',
+    //             'phone' => 'required',
+    //             'tgl_lahir' => 'date',
+    //             'jenis_kelamin' => 'required',
+    //             'agama' => 'required',
+    //             'alamat' => 'required',
+    //         ], $messages);
+    //         // dd($request->all());
+    //         return back()->with('success', 'Profil berhasil di update.');
+    //     } catch (\Throwable $th) {
+    //         // dd($th);
+    //         return back()->with('eror', 'Profil gagal di update.');
+    //     }
+    // }
+
     //Proses update Profile Photo
     public function updatePhoto(Request $request)
     {
@@ -44,18 +82,18 @@ class ProfileController extends Controller
     }
 
     //Proses update Profile Informasi
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    // public function update(ProfileUpdateRequest $request): RedirectResponse
+    // {
+    //     $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+    //     if ($request->user()->isDirty('email')) {
+    //         $request->user()->email_verified_at = null;
+    //     }
 
-        $request->user()->save();
+    //     $request->user()->save();
 
-        return Redirect::back()->with('status', 'profile-updated');
-    }
+    //     return Redirect::back()->with('status', 'profile-updated');
+    // }
 
     /**
      * Delete the user's account.
