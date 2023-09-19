@@ -11,17 +11,6 @@
     <title>SB Admin 2 - Dashboard</title>
     @include('layouts.link')
 </head>
-{{-- <style>
-    /* CSS untuk membuat alert mengambang */
-    .floating-alert {
-        position: fixed;
-        /* height: 100%; */
-        width: 80%;
-        top: 100px;
-        right: 30px;
-        z-index: 9999;
-    }
-</style> --}}
 
 <body id="page-top">
     @stack('style')
@@ -113,6 +102,16 @@
     </div>
 
     @include('layouts.script')
+
+    <!-- pengaturan datatables -->
+    <script>
+        $(document).ready(function() {
+            $('#tablebarang').DataTable({
+                "searching": true // Aktifkan fitur pencarian
+            });
+        });
+    </script>
+    <!-- End pengaturan datatables -->
 
     <!-- Batas waktu alert -->
     <script>

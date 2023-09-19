@@ -5,6 +5,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PengadaanController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingPlatformController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/{id}', [ProfileController::class, 'updateprofile'])->name('profile.updateprofile');
     // Route::put('/profile/{id}', 'ProfileController@updateprofile')->name('profile.update');
     Route::post('/profile-update', [ProfileController::class, 'updatePhoto'])->name('profile-update');
@@ -52,7 +54,8 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::middleware('auth')->resource('/pengadaan', PengadaanController::class);
 
     //Halaman Setting Platform
-    Route::middleware('auth')->resource('/settingPlatform', SettingPlatformController::class);
+    Route::middleware('auth')->resource('/product', ProductController::class);
+    Route::get('/hapusProduct/{id}', [ProductController::class, 'destroy'])->name('hapusProduct.destroy');
 });
 
 require __DIR__ . '/auth.php';

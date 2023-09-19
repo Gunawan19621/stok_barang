@@ -6,3 +6,10 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+<!-- tabah sendiri -->
+<!-- untuk pengaturan datatables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">

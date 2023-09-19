@@ -43,23 +43,21 @@
                         <label for="foto">Foto Profil</label><br>
                         @if (auth()->user()->foto === null)
                             <img src="{{ asset('assets/img/default-profile.png') }}" alt="{{ auth()->user()->name }}"
-                                class="rounded-circle thumb-xl profile-image" style="width: 155px; cursor: pointer;"><br>
+                                class="rounded-circle thumb-xl profile-image"
+                                style="width: 155px; height: 155px; cursor: pointer;"><br>
                         @else
                             <img src="{{ asset('storage/' . auth()->user()->foto) }}" alt="{{ auth()->user()->name }}"
                                 class="rounded-circle img-thumbnail thumb-xl profile-image"
-                                style="width: 155px; cursor: pointer;"><br>
+                                style="width: 155px; height: 155px; cursor: pointer;"><br>
                         @endif
-                        {{-- <div class="button-items">
-                            <form action="{{ route('profile-update') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="file" name="foto" id="photo" class="form-control-file d-none"
-                                        accept=".jpeg,.jpg,.png,.jfif">
-                                </div>
-                                <button type="submit" class="btn btn-sm col-4 btn-info">Simpan</button>
-                                <a href="#" class="btn btn-sm col-4 btn-secondary">Hapus</a>
-                            </form>
-                        </div> --}}
+                        <div class="button-items mt-2">
+                            <label for="photo" class="btn btn-sm col-4 btn-info mt-2">
+                                <input type="file" name="foto" id="photo" class="d-none" accept="image/*">
+                                Upload
+                            </label>
+                            <button type="button" class="btn btn-sm col-4 btn-danger"
+                                onclick="window.location.reload()">Batal</button>
+                        </div>
                     </div>
                     <div class="col-12">
                         <div class="mb-2">
@@ -129,14 +127,12 @@
 
                     </div>
                     <div class="col-12 d-flex justify-content-end">
-                        <button type="button" class="btn btn-danger mt-2 col-1">BATAL</button>
+                        <button type="button" class="btn btn-primary mt-2"
+                            onclick="window.location.href = '{{ route('profile.setting') }}';">EDIT PASSWORD</button>
                         <button type="submit" class="btn btn-success mt-2 ml-2 col-1">SIMPAN</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- update data foto -->
-    <!-- End update data foto -->
 @endsection

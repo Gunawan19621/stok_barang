@@ -1,6 +1,6 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -12,7 +12,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/dashboard2') }}">
+        <a class="nav-link" href="{{ url('/dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -26,6 +26,19 @@
             <span class="ml-4">Transaksi</span>
         </a>
     </li>
+    {{-- <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <span class="ml-4">Transaksi</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Custom Components:</h6>
+                <a class="collapse-item" href="buttons.html">Barang Masuk</a>
+                <a class="collapse-item" href="cards.html">Barang Keluar</a>
+            </div>
+        </div>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/dashboard/peminjaman') }}">
             <span class="ml-4">Peminjaman</span>
@@ -52,7 +65,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/settingPlatform') }}">
+        <a class="nav-link" href="{{ url('/dashboard/product') }}">
             <span class="ml-4">Setting Platform</span>
         </a>
     </li>
