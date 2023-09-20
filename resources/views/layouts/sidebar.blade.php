@@ -21,24 +21,23 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ url('/dashboard/transaksi') }}">
             <span class="ml-4">Transaksi</span>
         </a>
-    </li>
-    {{-- <li class="nav-item">
+    </li> --}}
+    <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <span class="ml-4">Transaksi</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="buttons.html">Barang Masuk</a>
                 <a class="collapse-item" href="cards.html">Barang Keluar</a>
             </div>
         </div>
-    </li> --}}
+    </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/dashboard/peminjaman') }}">
             <span class="ml-4">Peminjaman</span>
