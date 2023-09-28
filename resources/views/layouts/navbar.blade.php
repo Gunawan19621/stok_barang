@@ -170,12 +170,12 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->fullname }}</span>
                 @if (auth()->user()->foto === null)
-                    <img src="{{ asset('assets/img/default-profile.png') }}" alt="{{ auth()->user()->name }}"
+                    <img src="{{ asset('assets/img/default-profile.png') }}" alt="{{ auth()->user()->fullname }}"
                         class="img-profile rounded-circle">
                 @else
-                    <img src="{{ asset('storage/' . auth()->user()->foto) }}" alt="{{ auth()->user()->name }}"
+                    <img src="{{ asset('storage/' . auth()->user()->foto) }}" alt="{{ auth()->user()->fullname }}"
                         class="img-profile rounded-circle">
                 @endif
 

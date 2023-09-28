@@ -9,12 +9,12 @@
                 @method('PUT')
                 <div class="row">
                     <div class="col-9">
-                        <label for="name" class="col-form-label" style="font-size: 14px;">Nama</label>
+                        <label for="fullname" class="col-form-label" style="font-size: 14px;">Nama</label>
                         <div class="mb-2">
                             <input pattern="[^0-9]+" required oninput="this.value=this.value.replace(/[0-9]/g,'');"
-                                class="form-control" type="text" id="name" name="name"
-                                value="{{ old('name', auth()->user()->name) }}" placeholder="Masukan nama anda">
-                            @error('name')
+                                class="form-control" type="text" id="fullname" name="fullname"
+                                value="{{ old('fullname', auth()->user()->fullname) }}" placeholder="Masukan nama anda">
+                            @error('fullname')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -29,12 +29,12 @@
                             @enderror
                         </div>
 
-                        <label for="phone" class="col-form-label" style="font-size: 14px;">No.
+                        <label for="no_hp" class="col-form-label" style="font-size: 14px;">No.
                             Handphone</label>
                         <div class="mb-2">
-                            <input class="form-control" type="tel" id="phone" name="phone"
-                                value="{{ old('phone', auth()->user()->phone) }}" placeholder="Masukan nomor telepone anda">
-                            @error('phone')
+                            <input class="form-control" type="text" id="no_hp" name="no_hp"
+                                value="{{ old('no_hp', auth()->user()->no_hp) }}" placeholder="Masukan nomor telepon anda">
+                            @error('no_hp')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -63,8 +63,9 @@
                         <div class="mb-2">
                             <label for="tgl_lahir" class="col-form-label" style="font-size: 14px;">Tanggal
                                 Lahir</label>
-                            <input class="form-control" type="date" name="tgl_lahir"
-                                value="{{ old('tgl_lahir', auth()->user()->tgl_lahir) }}" id="tgl_lahir">
+                            <input class="form-control" name="tgl_lahir" type="date" id="tgl_lahir"
+                                value="{{ \Carbon\Carbon::parse(old('tgl_lahir', auth()->user()->tgl_lahir))->format('Y-m-d') }}"
+                                placeholder="Masukan Tanggal Asset" required>
                             @error('tgl_lahir')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -116,11 +117,11 @@
                             @enderror
                         </div>
 
-                        <label for="alamat" class="col-form-label" style="font-size: 14px;">Alamat</label>
+                        <label for="address" class="col-form-label" style="font-size: 14px;">Alamat</label>
                         <div class="mb-2">
                             <textarea pattern="[^0-9]+" required oninput="this.value=this.value.replace(/[0-9]/g,'');" class="form-control"
-                                id="alamat" name="alamat" placeholder="Masukkan alamat Anda">{{ old('alamat', auth()->user()->alamat) }}</textarea>
-                            @error('alamat')
+                                id="address" name="address" placeholder="Masukkan alamat Anda">{{ old('address', auth()->user()->address) }}</textarea>
+                            @error('address')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>

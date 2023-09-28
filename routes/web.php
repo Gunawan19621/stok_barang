@@ -6,7 +6,10 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\M_assetController;
+use App\Http\Controllers\M_userController;
 use App\Http\Controllers\SettingPlatformController;
+use App\Models\m_asset;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/coba', function () {
+    return view('landing_page.layouts.main');
+});
+Route::get('/logincoba', function () {
+    // return view('landing_page.login');
+    return view('login');
+});
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,9 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/{id}', [ProfileController::class, 'updateprofile'])->name('profile.updateprofile');
-    // Route::put('/profile/{id}', 'ProfileController@updateprofile')->name('profile.update');
     Route::post('/profile-update', [ProfileController::class, 'updatePhoto'])->name('profile-update');
     Route::get('/setting', [ProfileController::class, 'setting'])->name('profile.setting');
 });
@@ -46,6 +59,7 @@ Route::group(['prefix' => 'dashboard'], function () {
 
     //Halaman Peminjaman
     Route::middleware('auth')->resource('/peminjaman', PeminjamanController::class);
+    Route::get('/hapusPeminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('hapusPeminjaman.destroy');
 
     //Halaman Pengembalian
     Route::middleware('auth')->resource('/pengembalian', PengembalianController::class);
@@ -53,9 +67,14 @@ Route::group(['prefix' => 'dashboard'], function () {
     //Halaman Pengadaan
     Route::middleware('auth')->resource('/pengadaan', PengadaanController::class);
 
-    //Halaman Setting Platform
-    Route::middleware('auth')->resource('/product', ProductController::class);
-    Route::get('/hapusProduct/{id}', [ProductController::class, 'destroy'])->name('hapusProduct.destroy');
+    //Halaman Manajemen Asset
+    Route::middleware('auth')->resource('/asset', M_assetController::class);
+    Route::get('/hapusAsset/{id}', [M_assetController::class, 'destroy'])->name('hapusAsset.destroy');
+
+    //Halaman Manajemen User
+    Route::middleware('auth')->resource('/user', M_userController::class);
+    Route::get('/hapusUser/{id}', [M_userController::class, 'destroy'])->name('hapusUser.destroy');
+    // Route::get('/hapusAsset/{id}', [M_assetController::class, 'destroy'])->name('hapusAsset.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -33,14 +33,14 @@ class ProfileController extends Controller
     public function updateprofile(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255|min:3|regex:/^[a-zA-Z\s]+$/',
-            'email' => 'required|email|max:255|min:3',
-            'phone' => 'required|numeric|digits_between:10,13',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tgl_lahir' => 'date',
-            'jenis_kelamin' => 'required|in:L,P',
-            'agama' => 'required|in:Islam,Kristen,Katolik,Hindu,Budha,Konghucu',
-            'alamat' => 'required|string|max:255|min:3',
+            'fullname' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi jenis file gambar
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'address' => 'required',
         ]);
 
         try {
@@ -48,26 +48,29 @@ class ProfileController extends Controller
 
             // Handle foto upload if provided
             if ($request->hasFile('foto')) {
-                // Upload and update foto
+                // Hapus foto lama jika ada
+                if ($pengguna->foto) {
+                    Storage::delete('public/' . $pengguna->foto);
+                }
+
+                // Upload foto baru
                 $fotoPath = $request->file('foto')->store('profile_photos', 'public');
                 $pengguna->foto = $fotoPath;
             }
 
             // Update other fields
-            $pengguna->name = $request->name;
+            $pengguna->fullname = $request->fullname;
             $pengguna->email = $request->email;
-            $pengguna->phone = $request->phone;
+            $pengguna->no_hp = $request->no_hp;
             $pengguna->tgl_lahir = $request->tgl_lahir;
             $pengguna->jenis_kelamin = $request->jenis_kelamin;
             $pengguna->agama = $request->agama;
-            $pengguna->alamat = $request->alamat;
+            $pengguna->address = $request->address;
 
             $pengguna->save();
 
             return redirect()->back()->with('success', 'Profil pengguna berhasil diperbarui');
         } catch (\Throwable $th) {
-            // Uncomment this line to see the error details
-            // dd($th);
             return redirect()->back()->with('error', 'Data pengguna gagal diubah');
         }
     }
@@ -105,25 +108,25 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request)
-    {
-        $user = Auth::user();
+    // public function destroy(Request $request)
+    // {
+    //     $user = Auth::user();
 
-        // Validasi password
-        if (!Hash::check($request->password, $user->password)) {
-            return back()->withErrors([
-                'password' => 'The provided password does not match your current password.',
-            ]);
-        }
+    //     // Validasi password
+    //     if (!Hash::check($request->password, $user->password)) {
+    //         return back()->withErrors([
+    //             'password' => 'The provided password does not match your current password.',
+    //         ]);
+    //     }
 
-        // Hapus akun
-        $user->delete();
+    //     // Hapus akun
+    //     $user->delete();
 
-        // Logout
-        Auth::logout();
+    //     // Logout
+    //     Auth::logout();
 
-        return redirect('/');
-    }
+    //     return redirect('/');
+    // }
     // public function destroy(Request $request): RedirectResponse
     // {
     //     $request->validateWithBag('userDeletion', [

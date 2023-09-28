@@ -19,6 +19,11 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
 
+    public function warehouse()
+    {
+        return $this->belongsTo(m_warehouse::class, 'warehouse_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

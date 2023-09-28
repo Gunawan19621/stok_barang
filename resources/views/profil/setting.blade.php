@@ -21,13 +21,13 @@
                     @method('patch')
 
                     <div>
-                        <label for="name" class="block font-semibold text-gray-800">
+                        <label for="fullname" class="block font-semibold text-gray-800">
                             Nama
                         </label>
-                        <input id="name" name="name" type="text" class="mt-1 block w-full"
-                            value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
-                        @if ($errors->has('name'))
-                            <p class="text-red-500">{{ $errors->first('name') }}</p>
+                        <input id="fullname" name="fullname" type="text" class="mt-1 block w-full"
+                            value="{{ old('fullname', $user->fullname) }}" required autofocus autocomplete="fullname">
+                        @if ($errors->has('fullname'))
+                            <p class="text-red-500">{{ $errors->first('fullname') }}</p>
                         @endif
                     </div>
 
@@ -134,7 +134,7 @@
         </div>
     </div>
 
-    <div class="card mb-2">
+    {{-- <div class="card mb-2">
         <div class="card-body">
             <form method="POST" action="{{ route('profile.destroy') }}" class="mt-6 space-y-6">
                 @csrf
@@ -143,8 +143,8 @@
                 <div>
                     <x-danger-button type="submit">Delete Account</x-danger-button>
                 </div>
-            </form>
-            {{-- <header>
+            </form> --}}
+    {{-- <header>
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     Delete Account
                 </h2>
@@ -210,7 +210,7 @@
                     </form>
                 </div>
             </div> --}}
-            {{-- @include('profile.partials.delete-user-form') --}}
-        </div>
-    </div>
+    {{-- @include('profile.partials.delete-user-form') --}}
+    {{-- </div>
+    </div> --}}
 @endsection

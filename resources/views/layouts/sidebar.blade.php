@@ -63,9 +63,21 @@
             <span class="ml-4">Pengadaan</span>
         </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ url('/dashboard/product') }}">
             <span class="ml-4">Setting Platform</span>
         </a>
+    </li> --}}
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePlatform" aria-expanded="true"
+            aria-controls="collapsePlatform">
+            <span class="ml-4">Setting Platform</span>
+        </a>
+        <div id="collapsePlatform" class="collapse" aria-labelledby="headingPlatform" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('user.index') }}">Manajemen User</a>
+                <a class="collapse-item" href="{{ route('asset.index') }}">Manajemen Asset</a>
+            </div>
+        </div>
     </li>
 </ul>
