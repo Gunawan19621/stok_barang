@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AssetExport;
 use App\Models\m_asset;
+use Barryvdh\DomPDF\PDF;
+use Dompdf\Dompdf;
 use App\Models\m_warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class M_assetController extends Controller
 {
@@ -148,5 +152,36 @@ class M_assetController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Data asset gagal dihapus');
         }
+    }
+
+    /**
+     * Cetak PDF.
+     */
+    public function cetakpdf()
+    {
+        // dd('oke');
+        $asset = m_asset::all();
+
+        // Buat objek Dompdf
+        $dompdf = new Dompdf();
+        // Render tampilan ke PDF
+        $html = view('addons.SettingPlatform.asset_pdf', compact('asset'))->render();
+
+        // Muat HTML ke Dompdf
+        $dompdf->loadHtml($html);
+
+        // Atur ukuran dan orientasi kertas
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render PDF
+        $dompdf->render();
+
+        // Tampilkan PDF di browser
+        return $dompdf->stream('Laporan Barang');
+    }
+
+    public function export()
+    {
+        return Excel::download(new AssetExport, 'Assets.xlsx');
     }
 }

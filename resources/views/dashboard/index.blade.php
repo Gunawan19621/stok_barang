@@ -15,7 +15,8 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 14px;">
                                 <strong>Pengadaan</strong>
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">44</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">{{ $jumlahAsset }}
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -34,7 +35,8 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-size: 14px;">
                                 <strong>Peminjaman</strong>
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">73</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">
+                                {{ $jumlahPeminjaman }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -53,7 +55,8 @@
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1" style="font-size: 14px;">
                                 <strong>Pengembalian</strong>
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">45</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">
+                                {{ $jumlahPengembalian }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>

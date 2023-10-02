@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\M_assetController;
 use App\Http\Controllers\M_userController;
 use App\Http\Controllers\SettingPlatformController;
+use App\Models\asset_status;
 use App\Models\m_asset;
 use Illuminate\Support\Facades\Route;
 
@@ -51,7 +52,11 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'dashboard'], function () {
     //Halaman dashboard
     Route::middleware('auth')->get('', function () {
-        return view('dashboard.index');
+        $jumlahAsset = m_asset::count();
+        $jumlahPeminjaman = asset_status::count();
+        // $jumlahPengembalian = asset_status::count();
+        $jumlahPengembalian = asset_status::whereNotNull('enter_at')->count();
+        return view('dashboard.index', compact('jumlahAsset', 'jumlahPeminjaman', 'jumlahPengembalian'));
     });
 
     //Halaman Transaksi
@@ -70,11 +75,12 @@ Route::group(['prefix' => 'dashboard'], function () {
     //Halaman Manajemen Asset
     Route::middleware('auth')->resource('/asset', M_assetController::class);
     Route::get('/hapusAsset/{id}', [M_assetController::class, 'destroy'])->name('hapusAsset.destroy');
+    Route::get('/assetcetak_pdf', [M_assetController::class, 'cetakpdf'])->name('assetcetakpdf.cetakpdf');
+    Route::get('/assetexport', [M_assetController::class, 'export'])->name('assetexport.export');
 
     //Halaman Manajemen User
     Route::middleware('auth')->resource('/user', M_userController::class);
     Route::get('/hapusUser/{id}', [M_userController::class, 'destroy'])->name('hapusUser.destroy');
-    // Route::get('/hapusAsset/{id}', [M_assetController::class, 'destroy'])->name('hapusAsset.destroy');
 });
 
 require __DIR__ . '/auth.php';
