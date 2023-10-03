@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangMasuk;
+use App\Http\Requests\UpdateBarang_masukRequest;
 use Illuminate\Http\Request;
 
-class TransaksiController extends Controller
+class BarangMasukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.transaksi');
+        return view('dashboard.transaksi.barang_masuk');
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -26,38 +29,38 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('oke');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(BarangMasuk $barang_masuk)
     {
-        // dd('oke');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(BarangMasuk $barang_masuk)
     {
-        // dd('oke');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BarangMasuk $barang_masuk)
     {
-        // dd('oke');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(BarangMasuk $barang_masuk)
     {
-        // dd("oke");
+        //
     }
 }

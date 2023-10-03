@@ -50,7 +50,10 @@
                     <select class="form-control" name="role_id" type="text" id="role_id">
                         <option disabled selected>Pilih Hak Akses</option>
                         @foreach ($role as $data)
-                            <option value="{{ $data->id }}">{{ $data->name }}</option>
+                            <option value="{{ $data->id }}"
+                                @if ($data->id == $user->role_id) selected
+                                @else @endif>
+                                {{ $data->name }}</option>
                         @endforeach
                     </select>
 
@@ -58,7 +61,10 @@
                     <select class="form-control" name="warehouse_id" type="text" id="warehouse_id">
                         <option disabled selected>Pilih DItugaskan</option>
                         @foreach ($warehouse as $data)
-                            <option value="{{ $data->id }}">{{ $data->name }}</option>
+                            <option value="{{ $data->id }}"
+                                @if ($data->id == $user->warehouse_id) selected
+                                @else @endif>
+                                {{ $data->name }}</option>
                         @endforeach
                     </select>
                 </div>

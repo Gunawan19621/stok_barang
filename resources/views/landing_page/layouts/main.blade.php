@@ -33,14 +33,10 @@
         </div>
         <div class="site-mobile-menu-body"></div>
     </div>
-
-
-
     <nav class="site-nav mb-5">
         <div class="pb-2 top-bar mb-3">
             <div class="container">
                 <div class="row align-items-center">
-
                     <div class="col-6 col-lg-9">
                         <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> <span
                                 class="d-none d-lg-inline-block">Have a questions?</span></a>
@@ -49,7 +45,6 @@
                         <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span
                                 class="d-none d-lg-inline-block">siopas@gmail.com</span></a>
                     </div>
-
                     <div class="col-6 col-lg-3 text-right">
                         <a href="{{ route('login') }}" class="small mr-3">
                             <span class="icon-lock"></span>
@@ -60,7 +55,6 @@
                             Register
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -68,7 +62,6 @@
             <div class="container position-relative">
                 <div class="site-navigation text-center">
                     <a href="index.html" class="logo menu-absolute m-0">SIOPAS<span class="text-primary">.</span></a>
-
                     <ul class="js-clone-nav d-none d-lg-inline-block site-menu">
                         <li class="active"><a href="index.html">Home</a></li>
                         <li class="has-children">
@@ -92,52 +85,34 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
-
-                    <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
-
+                    {{-- <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a> --}}
                     <a href="#"
                         class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"
                         data-toggle="collapse" data-target="#main-navbar">
                         <span></span>
                     </a>
-
                 </div>
             </div>
         </div>
     </nav>
-
-
     <div class="untree_co-hero overlay"
-        style="background-image: url('{{ asset('asset_landingpage/images/hero-img-1-min.jpg') }}');">
-        {{-- style="background-image: url('/public/asset_landingpage/images/hero-img-1-min.jpg');"> --}}
-
-
+        style="background-image: url('{{ asset('asset_landingpage/images/bg1.jpg') }}');">
         <div class="container">
             <div class="row align-items-center justify-content-center">
-
                 <div class="col-12">
-
                     <div class="row justify-content-center ">
-
                         <div class="col-lg-6 text-center ">
                             <a href="#" href="https://vimeo.com/342333493" data-fancybox data-aos="fade-up"
                                 data-aos-delay="0" class="caption mb-4 d-inline-block">Watch the video</a>
-
-                            <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Education is
-                                the Mother of Leadership</h1>
+                            <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Inventory
+                                Management is the Backbone of Efficiency</h1>
                             <p class="mb-0" data-aos="fade-up" data-aos-delay="300"><a href="#"
                                     class="btn btn-secondary">Explore courses</a></p>
-
                         </div>
-
-
                     </div>
-
                 </div>
-
             </div> <!-- /.row -->
         </div> <!-- /.container -->
-
     </div> <!-- /.untree_co-hero -->
 
 
@@ -372,7 +347,7 @@
                                         lesson</span></div>
                                 <div class="review"><span class="icon-star"></span> <span>4.8</span></div>
                             </div>
-                            <h3>Education Program Title</h3>
+                            <h3>Asset Management Program 1</h3>
                             <p class="mb-4">Lorem ipsum dolor sit amet once is consectetur adipisicing elit optio.
                             </p>
                             <div class="border-top d-flex justify-content-between pt-3 mt-3 align-items-center">
@@ -384,15 +359,15 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
                     <div class="custom-media">
-                        <a href="#"><img src="images/img-school-2-min.jpg" alt="Image"
-                                class="img-fluid"></a>
+                        <a href="#"><img src="{{ asset('asset_landingpage/images/img-school-2-min.jpg') }}"
+                                alt="Image" class="img-fluid"></a>
                         <div class="custom-media-body">
                             <div class="d-flex justify-content-between pb-3">
                                 <div class="text-primary"><span class="uil uil-book-open"></span> <span>43
                                         lesson</span></div>
                                 <div class="review"><span class="icon-star"></span> <span>4.8</span></div>
                             </div>
-                            <h3>Education Program Title</h3>
+                            <h3>Asset Management Program 2</h3>
                             <p class="mb-4">Lorem ipsum dolor sit amet once is consectetur adipisicing elit optio.
                             </p>
                             <div class="border-top d-flex justify-content-between pt-3 mt-3 align-items-center">
@@ -404,15 +379,15 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
                     <div class="custom-media">
-                        <a href="#"><img src="images/img-school-3-min.jpg" alt="Image"
-                                class="img-fluid"></a>
+                        <a href="#"><img src="{{ asset('asset_landingpage/images/img-school-3-min.jpg') }}"
+                                alt="Image" class="img-fluid"></a>
                         <div class="custom-media-body">
                             <div class="d-flex justify-content-between pb-3">
                                 <div class="text-primary"><span class="uil uil-book-open"></span> <span>43
                                         lesson</span></div>
                                 <div class="review"><span class="icon-star"></span> <span>4.8</span></div>
                             </div>
-                            <h3>Education Program Title</h3>
+                            <h3>Asset Management Program 3</h3>
                             <p class="mb-4">Lorem ipsum dolor sit amet once is consectetur adipisicing elit optio.
                             </p>
                             <div class="border-top d-flex justify-content-between pt-3 mt-3 align-items-center">
@@ -426,7 +401,8 @@
         </div>
     </div>
 
-    <div class="untree_co-section pt-0 bg-img overlay" style="background-image: url('images/img-school-1-min.jpg');">
+    <div class="untree_co-section pt-0 bg-img overlay"
+        style="background-image: url('{{ asset('asset_landingpage/images/img_3.jpg') }}');">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-lg-7">
@@ -479,7 +455,8 @@
                     <div class="bg-1"></div>
                     <a href="https://vimeo.com/342333493" data-fancybox class="video-wrap">
                         <span class="play-wrap"><span class="icon-play"></span></span>
-                        <img src="images/img-school-4-min.jpg" alt="Image" class="img-fluid rounded">
+                        <img src="{{ asset('asset_landingpage/images/img-school-4-min.jpg') }}" alt="Image"
+                            class="img-fluid rounded">
                     </a>
                 </div>
             </div>
@@ -499,7 +476,7 @@
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="media-h d-flex h-100">
                         <figure>
-                            <img src="images/img-school-1-min.jpg" alt="Image">
+                            <img src="{{ asset('asset_landingpage/images/img_3.jpg') }}" alt="Image">
                         </figure>
                         <div class="media-h-body">
                             <h2 class="mb-3"><a href="#">Education for Tomorrow's Leaders</a></h2>
@@ -515,7 +492,7 @@
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="media-h d-flex h-100">
                         <figure>
-                            <img src="images/img-school-2-min.jpg" alt="Image">
+                            <img src="{{ asset('asset_landingpage/images/img-school-2-min.jpg') }}" alt="Image">
                         </figure>
                         <div class="media-h-body">
                             <h2 class="mb-3"><a href="#">Enroll Your Kids This Summer to get 30% off</a></h2>
@@ -605,7 +582,8 @@
                                     Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right
                                     at the coast of the Semantics, a large language ocean.&rdquo;</p>
                                 <div class="author">
-                                    <img src="images/person_1.jpg" alt="Free template by TemplateUX">
+                                    <img src="{{ asset('asset_landingpage/images/person_1.jpg') }}"
+                                        alt="Free template by TemplateUX">
                                     <h3>John Doe</h3>
                                     <p class="position">CEO, Founder</p>
                                 </div>
@@ -621,7 +599,8 @@
                                     and the subline of her own road, the Line Lane. Pityful a rethoric question ran over
                                     her cheek, then she continued her way.&rdquo;</p>
                                 <div class="author">
-                                    <img src="images/person_2.jpg" alt="Free template by TemplateUX">
+                                    <img src="{{ asset('asset_landingpage/images/person_2.jpg') }}"
+                                        alt="Free template by TemplateUX">
                                     <h3>James Woodland</h3>
                                     <p class="position">Designer at Facebook</p>
                                 </div>
@@ -636,7 +615,8 @@
                                     necessary regelialia. It is a paradisematic country, in which roasted parts of
                                     sentences fly into your mouth.&rdquo;</p>
                                 <div class="author">
-                                    <img src="images/person_3.jpg" alt="Free template by TemplateUX">
+                                    <img src="{{ asset('asset_landingpage/images/person_3.jpg') }}"
+                                        alt="Free template by TemplateUX">
                                     <h3>Rob Smith</h3>
                                     <p class="position">Product Designer at Twitter</p>
                                 </div>
@@ -656,7 +636,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 mr-auto mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="0">
-                    <img src="images/img-school-5-min.jpg" alt="image" class="img-fluid">
+                    <img src="{{ asset('asset_landingpage/images/img-school-5-min.jpg') }}" alt="image"
+                        class="img-fluid">
                 </div>
                 <div class="col-lg-7 ml-auto" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="line-bottom mb-4">Why Choose Us</h3>
@@ -676,7 +657,8 @@
                                 <div class="accordion-body">
                                     <div class="d-flex">
                                         <div class="accordion-img mr-4">
-                                            <img src="images/img-school-1-min.jpg" alt="Image" class="img-fluid">
+                                            <img src="{{ asset('asset_landingpage/images/img-school-1-min.jpg') }}"
+                                                alt="Image" class="img-fluid">
                                         </div>
                                         <div>
                                             <p>Far far away, behind the word mountains, far from the countries Vokalia
@@ -700,7 +682,8 @@
                                 <div class="accordion-body">
                                     <div class="d-flex">
                                         <div class="accordion-img mr-4">
-                                            <img src="images/img-school-2-min.jpg" alt="Image" class="img-fluid">
+                                            <img src="{{ asset('asset_landingpage/images/img-school-2-min.jpg') }}"
+                                                alt="Image" class="img-fluid">
                                         </div>
                                         <div>
                                             <p>Far far away, behind the word mountains, far from the countries Vokalia
@@ -724,7 +707,8 @@
                                 <div class="accordion-body">
                                     <div class="d-flex">
                                         <div class="accordion-img mr-4">
-                                            <img src="images/img-school-3-min.jpg" alt="Image" class="img-fluid">
+                                            <img src="{{ asset('asset_landingpage/images/img-school-3-min.jpg') }}"
+                                                alt="Image" class="img-fluid">
                                         </div>
                                         <div>
                                             <p>When she reached the first hills of the Italic Mountains, she had a last
@@ -789,23 +773,29 @@
                     <div class="widget">
                         <h3>Gallery</h3>
                         <ul class="instafeed instagram-gallery list-unstyled">
-                            <li><a class="instagram-item" href="images/gal_1.jpg" data-fancybox="gal"><img
-                                        src="images/gal_1.jpg" alt="" width="72" height="72"></a>
+                            <li><a class="instagram-item" href="{{ asset('asset_landingpage/images/gal_1.jpg') }}"
+                                    data-fancybox="gal"><img src="{{ asset('asset_landingpage/images/gal_1.jpg') }}"
+                                        alt="" width="72" height="72"></a>
                             </li>
-                            <li><a class="instagram-item" href="images/gal_2.jpg" data-fancybox="gal"><img
-                                        src="images/gal_2.jpg" alt="" width="72" height="72"></a>
+                            <li><a class="instagram-item" href="{{ asset('asset_landingpage/images/gal_2.jpg') }}"
+                                    data-fancybox="gal"><img src="{{ asset('asset_landingpage/images/gal_2.jpg') }}"
+                                        alt="" width="72" height="72"></a>
                             </li>
-                            <li><a class="instagram-item" href="images/gal_3.jpg" data-fancybox="gal"><img
-                                        src="images/gal_3.jpg" alt="" width="72" height="72"></a>
+                            <li><a class="instagram-item" href="{{ asset('asset_landingpage/images/gal_3.jpg') }}"
+                                    data-fancybox="gal"><img src="{{ asset('asset_landingpage/images/gal_3.jpg') }}"
+                                        alt="" width="72" height="72"></a>
                             </li>
-                            <li><a class="instagram-item" href="images/gal_4.jpg" data-fancybox="gal"><img
-                                        src="images/gal_4.jpg" alt="" width="72" height="72"></a>
+                            <li><a class="instagram-item" href="{{ asset('asset_landingpage/images/gal_4.jpg') }}"
+                                    data-fancybox="gal"><img src="{{ asset('asset_landingpage/images/gal_4.jpg') }}"
+                                        alt="" width="72" height="72"></a>
                             </li>
-                            <li><a class="instagram-item" href="images/gal_5.jpg" data-fancybox="gal"><img
-                                        src="images/gal_5.jpg" alt="" width="72" height="72"></a>
+                            <li><a class="instagram-item" href="{{ asset('asset_landingpage/images/gal_5.jpg') }}"
+                                    data-fancybox="gal"><img src="{{ asset('asset_landingpage/images/gal_5.jpg') }}"
+                                        alt="" width="72" height="72"></a>
                             </li>
-                            <li><a class="instagram-item" href="images/gal_6.jpg" data-fancybox="gal"><img
-                                        src="images/gal_6.jpg" alt="" width="72" height="72"></a>
+                            <li><a class="instagram-item" href="{{ asset('asset_landingpage/images/gal_6.jpg') }}"
+                                    data-fancybox="gal"><img src="{{ asset('asset_landingpage/images/gal_6.jpg') }}"
+                                        alt="" width="72" height="72"></a>
                             </li>
                         </ul>
                     </div> <!-- /.widget -->
@@ -815,11 +805,11 @@
                 <div class="col-lg-3">
                     <div class="widget">
                         <h3>Contact</h3>
-                        <address>43 Raymouth Rd. Baltemoer, London 3910</address>
+                        <address>Jln Raya Gelarmendala</address>
                         <ul class="list-unstyled links mb-4">
-                            <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                            <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                            <li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
+                            <li><a href="tel://085159079010">0851 5907 9010</a></li>
+                            <li><a href="tel://085159079010">0851 5907 9010</a></li>
+                            <li><a href="mailto:siopas@gmail.com">siopas@gmail.com</a></li>
                         </ul>
                     </div> <!-- /.widget -->
                 </div> <!-- /.col-lg-3 -->
@@ -835,6 +825,7 @@
                             href="https://untree.co">Untree.co</a> Distributed By <a
                             href="https://themewagon.com">ThemeWagon</a>
                         <!-- License information: https://untree.co/license/ -->
+                    </p>
                 </div>
             </div>
         </div> <!-- /.container -->

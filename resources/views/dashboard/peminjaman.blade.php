@@ -135,7 +135,13 @@
                                 <label for="asset_id" class="col-form-label">Nama Asset:</label>
                                 <select class="form-control" name="asset_id" type="text" id="asset_id">
                                     <option disabled selected>Pilih Nama Asset</option>
-                                    <option value="{{ $data->asset_id }}" selected>{{ $data->asset->name }}</option>
+                                    @foreach ($asset as $data_asset)
+                                        <option value="{{ $data_asset->id }}"
+                                            @if ($data_asset->id == $data->id) selected
+                                            @else @endif>
+                                            {{ $data_asset->name }}</option>
+                                    @endforeach
+                                    {{-- <option value="{{ $data->asset_id }}" selected>{{ $data->asset->name }}</option> --}}
                                 </select>
                                 <label for="exit_at" class="col-form-label">Tanggal:</label>
                                 <input class="form-control" name="exit_at" type="date" id="exit_at"

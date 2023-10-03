@@ -179,9 +179,11 @@
                                 <label for="warehouse_id" class="col-form-label">Gudang:</label>
                                 <select class="form-control" name="warehouse_id" id="warehouse_id">
                                     <option disabled selected>Pilih Asal Gudang</option>
-                                    @foreach ($warehouse as $data)
-                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
-                                        </option>
+                                    @foreach ($warehouse as $data_warehouse)
+                                        <option value="{{ $data_warehouse->id }}"
+                                            @if ($data_warehouse->id == $data->warehouse_id) selected
+                                                @else @endif>
+                                            {{ $data_warehouse->name }}</option>
                                     @endforeach
                                 </select>
 
