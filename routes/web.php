@@ -40,7 +40,8 @@ Route::get('/logincoba', function () {
 
 Route::get('/', function () {
     // return view('welcome');
-    return view('landing_page.layouts.main');
+    // return view('landing_page.layouts.main');
+    return view('login');
 });
 
 Route::middleware('auth')->group(function () {
