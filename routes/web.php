@@ -26,22 +26,10 @@ use App\Http\Controllers\SettingPlatformController;
 |
 */
 
-// Route::get('/coba', function () {
-//     return view('landing_page.layouts.main');
-// });
-Route::get('/logincoba', function () {
-    // return view('landing_page.login');
-    return view('login');
-});
-
-
-
-
-
 Route::get('/', function () {
     // return view('welcome');
     // return view('landing_page.layouts.main');
-    return view('login');
+    return view('auth.login');
 });
 
 Route::middleware('auth')->group(function () {

@@ -21,7 +21,7 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
-    {{-- <li class="nav-item">
+    <!-- {{-- <li class="nav-item">
         <a class="nav-link" href="{{ url('/dashboard/transaksi') }}">
             <span class="ml-4">Transaksi</span>
         </a>
@@ -37,7 +37,7 @@
                 <a class="collapse-item" href="{{ url('/dashboard/barangKeluar') }}">Barang Keluar</a>
             </div>
         </div>
-    </li>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/dashboard/peminjaman') }}">
             <span class="ml-4">Peminjaman</span>
@@ -54,30 +54,18 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Addons
+        Master Data
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/pengadaan') }}">
-            <span class="ml-4">Pengadaan</span>
+        <a class="nav-link" href="{{ route('asset.index') }}">
+            <span class="ml-4">Asset</span>
         </a>
     </li>
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/product') }}">
-            <span class="ml-4">Setting Platform</span>
-        </a>
-    </li> --}}
     <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePlatform" aria-expanded="true"
-            aria-controls="collapsePlatform">
-            <span class="ml-4">Setting Platform</span>
+        <a class="nav-link" href="{{ route('user.index') }}">
+            <span class="ml-4">User</span>
         </a>
-        <div id="collapsePlatform" class="collapse" aria-labelledby="headingPlatform" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('user.index') }}">Manajemen User</a>
-                <a class="collapse-item" href="{{ route('asset.index') }}">Manajemen Asset</a>
-            </div>
-        </div>
     </li>
 </ul>

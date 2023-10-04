@@ -2,14 +2,7 @@
 @section('title', 'Peminjaman')
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Tabel Peminjaman</h1>
-        <div class="mb-4">
-            <p>Our Loan Tables are enhanced with the help of the DataTables plugin. This is a powerful tool that allows you
-                to explore return data in a more interactive and efficient way</p>
-            <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
-                <span class="text">+ Tambah peminjaman</span>
-            </a>
-        </div>
+        <!-- <h1 class="h3 mb-2 text-gray-800">Tabel Peminjaman</h1> -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Data Peminjaman</h6>

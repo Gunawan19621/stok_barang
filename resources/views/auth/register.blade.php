@@ -30,7 +30,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <img src="{{ asset('assets/img/fotocowo.png') }}" alt="Register Image"
+                    <img src="{{ asset('assets/img/8487305.jpg') }}" alt="Register Image"
                         class="col-lg-5 d-none d-lg-block">
                     <div class="col-lg-7">
                         <div class="p-5">
@@ -97,20 +97,7 @@
                                     Register Account
                                 </button>
                                 <hr>
-                                <a href="#" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="#" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                @if (Route::has('password.request'))
-                                    <a class="small" href="{{ route('password.request') }}">Forgot your
-                                        password?</a>
-                                @endif
-                            </div>
+                            </form> 
                             <div class="text-center">
                                 <a class="small" href="{{ url('/login') }}">Already have an account? Login!</a>
                             </div>

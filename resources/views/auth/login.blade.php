@@ -35,7 +35,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <img src="{{ asset('assets/img/fotocewe.png') }}" alt="Login Image"
+                            <img src="{{ asset('assets/img/8487305.jpg') }}" alt="Login Image"
                                 class="col-lg-5 d-none d-lg-block">
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -57,9 +57,9 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <label for="remember_me" class="custom-control-label">
-                                                    <input id="remember_me" type="checkbox" name="remember"
+                                            <input id="remember_me" type="checkbox" name="remember"
                                                         class="custom-control-input">
+                                                <label for="remember_me" class="custom-control-label">
                                                     <span>Remember Me</span>
                                                 </label>
                                             </div>
@@ -69,23 +69,23 @@
                                             Login
                                         </button>
                                         <hr>
-                                        <a href="#" class="btn btn-google btn-user btn-block">
+                                        <!-- <a href="#" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
                                         <a href="#" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
+                                        </a> -->
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
+                                    <!-- <hr> -->
+                                    <!-- <div class="text-center">
                                         @if (Route::has('password.request'))
                                             <a class="small" href="{{ route('password.request') }}">Forgot your
                                                 password?</a>
                                         @endif
-                                    </div>
+                                    </div> -->
 
                                     <div class="text-center">
-                                        <a class="small" href="{{ url('/register') }}">Create an Account!</a>
+                                        <label class="small">Copy Rigth SIOPAS</label>
                                     </div>
                                 </div>
                             </div>

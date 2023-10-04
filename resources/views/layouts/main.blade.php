@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin 2 - Dashboard</title>
+    <title>SIOPAS - Dashboard</title>
     @include('layouts.link')
 </head>
 
@@ -28,7 +28,7 @@
                 @include('layouts.navbar')
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <!-- <div class="container-fluid"> -->
                     <!-- allert update data foto -->
                     {{-- @if (session()->has('success'))
                         <div id="success-alert" class="alert alert-success floating-alert">
@@ -50,7 +50,7 @@
                     @endif
                     <!-- allert update data foto -->
                     @yield('content')
-                </div>
+                <!-- </div> -->
                 <!-- /.container-fluid -->
 
             </div>
