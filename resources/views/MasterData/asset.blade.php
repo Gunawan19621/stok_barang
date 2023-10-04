@@ -3,13 +3,13 @@
 @section('content')
     <div class="container-fluid">
         <!-- <h1 class="h3 mb-2 text-gray-800">Tabel Asset</h1>
-        <div class="mb-4">
-            <p>Our Item Tables are enhanced with the help of the DataTables plugin. This is a powerful tool that allows you
-                to explore return data in a more interactive and efficient way</p>
-            <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
-                <span class="text">+ Tambah data</span>
-            </a>
-        </div> -->
+            <div class="mb-4">
+                <p>Our Item Tables are enhanced with the help of the DataTables plugin. This is a powerful tool that allows you
+                    to explore return data in a more interactive and efficient way</p>
+                <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
+                    <span class="text">+ Tambah data</span>
+                </a>
+            </div> -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="row">
@@ -17,9 +17,10 @@
                         <h5 class="m-0 font-weight-bold text-primary mt-2">Data Asset</h5>
                     </div>
                     <div class="col-6 text-right">
-                    <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
-                        <span class="text">+ Tambah data</span>
-                    </a>
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal"
+                            data-target="#tambahDataModal">
+                            <span class="text">+ Tambah data</span>
+                        </a>
                         <a href="{{ route('assetcetakpdf.cetakpdf') }}" class="btn btn-success btn-icon-split ml-auto"
                             target="_blank">
                             <span class="text">Cetak PDF</span>
@@ -31,16 +32,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Asset</h6>
-                <a href="{{ route('assetcetakpdf.cetakpdf') }}" class="btn btn-success btn-icon-split ml-auto"
-                    target="_blank">
-                    <span class="text">CETAK PDF</span>
-                </a>
-                <a href="{{ route('assetexport.export') }}" class="btn btn-info btn-icon-split ml-auto" target="_blank">
-                    <span class="text">CETAK Exel</span>
-                </a>
-            </div> --}}
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="tablebarang" width="100%" cellspacing="0">

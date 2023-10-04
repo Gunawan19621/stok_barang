@@ -14,6 +14,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\SettingPlatformController;
+use App\Http\Controllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +28,6 @@ use App\Http\Controllers\SettingPlatformController;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    // return view('landing_page.layouts.main');
     return view('auth.login');
 });
 
@@ -52,7 +51,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     });
 
     //Halaman Transaksi
-    Route::middleware('auth')->resource('/transaksi', TransaksiController::class);
+    // Route::middleware('auth')->resource('/transaksi', TransaksiController::class);
 
     //Halaman Peminjaman
     Route::middleware('auth')->resource('/peminjaman', PeminjamanController::class);
@@ -74,12 +73,16 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::middleware('auth')->resource('/user', M_userController::class);
     Route::get('/hapusUser/{id}', [M_userController::class, 'destroy'])->name('hapusUser.destroy');
 
+    //Halaman Warehouse
+    Route::middleware('auth')->resource('/warehouse', WarehouseController::class);
+    Route::get('/hapuswarehouse/{id}', [WarehouseController::class, 'destroy'])->name('hapuswarehouse.destroy');
+
     //Halaman Barang Masuk
-    Route::middleware('auth')->resource('/barangMasuk', BarangMasukController::class);
+    // Route::middleware('auth')->resource('/barangMasuk', BarangMasukController::class);
 
     //Halaman Barang Keluar
-    Route::middleware('auth')->resource('/barangKeluar', BarangKeluarController::class);
-    Route::get('/hapusBarangK/{id}', [BarangKeluarController::class, 'destroy'])->name('hapusBarangK.destroy');
+    // Route::middleware('auth')->resource('/barangKeluar', BarangKeluarController::class);
+    // Route::get('/hapusBarangK/{id}', [BarangKeluarController::class, 'destroy'])->name('hapusBarangK.destroy');
 });
 
 require __DIR__ . '/auth.php';

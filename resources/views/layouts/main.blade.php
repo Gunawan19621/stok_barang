@@ -29,29 +29,17 @@
 
                 <!-- Begin Page Content -->
                 <!-- <div class="container-fluid"> -->
-                    <!-- allert update data foto -->
-                    {{-- @if (session()->has('success'))
-                        <div id="success-alert" class="alert alert-success floating-alert">
-                            {{ session()->get('success') }}
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div id="error-alert" class="alert alert-danger floating-alert">
-                            X {{ session()->get('error') }}
-                        </div>
-                    @endif --}}
-                    @if (session()->has('success'))
-                        <div id="success-alert" class="alert alert-success">
-                            {{ session()->get('success') }}
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div id="success-alert" class="alert alert-danger">
-                            X {{ session()->get('error') }}
-                        </div>
-                    @endif
-                    <!-- allert update data foto -->
-                    @yield('content')
-                <!-- </div> -->
-                <!-- /.container-fluid -->
+                <!-- allert update data foto -->
+                @if (session()->has('success'))
+                    <div id="success-alert" class="alert alert-success floating-alert">
+                        {{ session()->get('success') }}
+                    </div>
+                @elseif(session()->has('error'))
+                    <div id="error-alert" class="alert alert-danger floating-alert">
+                        X {{ session()->get('error') }}
+                    </div>
+                @endif
+                @yield('content')
 
             </div>
             <!-- End of Main Content -->

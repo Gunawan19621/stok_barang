@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 200);
             $table->text('description')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by', 200)->nullable()->default('System');
@@ -23,9 +24,9 @@ return new class extends Migration
         });
 
         DB::table('m_warehouses')->insert([
-            ['name' => 'Gudangsatu', 'description' => 'Gudang Barang'],
-            ['name' => 'Gudangdua', 'description' => 'Gudang Makanan'],
-            ['name' => 'Gudangtiga', 'description' => 'Gudang Pakaian'],
+            ['name' => 'Gudangsatu', 'description' => 'Gudang Barang', 'address' => 'Jln. Raya Kesatu'],
+            ['name' => 'Gudangdua', 'description' => 'Gudang Makanan', 'address' => 'Jln. Raya Kedua'],
+            ['name' => 'Gudangtiga', 'description' => 'Gudang Pakaian', 'address' => 'Jln. Raya Ketiga'],
         ]);
     }
 

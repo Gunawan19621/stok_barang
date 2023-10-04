@@ -20,7 +20,7 @@ class M_assetController extends Controller
     {
         $asset = m_asset::get();
         $warehouse = m_warehouse::all();
-        return view('addons.SettingPlatform.manajement_asset', compact('asset', 'warehouse'));
+        return view('MasterData.asset', compact('asset', 'warehouse'));
     }
 
     /**
@@ -165,7 +165,7 @@ class M_assetController extends Controller
         // Buat objek Dompdf
         $dompdf = new Dompdf();
         // Render tampilan ke PDF
-        $html = view('addons.SettingPlatform.asset_pdf', compact('asset'))->render();
+        $html = view('MasterData.asset_pdf', compact('asset'))->render();
 
         // Muat HTML ke Dompdf
         $dompdf->loadHtml($html);
