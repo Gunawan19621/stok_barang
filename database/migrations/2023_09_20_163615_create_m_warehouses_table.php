@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('created_by', 200)->nullable()->default('System');
-            $table->string('updated_by', 200)->nullable()->default('System');
+            $table->string('created_by', 200)->nullable();
+            $table->string('updated_by', 200)->nullable();
         });
 
         DB::table('m_warehouses')->insert([

@@ -177,11 +177,14 @@ class M_assetController extends Controller
         $dompdf->render();
 
         // Tampilkan PDF di browser
-        return $dompdf->stream('Laporan Barang');
+        return $dompdf->stream('Laporan Assets');
     }
 
+    /**
+     * Cetak Exel.
+     */
     public function export()
     {
-        return Excel::download(new AssetExport, 'Assets.xlsx');
+        return Excel::download(new AssetExport, 'Laporan Assets.xlsx');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\m_warehouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WarehouseController extends Controller
 {
@@ -36,7 +37,10 @@ class WarehouseController extends Controller
             'address' => 'required',
         ]);
         try {
+            $currentUser = Auth::user();
             $validatedData = $request->except('_token');
+            $validatedData['created_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai created_by
+            $validatedData['updated_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai updated_by
             m_warehouse::create($validatedData);
             return redirect()->back()->with('success', 'Data gudang berhasil ditambah.');
         } catch (\Throwable $th) {
@@ -67,6 +71,23 @@ class WarehouseController extends Controller
     public function update(Request $request, $id)
     {
         // dd('oke');
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+        ]);
+        // dd($request);
+        try {
+            $warehouse = m_warehouse::findOrFail($id);
+            $warehouse->update($request->all());
+
+            // Menambahkan nama pengguna yang melakukan pembaruan
+            $userData['updated_by'] = Auth::user()->fullname;
+
+            return redirect()->back()->with('success', 'Data Gudang Berhasil Diperbaharui');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Data Gudang Gagal Diperbaharui');
+        }
     }
 
     /**

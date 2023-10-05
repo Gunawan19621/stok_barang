@@ -33,30 +33,6 @@ class M_userController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'username' => 'required',
-    //         'fullname' => 'required',
-    //         'email' => 'required|email',
-    //         'divisi' => 'required',
-    //         'role_id' => 'required',
-    //         'warehouse_id' => 'required',
-    //         'password' => 'required',
-    //     ]);
-
-    //     try {
-    //         $currentUser = Auth::user();
-    //         $validatedData = $request->except('_token');
-    //         $validatedData['created_by'] = $currentUser->name; // Menggunakan nama pengguna sebagai created_by
-    //         $validatedData['updated_by'] = $currentUser->name; // Menggunakan nama pengguna sebagai updated_by
-    //         $validatedData['password'] = bcrypt($request->input('password')); // Enkripsi password
-    //         user::create($validatedData);
-    //         return redirect()->back()->with('success', 'Data User Berhasil Ditambah.');
-    //     } catch (\Throwable $th) {
-    //         return redirect()->back()->with('error', 'Data User Gagal Ditambah.');
-    //     }
-    // }
     public function store(Request $request)
     {
         $request->validate([
@@ -126,7 +102,6 @@ class M_userController extends Controller
             $userData['updated_by'] = Auth::user()->fullname;
 
             $user->update($userData);
-
             return redirect()->route('user.index')->with('success', 'Data User berhasil diperbaharui');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Data User gagal diperbaharui');
