@@ -7,14 +7,15 @@ use App\Http\Controllers\M_userController;
 use App\Http\Controllers\M_assetController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\PengadaanController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\SettingPlatformController;
-use App\Http\Controllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,11 +44,12 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'dashboard'], function () {
     //Halaman dashboard
     Route::middleware('auth')->get('', function () {
+        $reminder = asset_status::whereNull('enter_at')->count();
         $jumlahAsset = m_asset::count();
         $jumlahPeminjaman = asset_status::count();
         // $jumlahPengembalian = asset_status::count();
         $jumlahPengembalian = asset_status::whereNotNull('enter_at')->count();
-        return view('dashboard.index', compact('jumlahAsset', 'jumlahPeminjaman', 'jumlahPengembalian'));
+        return view('dashboard.index', compact('jumlahAsset', 'jumlahPeminjaman', 'jumlahPengembalian', 'reminder'));
     });
 
     //Halaman Transaksi
@@ -68,6 +70,13 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/hapusAsset/{id}', [M_assetController::class, 'destroy'])->name('hapusAsset.destroy');
     Route::get('/assetcetak_pdf', [M_assetController::class, 'cetakpdf'])->name('assetcetakpdf.cetakpdf');
     Route::get('/assetexport', [M_assetController::class, 'export'])->name('assetexport.export');
+    // Route::get('/assetQR{id}', [M_assetController::class, 'QR'])->name('assetQR.QR');
+    // Route::get('assetQR{id}', function () {
+    //     $path = public_path('qrcode/' . time() . '.png');
+
+    //     return QrCode::size(300)
+    //         ->generate('A simple example of QR code', $path);
+    // })->name('assetQR.QR');
 
     //Halaman Manajemen User
     Route::middleware('auth')->resource('/user', M_userController::class);

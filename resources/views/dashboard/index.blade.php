@@ -81,7 +81,8 @@
                                     style="font-size: 13px;">
                                     <strong>Reminder Pengembalian</strong>
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">28</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 25px;">
+                                    {{ $reminder }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>

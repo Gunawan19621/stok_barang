@@ -19,7 +19,8 @@ return new class extends Migration
             $table->bigInteger('warehouse_id')->unsigned();
             $table->foreign('warehouse_id')->references('id')->on('m_warehouses');
             $table->datetime('date');
-            $table->integer('qr_count');
+            // $table->integer('qr_count');
+            $table->string('qr_count')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by', 200);
