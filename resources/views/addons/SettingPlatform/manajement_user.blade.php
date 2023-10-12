@@ -18,9 +18,9 @@
                         <h5 class="m-0 font-weight-bold text-primary mt-2">Data User</h5>
                     </div>
                     <div class="col-6 text-right">
-                    {{--<a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
+                    <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
                         <span class="text">+ Tambah data</span>
-                    </a>--}}
+                    </a>
                     </div>
                 </div>
             </div>

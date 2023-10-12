@@ -64,7 +64,7 @@ class M_assetController extends Controller
         // Mendapatkan produk terbaru
         $latestAsset = \App\Models\m_asset::latest()->first();
         // Mendapatkan tahun saat ini
-        $currentYear = date("Y");
+        $currentYear = date("Y-m-d");
         // Menghitung nomor urut untuk kode barang
         if ($latestAsset == null) {
             // Kode pertama
@@ -75,7 +75,7 @@ class M_assetController extends Controller
             $nomorUrut = intval($lastCode) + 1;
         }
         // Menggabungkan semua komponen kode barang
-        $seri = 'AST' . $currentYear . str_pad($nomorUrut, STR_PAD_LEFT);
+        $seri = 'AST' . $currentYear .'-'. str_pad($nomorUrut, STR_PAD_LEFT);
         // Validasi input
         $request->validate([
             'name' => 'required',

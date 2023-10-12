@@ -28,7 +28,7 @@
                 @include('layouts.navbar')
 
                 <!-- Begin Page Content -->
-                <!-- <div class="container-fluid"> -->
+                <div class="container-fluid">
                     <!-- allert update data foto -->
                     {{-- @if (session()->has('success'))
                         <div id="success-alert" class="alert alert-success floating-alert">
@@ -50,7 +50,7 @@
                     @endif
                     <!-- allert update data foto -->
                     @yield('content')
-                <!-- </div> -->
+                </div>
                 <!-- /.container-fluid -->
 
             </div>

@@ -51,11 +51,11 @@
                                 <th>Deskripsi</th>
                                 <th>Gudang</th>
                                 <th>Tanggal</th>
-                                <th>QR</th>
+                                <th>Jumlah QR Print</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
                                 <th>No. Seri</th>
                                 <th>Nama</th>
@@ -65,7 +65,7 @@
                                 <th>QR</th>
                                 <th class="text-center">Action</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                         <tbody>
                             @foreach ($asset as $data)
                                 <tr>
@@ -77,9 +77,11 @@
                                     <td>{{ $data->qr_count }}</td>
                                     <td class="text-center">
                                         <a href="#" data-toggle="modal"
+                                            data-target="#printQRModal{{ $data['id'] }}">
+                                            <i class="fa fa-qrcode text-warning mr-2" style="font-size: 20px"></i></a>
+                                        <a href="#" data-toggle="modal"
                                             data-target="#editDataModal{{ $data['id'] }}">
-                                            <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
-                                        </a>
+                                            <i class="fa fa-edit mr-2" style="font-size: 20px"></i></a>
                                         <a href="{{ route('hapusAsset.destroy', $data->id) }}"
                                             onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                             <i class="fa fa-trash text-danger mr-2" style="font-size: 20px"></i>
@@ -152,6 +154,64 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Edit Data Asset</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('asset.update', $data->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">Nama Asset:</label>
+                                <input class="form-control" name="name" type="text" id="name"
+                                    value="{{ $data->name }}" placeholder="Masukan Nama Asset" required>
+
+                                <label for="description" class="col-form-label">Deskripsi Asset:</label>
+                                <textarea class="form-control" name="description" id="description" placeholder="Masukkan Deskripsi Asset" required>{{ $data->description }}</textarea>
+
+                                <label for="qr_count" class="col-form-label">QR_Count:</label>
+                                <input class="form-control" name="qr_count" type="text" id="qr_count"
+                                    value="{{ $data->qr_count }}" placeholder="Masukan Kode QR"
+                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+
+                                <label for="date" class="col-form-label">Tanggal:</label>
+                                <input class="form-control" name="date" type="date" id="date"
+                                    value="{{ \Carbon\Carbon::parse($data->date)->format('Y-m-d') }}"
+                                    placeholder="Masukan Tanggal Asset" required>
+
+                                <label for="warehouse_id" class="col-form-label">Gudang:</label>
+                                <select class="form-control" name="warehouse_id" id="warehouse_id">
+                                    <option disabled selected>Pilih Asal Gudang</option>
+                                    @foreach ($warehouse as $data_warehouse)
+                                        <option value="{{ $data_warehouse->id }}"
+                                            @if ($data_warehouse->id == $data->warehouse_id) selected
+                                                @else @endif>
+                                            {{ $data_warehouse->name }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <!-- Modal Print QR Asset-->
+    @foreach ($asset as $data)
+        <div class="modal fade" id="printQRModal{{ $data['id'] }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Print QR Asset</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
