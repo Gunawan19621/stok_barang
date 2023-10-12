@@ -5,16 +5,34 @@
         <!-- <h1 class="h3 mb-2 text-gray-800">Tabel Peminjaman</h1> -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data Peminjaman</h6>
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="m-0 font-weight-bold text-primary mt-2">Data Peminjaman</h5>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal"
+                            data-target="#tambahDataModal">
+                            <span class="text">+ Tambah data</span>
+                        </a>
+                        {{-- <a href="{{ route('assetcetakpdf.cetakpdf') }}" class="btn btn-success btn-icon-split ml-auto"
+                            target="_blank">
+                            <span class="text">Cetak PDF</span>
+                        </a>
+                        <a href="{{ route('assetexport.export') }}" class="btn btn-info btn-icon-split ml-auto"
+                            target="_blank">
+                            <span class="text">Cetak Exel</span> --}}
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="tablebarang" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th class="text-center">No</th>
                                 <th>Nama Asset</th>
-                                <th>Tgl Keluar</th>
+                                <th>Tgl Peminjaman</th>
                                 <th>PJ Keluar</th>
                                 <th>Asal Gudang</th>
                                 <th class="text-center">Action</th>
@@ -22,9 +40,9 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>No</th>
+                                <th class="text-center">No</th>
                                 <th>Nama Asset</th>
-                                <th>Tgl Keluar</th>
+                                <th>Tgl Peminjaman</th>
                                 <th>PJ Keluar</th>
                                 <th>Asal Gudang</th>
                                 <th class="text-center">Action</th>
@@ -36,11 +54,11 @@
                             @endphp
                             @foreach ($peminjaman as $data)
                                 <tr>
-                                    <td>{{ $no_peminjaman++ }}</td>
+                                    <td class="text-center">{{ $no_peminjaman++ }}</td>
                                     <td>{{ $data->asset->name }}</td>
                                     <td>{{ \Carbon\Carbon::parse($data->exit_at)->format('d-m-Y') }}</td>
                                     <td>{{ $data->exit_pic }}</td>
-                                    <td>{{ $data->exit_warehouse }}</td>
+                                    <td>{{ $data->warehouse->name }}</td>
                                     <td class="text-center">
                                         <a href="#" data-toggle="modal"
                                             data-target="#editDataModal{{ $data['id'] }}">
@@ -93,9 +111,15 @@
                                 oninput="this.value=this.value.replace(/[0-9]/g,'');" required>
 
                             <label for="exit_warehouse" class="col-form-label">Asal Gudang :</label>
-                            <input class="form-control" name="exit_warehouse" type="text" id="exit_warehouse"
+                            <select class="form-control" name="exit_warehouse" type="text" id="exit_warehouse">
+                                <option disabled selected>Pilih Asal Gudang</option>
+                                @foreach ($warehouse as $data)
+                                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input class="form-control" name="exit_warehouse" type="text" id="exit_warehouse"
                                 value="{{ old('exit_warehouse') }}" placeholder="Masukan Asal gudang keluarnya asset"
-                                required>
+                                required> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -134,7 +158,6 @@
                                             @else @endif>
                                             {{ $data_asset->name }}</option>
                                     @endforeach
-                                    {{-- <option value="{{ $data->asset_id }}" selected>{{ $data->asset->name }}</option> --}}
                                 </select>
                                 <label for="exit_at" class="col-form-label">Tanggal:</label>
                                 <input class="form-control" name="exit_at" type="date" id="exit_at"
@@ -147,8 +170,15 @@
                                     oninput="this.value=this.value.replace(/[0-9]/g,'');" required>
 
                                 <label for="exit_warehouse" class="col-form-label">Asal Gudang :</label>
-                                <input class="form-control" name="exit_warehouse" type="text" id="exit_warehouse"
-                                    value="{{ $data->exit_warehouse }}" placeholder="Masukan Nama PJ Keluar" required>
+                                <select class="form-control" name="exit_warehouse" type="text" id="exit_warehouse">
+                                    <option disabled selected>Pilih Nama Asset</option>
+                                    @foreach ($warehouse as $data_warehouse)
+                                        <option value="{{ $data_warehouse->id }}"
+                                            @if ($data_warehouse->id == $data->id) selected
+                                            @else @endif>
+                                            {{ $data_warehouse->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

@@ -37,15 +37,6 @@
                     <label for="address" class="col-form-label">Alamat:</label>
                     <textarea class="form-control" name="address" id="address" placeholder="Masukan detail alamat anda" required>{{ $user->address }}</textarea>
 
-                    <label for="status" class="col-form-label">Status:</label>
-                    <select class="form-control" name="status" type="text" id="status">
-                        <option disabled selected>Pilih Status</option>
-                        <option value="aktif" {{ old('status', $user->status) == 'aktif' ? 'selected' : '' }}>Aktif
-                        </option>
-                        <option value="tidak aktif" {{ old('status', $user->status) == 'tidak aktif' ? 'selected' : '' }}>
-                            Tidak Aktif
-                        </option>
-                    </select>
                     <label for="role_id" class="col-form-label">Hak Akses:</label>
                     <select class="form-control" name="role_id" type="text" id="role_id">
                         <option disabled selected>Pilih Hak Akses</option>

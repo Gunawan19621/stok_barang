@@ -14,4 +14,9 @@ class asset_status extends Model
     {
         return $this->belongsTo(m_asset::class, 'asset_id');
     }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(m_warehouse::class, 'exit_warehouse');
+    }
 }

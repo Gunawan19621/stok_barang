@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\asset_status;
 use App\Models\m_asset;
+use App\Models\m_warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,8 @@ class PeminjamanController extends Controller
     {
         $asset = m_asset::all();
         $peminjaman = asset_status::get();
-        return view('dashboard.peminjaman', compact('asset', 'peminjaman'));
+        $warehouse = m_warehouse::get();
+        return view('dashboard.peminjaman', compact('asset', 'peminjaman', 'warehouse'));
     }
 
     /**
@@ -86,8 +88,7 @@ class PeminjamanController extends Controller
         // dd($request);
         try {
             $peminjaman = asset_status::findOrFail($id);
-            // dd($peminjaman);
-            // dd($request->all());
+            $peminjaman['updated_by'] = Auth::user()->fullname; // Menambahkan ID pengguna sebagai updated_by
             $peminjaman->update($request->all());
             return redirect()->back()->with('success', 'Data peminjaman berhasil diperbaharui');
         } catch (\Throwable $th) {

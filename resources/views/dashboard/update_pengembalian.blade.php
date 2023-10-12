@@ -27,13 +27,22 @@
                         value="{{ $peminjaman->exit_pic }}" placeholder="Masukan Nama PJ Keluar" readonly required>
 
                     <label for="exit_warehouse" class="col-form-label">Asal Gudang :</label>
-                    <input class="form-control" name="exit_warehouse" type="text" id="exit_warehouse"
-                        value="{{ $peminjaman->exit_warehouse }}" placeholder="Masukan Nama PJ Keluar" readonly required>
+                    {{-- <select class="form-control" name="enter_warehouse" id="enter_warehouse" required>
+                        <option disabled selected>Pilih Nama Asset</option>
+                        @foreach ($warehouse as $data_warehouse)
+                            <option value="{{ $data_warehouse->id }}"
+                                {{ $data_warehouse->id == $peminjaman->enter_warehouse ? 'selected' : '' }}>
+                                {{ $data_warehouse->name }}
+                            </option>
+                        @endforeach
+                    </select> --}}
+                    <input type="hidden" name="exit_warehouse" id="exit_warehouse"
+                        value="{{ $peminjaman->exit_warehouse }}">
+                    <input class="form-control" type="text" value="{{ $peminjaman->warehouse->name }}" readonly required>
+                    {{-- <input class="form-control" name="exit_warehouse" type="text" id="exit_warehouse"
+                        value="{{ $peminjaman->warehouse->id }}" placeholder="Masukan Nama PJ Keluar" readonly required> --}}
 
                     <label for="enter_at" class="col-form-label">Tanggal Pengembalian:</label>
-                    {{-- <input class="form-control" name="enter_at" type="date" id="enter_at"
-                        value="{{ old('enter_at', $peminjaman->enter_at) }}" placeholder="Masukan Tanggal Pengembalian"
-                        required> --}}
                     <input class="form-control" name="enter_at" type="date" id="enter_at"
                         value="{{ \Carbon\Carbon::parse($peminjaman->enter_at)->format('Y-m-d') }}"
                         placeholder="Masukan Tanggal Asset" required>
@@ -44,9 +53,15 @@
                         pattern="[^0-9]+" oninput="this.value=this.value.replace(/[0-9]/g,'');" required>
 
                     <label for="enter_warehouse" class="col-form-label">Tujuan Pengembalian Gudang:</label>
-                    <input class="form-control" name="enter_warehouse" type="text" id="enter_warehouse"
-                        value="{{ old('enter_warehouse', $peminjaman->enter_warehouse) }}"
-                        placeholder="Masukan tujuan pengembalian" required>
+                    <select class="form-control" name="enter_warehouse" type="text" id="enter_warehouse">
+                        <option disabled selected>Pilih Nama Asset</option>
+                        @foreach ($warehouse as $data_warehouse)
+                            <option value="{{ $data_warehouse->id }}"
+                                @if ($data_warehouse->id == $peminjaman->enter_warehouse) selected
+                                @else @endif>
+                                {{ $data_warehouse->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"

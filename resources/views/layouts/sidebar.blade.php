@@ -68,4 +68,9 @@
             <span class="ml-4">User</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('warehouse.index') }}">
+            <span class="ml-4">Warehouse</span>
+        </a>
+    </li>
 </ul>

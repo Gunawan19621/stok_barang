@@ -17,10 +17,14 @@ return new class extends Migration
             $table->foreign('asset_id')->references('id')->on('m_assets')->onDelete('cascade');
             $table->datetime('exit_at');
             $table->string('exit_pic', 200);
-            $table->string('exit_warehouse', 200);
+            // $table->string('exit_warehouse', 200);
+            $table->bigInteger('exit_warehouse')->unsigned()->nullable();
+            $table->foreign('exit_warehouse')->references('id')->on('m_warehouses')->onDelete('cascade');
             $table->datetime('enter_at')->nullable();
             $table->string('enter_pic', 200)->nullable();
-            $table->string('enter_warehouse', 200)->nullable();
+            // $table->string('enter_warehouse', 200)->nullable();
+            $table->bigInteger('enter_warehouse')->unsigned()->nullable();
+            $table->foreign('enter_warehouse')->references('id')->on('m_warehouses')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by', 200);
