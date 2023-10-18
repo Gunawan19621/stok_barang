@@ -20,26 +20,8 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/transaksi') }}">
-            <span class="ml-4">Transaksi</span>
-        </a>
-    </li> --}}
     <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-            aria-controls="collapseTwo">
-            <span class="ml-4">Transaksi</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ url('/dashboard/barangMasuk') }}">Barang Masuk</a>
-                <a class="collapse-item" href="{{ url('/dashboard/barangKeluar') }}">Barang Keluar</a>
-            </div>
-        </div>
-    </li> -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/peminjaman') }}">
+        <a class="nav-link" href="{{ route('dashboard.peminjaman.index') }}">
             <span class="ml-4">Peminjaman</span>
         </a>
     </li>
@@ -59,13 +41,18 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('asset.index') }}">
-            <span class="ml-4">Asset</span>
+        <a class="nav-link" href="#">
+            <span class="ml-4">Role</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('user.index') }}">
             <span class="ml-4">User</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('asset.index') }}">
+            <span class="ml-4">Asset</span>
         </a>
     </li>
     <li class="nav-item">

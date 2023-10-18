@@ -3,6 +3,7 @@
 use App\Models\m_asset;
 use App\Models\asset_status;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\M_userController;
 use App\Http\Controllers\M_assetController;
 use App\Http\Controllers\ProductController;
@@ -41,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/setting', [ProfileController::class, 'setting'])->name('profile.setting');
 });
 
-Route::group(['prefix' => 'dashboard'], function () {
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function () {
     //Halaman dashboard
     Route::middleware('auth')->get('', function () {
         $reminder = asset_status::whereNull('enter_at')->count();
@@ -52,13 +53,31 @@ Route::group(['prefix' => 'dashboard'], function () {
         return view('dashboard.index', compact('jumlahAsset', 'jumlahPeminjaman', 'jumlahPengembalian', 'reminder'));
     });
 
-    //Halaman Transaksi
-    // Route::middleware('auth')->resource('/transaksi', TransaksiController::class);
+    //Halaman Role
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('role', 'index')->name('role.index');
+        Route::get('role/create', 'create')->name('role.create');
+        Route::post('role/store', 'store')->name('role.store');
+        Route::get('role/{id}', 'show')->name('role.show');
+        Route::get('role/{id}/edit', 'edit')->name('role.edit');
+        Route::put('role/{id}', 'update')->name('role.update');
+        Route::delete('role/delete/{id}', 'destroy')->name('role.destroy');
+    });
+
 
     //Halaman Peminjaman
-    Route::middleware('auth')->resource('/peminjaman', PeminjamanController::class);
-    Route::get('/hapusPeminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('hapusPeminjaman.destroy');
+    Route::controller(PeminjamanController::class)->group(function () {
+        Route::get('peminjaman', 'index')->name('peminjaman.index');
+        // Route::get('peminjaman/create', 'create')->name('peminjaman.create');
+        Route::post('peminjaman/store', 'store')->name('peminjaman.store');
+        // Route::get('peminjaman/{id}', 'show')->name('peminjaman.show');
+        // Route::get('peminjaman/{id}/edit', 'edit')->name('peminjaman.edit');
+        Route::put('peminjaman/{id}', 'update')->name('peminjaman.update');
+        Route::delete('peminjaman/delete/{id}', 'destroy')->name('peminjaman.destroy');
+    });
+});
 
+Route::group(['prefix' => 'dashboard'], function () {
     //Halaman Pengembalian
     Route::middleware('auth')->resource('/pengembalian', PengembalianController::class);
 

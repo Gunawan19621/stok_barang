@@ -91,7 +91,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('peminjaman.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.peminjaman.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="asset_id" class="col-form-label">Nama Asset:</label>
@@ -144,7 +144,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('peminjaman.update', $data->id) }}" method="POST"
+                        <form action="{{ route('dashboard.peminjaman.update', $data->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
