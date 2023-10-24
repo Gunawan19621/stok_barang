@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('barang_keluars', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('asset_id')->unsigned();
-            $table->foreign('asset_id')->references('id')->on('m_assets');
-            $table->integer('jumlah'); // Kolom untuk jumlah barang masuk
-            $table->date('tanggal_keluar'); // Kolom untuk tanggal barang masuk
-            $table->string('penerima_barang', 200); // Kolom untuk PIC barang masuk
+            $table->bigInteger('assets_id')->unsigned()->nullable();
+            $table->foreign('assets_id')->references('id')->on('m_assets')->onDelete('set null');
+            $table->integer('jumlah')->nullable();
+            $table->date('tanggal_keluar')->nullable();
+            $table->string('penerima_barang', 200)->nullable();
             $table->string('exit_warehouse', 200)->nullable();
-            $table->string('keterangan')->nullable(); // Kolom untuk keterangan (opsional)
+            $table->string('keterangan', 255)->nullable();
             $table->timestamps();
         });
     }

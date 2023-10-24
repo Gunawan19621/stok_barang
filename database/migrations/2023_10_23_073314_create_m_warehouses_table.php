@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -14,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('m_warehouses', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 200);
+            $table->string('name', 200)->nullable();
             $table->text('description')->nullable();
             $table->text('address')->nullable();
             $table->timestamps();
@@ -22,12 +21,6 @@ return new class extends Migration
             $table->string('created_by', 200)->nullable();
             $table->string('updated_by', 200)->nullable();
         });
-
-        DB::table('m_warehouses')->insert([
-            ['name' => 'Gudangsatu', 'description' => 'Gudang Barang', 'address' => 'Jln. Raya Kesatu'],
-            ['name' => 'Gudangdua', 'description' => 'Gudang Makanan', 'address' => 'Jln. Raya Kedua'],
-            ['name' => 'Gudangtiga', 'description' => 'Gudang Pakaian', 'address' => 'Jln. Raya Ketiga'],
-        ]);
     }
 
     /**

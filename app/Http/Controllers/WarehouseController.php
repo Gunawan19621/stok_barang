@@ -29,8 +29,6 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('oke');
-        // dd($request);
         $request->validate([
             'name' => 'required',
             'description' => 'required',

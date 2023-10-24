@@ -37,121 +37,6 @@ class M_assetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     $latestAsset = \App\Models\m_asset::latest()->first();
-    //     // Mendapatkan tahun saat ini
-    //     $currentYear = date("Y");
-    //     // Menghitung nomor urut untuk kode barang
-    //     if ($latestAsset == null) {
-    //         // Kode pertama
-    //         $nomorUrut = 1;
-    //     } else {
-    //         // Kode berikutnya
-    //         $lastCode = substr($latestAsset->seri, 7);
-    //         $nomorUrut = intval($lastCode) + 1;
-    //     }
-    //     // Menggabungkan semua komponen kode barang
-    //     $seri = 'AST' . $currentYear . str_pad($nomorUrut, STR_PAD_LEFT);
-    //     // Validasi input
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'description' => 'required',
-    //         'warehouse_id' => 'required',
-    //         'date' => 'required',
-    //         'qr_count' => '',
-    //     ]);
-    //     try {
-    //         $currentUser = Auth::user();
-    //         // Menyiapkan data untuk disimpan
-    //         $validatedData = $request->except('_token');
-    //         $validatedData['seri'] = $seri;
-    //         $validatedData['created_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai created_by
-    //         $validatedData['updated_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai updated_by
-
-    //         // Menyimpan data ke dalam database
-    //         $newAsset = \App\Models\m_asset::create($validatedData);
-
-    //         // Membuat QR code dan menyimpannya ke dalam basis data
-    //         $dataForQR = [
-    //             'seri' => $newAsset->seri,
-    //             'name' => $newAsset->name,
-    //             // ... tambahkan lebih banyak data sesuai kebutuhan ...
-    //         ];
-
-    //         $qrCode = QrCode::size(300)->generate(json_encode($dataForQR));
-
-    //         // Menyimpan QR code ke dalam kolom 'qr_code' di tabel asset (perbaikan)
-    //         $newAsset->update(['qr_count' => $qrCode]);
-
-    //         return redirect()->back()->with('success', 'Data asset berhasil ditambah.');
-    //     } catch (\Throwable $th) {
-    //         return redirect()->back()->with('error', 'Data asset gagal ditambah.');
-    //     }
-    // }
-
-    // public function store(Request $request)
-    // {
-    //     $latestAsset = \App\Models\m_asset::latest()->first();
-
-    //     // Mendapatkan tahun saat ini
-    //     $currentYear = date("Y");
-
-    //     // Menghitung nomor urut untuk kode barang
-    //     if ($latestAsset == null) {
-    //         // Kode pertama
-    //         $nomorUrut = 1;
-    //     } else {
-    //         // Kode berikutnya
-    //         $lastCode = substr($latestAsset->seri, 7);
-    //         $nomorUrut = intval($lastCode) + 1;
-    //     }
-
-    //     // Menggabungkan semua komponen kode barang
-    //     $seri = 'AST' . $currentYear . str_pad($nomorUrut, STR_PAD_LEFT);
-
-    //     // Validasi input
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'description' => 'required',
-    //         'warehouse_id' => 'required',
-    //         'date' => 'required',
-    //         'qr_count' => '',
-    //     ]);
-
-    //     try {
-    //         $currentUser = Auth::user();
-
-    //         // Menyiapkan data untuk disimpan
-    //         $validatedData = $request->except('_token');
-    //         $validatedData['seri'] = $seri;
-    //         $validatedData['created_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai created_by
-    //         $validatedData['updated_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai updated_by
-
-    //         // Menyimpan data ke dalam database
-    //         $newAsset = \App\Models\m_asset::create($validatedData);
-
-    //         // Generate QR code and save it as an image in the public directory
-    //         $dataForQR = [
-    //             'seri' => $newAsset->seri,
-    //             'name' => $newAsset->name,
-    //             // ... tambahkan lebih banyak data sesuai kebutuhan ...
-    //         ];
-
-    //         $qrCode = QrCode::format('png')->size(300)->generate(json_encode($dataForQR));
-
-    //         // Menyimpan QR code sebagai gambar di direktori penyimpanan publik
-    //         $qrCodePath = 'qr_codes/' . $seri . '.png';
-    //         Storage::disk('public')->put($qrCodePath, $qrCode);
-
-    //         // Menyimpan URL gambar QR code ke dalam kolom 'qr_count'
-    //         $newAsset->update(['qr_count' => $qrCodePath]);
-
-    //         return redirect()->back()->with('success', 'Data asset berhasil ditambah.');
-    //     } catch (\Throwable $th) {
-    //         return redirect()->back()->with('error', 'Data asset gagal ditambah.');
-    //     }
-    // }
     public function store(Request $request)
     {
         // dd($request);
@@ -168,7 +53,7 @@ class M_assetController extends Controller
             $nomorUrut = intval($lastCode) + 1;
         }
         // Menggabungkan semua komponen kode barang
-        $seri = 'AST' . $currentYear .'-'. str_pad($nomorUrut, STR_PAD_LEFT);
+        $seri = 'AST' . $currentYear . '-' . str_pad($nomorUrut, STR_PAD_LEFT);
         // Validasi input
         $request->validate([
             'name' => 'required',

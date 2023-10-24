@@ -41,7 +41,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('dashboard.role.index') }}">
             <span class="ml-4">Role</span>
         </a>
     </li>

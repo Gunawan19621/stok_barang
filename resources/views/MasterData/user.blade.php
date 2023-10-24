@@ -3,14 +3,6 @@
 @section('content')
     {{-- <h1>Halaman Manajement User</h1> --}}
     <div class="container-fluid">
-        <!-- <h1 class="h3 mb-2 text-gray-800">Tabel User</h1>
-                                                                                                                                                                        <div class="mb-4">
-                                                                                                                                                                            <p>Our User Tables are enhanced with the help of the DataTables plugin. This is a powerful tool that allows you
-                                                                                                                                                                                to explore return data in a more interactive and efficient way</p>
-                                                                                                                                                                            {{-- <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
-                <span class="text">+ Tambah data</span> --}}
-                                                                                                                                                                            </a>
-                                                                                                                                                                        </div> -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="row">

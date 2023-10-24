@@ -48,7 +48,6 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         $reminder = asset_status::whereNull('enter_at')->count();
         $jumlahAsset = m_asset::count();
         $jumlahPeminjaman = asset_status::count();
-        // $jumlahPengembalian = asset_status::count();
         $jumlahPengembalian = asset_status::whereNotNull('enter_at')->count();
         return view('dashboard.index', compact('jumlahAsset', 'jumlahPeminjaman', 'jumlahPengembalian', 'reminder'));
     });
@@ -56,22 +55,16 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
     //Halaman Role
     Route::controller(RoleController::class)->group(function () {
         Route::get('role', 'index')->name('role.index');
-        Route::get('role/create', 'create')->name('role.create');
         Route::post('role/store', 'store')->name('role.store');
-        Route::get('role/{id}', 'show')->name('role.show');
-        Route::get('role/{id}/edit', 'edit')->name('role.edit');
         Route::put('role/{id}', 'update')->name('role.update');
-        Route::delete('role/delete/{id}', 'destroy')->name('role.destroy');
+        Route::get('role/delete/{id}', 'destroy')->name('role.destroy');
     });
 
 
     //Halaman Peminjaman
     Route::controller(PeminjamanController::class)->group(function () {
         Route::get('peminjaman', 'index')->name('peminjaman.index');
-        // Route::get('peminjaman/create', 'create')->name('peminjaman.create');
         Route::post('peminjaman/store', 'store')->name('peminjaman.store');
-        // Route::get('peminjaman/{id}', 'show')->name('peminjaman.show');
-        // Route::get('peminjaman/{id}/edit', 'edit')->name('peminjaman.edit');
         Route::put('peminjaman/{id}', 'update')->name('peminjaman.update');
         Route::delete('peminjaman/delete/{id}', 'destroy')->name('peminjaman.destroy');
     });
@@ -89,13 +82,6 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/hapusAsset/{id}', [M_assetController::class, 'destroy'])->name('hapusAsset.destroy');
     Route::get('/assetcetak_pdf', [M_assetController::class, 'cetakpdf'])->name('assetcetakpdf.cetakpdf');
     Route::get('/assetexport', [M_assetController::class, 'export'])->name('assetexport.export');
-    // Route::get('/assetQR{id}', [M_assetController::class, 'QR'])->name('assetQR.QR');
-    // Route::get('assetQR{id}', function () {
-    //     $path = public_path('qrcode/' . time() . '.png');
-
-    //     return QrCode::size(300)
-    //         ->generate('A simple example of QR code', $path);
-    // })->name('assetQR.QR');
 
     //Halaman Manajemen User
     Route::middleware('auth')->resource('/user', M_userController::class);
@@ -104,13 +90,6 @@ Route::group(['prefix' => 'dashboard'], function () {
     //Halaman Warehouse
     Route::middleware('auth')->resource('/warehouse', WarehouseController::class);
     Route::get('/hapuswarehouse/{id}', [WarehouseController::class, 'destroy'])->name('hapuswarehouse.destroy');
-
-    //Halaman Barang Masuk
-    // Route::middleware('auth')->resource('/barangMasuk', BarangMasukController::class);
-
-    //Halaman Barang Keluar
-    // Route::middleware('auth')->resource('/barangKeluar', BarangKeluarController::class);
-    // Route::get('/hapusBarangK/{id}', [BarangKeluarController::class, 'destroy'])->name('hapusBarangK.destroy');
 });
 
 require __DIR__ . '/auth.php';

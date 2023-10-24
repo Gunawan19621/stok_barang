@@ -13,18 +13,17 @@ return new class extends Migration
     {
         Schema::create('m_assets', function (Blueprint $table) {
             $table->id();
-            $table->string('seri', 50);
-            $table->string('name', 200);
-            $table->text('description');
-            $table->bigInteger('warehouse_id')->unsigned();
-            $table->foreign('warehouse_id')->references('id')->on('m_warehouses');
-            $table->datetime('date');
-            // $table->integer('qr_count');
-            $table->string('qr_count')->nullable();
+            $table->string('seri', 50)->nullable();
+            $table->string('name', 200)->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('warehouse_id')->nullable();
+            $table->foreign('warehouse_id')->references('id')->on('m_warehouses')->onDelete('set null');
+            $table->datetime('date')->nullable();
+            $table->string('qr_count', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('created_by', 200);
-            $table->string('updated_by', 200);
+            $table->string('created_by', 200)->nullable();
+            $table->string('updated_by', 200)->nullable();
         });
     }
 

@@ -13,22 +13,18 @@ return new class extends Migration
     {
         Schema::create('asset_statuses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('asset_id')->unsigned();
-            $table->foreign('asset_id')->references('id')->on('m_assets')->onDelete('cascade');
-            $table->datetime('exit_at');
-            $table->string('exit_pic', 200);
-            // $table->string('exit_warehouse', 200);
+            $table->bigInteger('asset_id')->unsigned()->nullable();
+            $table->foreign('asset_id')->references('id')->on('m_assets')->onDelete('set null');
+            $table->datetime('exit_at')->nullable();
+            $table->string('exit_pic', 200)->nullable();
             $table->bigInteger('exit_warehouse')->unsigned()->nullable();
-            $table->foreign('exit_warehouse')->references('id')->on('m_warehouses')->onDelete('cascade');
             $table->datetime('enter_at')->nullable();
             $table->string('enter_pic', 200)->nullable();
-            // $table->string('enter_warehouse', 200)->nullable();
             $table->bigInteger('enter_warehouse')->unsigned()->nullable();
-            $table->foreign('enter_warehouse')->references('id')->on('m_warehouses')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
-            $table->string('created_by', 200);
-            $table->string('updated_by', 200);
+            $table->string('created_by', 200)->nullable();
+            $table->string('updated_by', 200)->nullable();
         });
     }
 

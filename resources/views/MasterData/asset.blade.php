@@ -38,17 +38,6 @@
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                        <!-- <tfoot>
-                            <tr>
-                                <th>No. Seri</th>
-                                <th>Nama</th>
-                                <th>Deskripsi</th>
-                                <th>Gudang</th>
-                                <th>Tanggal</th>
-                                <th>QR</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </tfoot> -->
                         <tbody>
                             @foreach ($asset as $data)
                                 <tr>
