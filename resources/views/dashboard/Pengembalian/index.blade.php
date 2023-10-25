@@ -24,20 +24,6 @@
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Asset</th>
-                                <th>Tgl Peinjaman</th>
-                                <th>PJ Peinjaman</th>
-                                <th>Asal Gudang</th>
-                                <th>Tgl Pengembalian</th>
-                                <th>PJ Pengembalian</th>
-                                <th>Tujuan Gudang</th>
-                                <th>Status</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
                             @php
                                 $no_peminjaman = 1;
@@ -78,7 +64,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('pengembalian.show', [$data->id]) }}">
+                                        <a href="{{ route('dashboard.pengembalian.edit', [$data->id]) }}">
                                             <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                         </a>
                                     </td>

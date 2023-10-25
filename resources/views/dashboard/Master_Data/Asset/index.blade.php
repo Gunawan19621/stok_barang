@@ -13,11 +13,11 @@
                             data-target="#tambahDataModal">
                             <span class="text">+ Tambah data</span>
                         </a>
-                        <a href="{{ route('assetcetakpdf.cetakpdf') }}" class="btn btn-success btn-icon-split ml-auto"
-                            target="_blank">
+                        <a href="{{ route('dashboard.assetcetakpdf.cetakpdf') }}"
+                            class="btn btn-success btn-icon-split ml-auto" target="_blank">
                             <span class="text">Cetak PDF</span>
                         </a>
-                        <a href="{{ route('assetexport.export') }}" class="btn btn-info btn-icon-split ml-auto"
+                        <a href="{{ route('dashboard.assetexport.export') }}" class="btn btn-info btn-icon-split ml-auto"
                             target="_blank">
                             <span class="text">Cetak Exel</span>
                         </a>
@@ -46,23 +46,27 @@
                                     <td>{{ $data->description }}</td>
                                     <td>{{ $data->warehouse->name }}</td>
                                     <td>{{ \Carbon\Carbon::parse($data->date)->format('d-m-Y') }}</td>
-                                    <td>
-                                        {!! QrCode::size(80)->generate(route('asset.show', $data->id)) !!}
-                                    </td>
-
-
                                     <td class="text-center">
-                                        <a href="{{ route('asset.show', $data->id) }}">
+                                        {!! QrCode::size(80)->generate(route('dashboard.asset.show', $data->id)) !!}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('dashboard.asset.show', $data->id) }}">
                                             <i class="fa fa-eye mr-2" style="font-size: 20px"></i>
                                         </a>
                                         <a href="#" data-toggle="modal"
                                             data-target="#editDataModal{{ $data->id }}">
                                             <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                         </a>
-                                        <a href="{{ route('hapusAsset.destroy', $data->id) }}"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            <i class="fa fa-trash text-danger mr-2" style="font-size: 20px"></i>
-                                        </a>
+                                        <form action="{{ route('dashboard.asset.destroy', $data->id) }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                                style="border: none; background: none; cursor: pointer;">
+                                                <i class="fa fa-trash text-danger" style="font-size: 20px"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -86,7 +90,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('asset.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.asset.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name" class="col-form-label">Nama Asset:</label>
@@ -107,11 +111,6 @@
                             <label for="date" class="col-form-label">Tanggal:</label>
                             <input class="form-control" name="date" type="date" id="date"
                                 value="{{ old('date') }}" placeholder="Masukan Tanggal Asset" required>
-
-                            {{-- <label for="qr_count" class="col-form-label">QR_Count:</label>
-                            <input class="form-control" name="qr_count" type="text" id="qr_count"
-                                value="{{ old('qr_count') }}" placeholder="Masukan Kode QR"
-                                onkeypress="return event.charCode >= 48 && event.charCode <= 57" required> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -136,7 +135,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('asset.update', $data->id) }}" method="POST"
+                        <form action="{{ route('dashboard.asset.update', $data->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -189,7 +188,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('asset.update', $data->id) }}" method="POST"
+                        <form action="{{ route('dashboard.asset.update', $data->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

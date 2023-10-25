@@ -18,7 +18,7 @@ class PeminjamanController extends Controller
         $asset = m_asset::all();
         $peminjaman = asset_status::get();
         $warehouse = m_warehouse::get();
-        return view('dashboard.peminjaman', compact('asset', 'peminjaman', 'warehouse'));
+        return view('dashboard.Peminjaman.index', compact('asset', 'peminjaman', 'warehouse'));
     }
 
     /**
@@ -26,7 +26,10 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        //
+        $asset = m_asset::all();
+        $peminjaman = asset_status::get();
+        $warehouse = m_warehouse::get();
+        return view('dashboard.Peminjaman.create', compact('asset', 'peminjaman', 'warehouse'));
     }
 
     /**
@@ -50,11 +53,10 @@ class PeminjamanController extends Controller
             $validatedData['updated_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai updated_by
             // dd($validatedData);
             asset_status::create($validatedData);
-            return redirect()->back()->with('success', 'Data peminjaman berhasil ditambah.');
+            return redirect()->route('dashboard.peminjaman.index')->with('success', 'Data peminjaman berhasil ditambah.');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Data peminjaman gagal ditambah.');
         }
-        return redirect()->back()->with('success', 'Data peminjaman berhasil ditambah.');
     }
 
     /**
@@ -68,9 +70,12 @@ class PeminjamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit($id)
     {
-        // dd('oke');
+        $peminjaman = asset_status::find($id);
+        $asset = m_asset::all();
+        $warehouse = m_warehouse::get();
+        return view('dashboard.Peminjaman.edit', compact('asset', 'peminjaman', 'warehouse'));
     }
 
     /**
@@ -90,9 +95,8 @@ class PeminjamanController extends Controller
             $peminjaman = asset_status::findOrFail($id);
             $peminjaman['updated_by'] = Auth::user()->fullname; // Menambahkan ID pengguna sebagai updated_by
             $peminjaman->update($request->all());
-            return redirect()->back()->with('success', 'Data peminjaman berhasil diperbaharui');
+            return redirect()->route('dashboard.peminjaman.index')->with('success', 'Data peminjaman berhasil diperbaharui');
         } catch (\Throwable $th) {
-            // dd($th->getMessage());
             return redirect()->back()->with('error', 'Data peminjaman gagal diperbaharui');
         }
     }
@@ -102,7 +106,6 @@ class PeminjamanController extends Controller
      */
     public function destroy($id)
     {
-        // dd("oke");
         try {
             $peminjaman = asset_status::findOrFail($id);
             $peminjaman->delete();

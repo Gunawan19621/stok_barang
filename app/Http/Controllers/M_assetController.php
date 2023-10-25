@@ -23,7 +23,7 @@ class M_assetController extends Controller
     {
         $asset = m_asset::get();
         $warehouse = m_warehouse::all();
-        return view('MasterData.asset', compact('asset', 'warehouse'));
+        return view('dashboard.Master_Data.Asset.index', compact('asset', 'warehouse'));
     }
 
     /**
@@ -66,8 +66,8 @@ class M_assetController extends Controller
             // Menyiapkan data untuk disimpan
             $validatedData = $request->except('_token');
             $validatedData['seri'] = $seri;
-            $validatedData['created_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai created_by
-            $validatedData['updated_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai updated_by
+            $validatedData['created_by'] = $currentUser->fullname; // Menambahkan ID pengguna sebagai created_by
+            $validatedData['updated_by'] = $currentUser->fullname; // Menambahkan ID pengguna sebagai updated_by
             // dd($validatedData);
             // Menyimpan data ke dalam database
             \App\Models\m_asset::create($validatedData);
@@ -86,38 +86,36 @@ class M_assetController extends Controller
         // dd('oke');
         $asset = m_asset::find($id);
         $warehouse = m_warehouse::all();
-        return view('MasterData.asset.show', compact('asset', 'warehouse'));
+        return view('dashboard.Master_Data.Asset.show', compact('asset', 'warehouse'));
     }
 
     // Menampilkan data QR
-    public function QR($id)
-    {
-        $asset = m_asset::find($id);
-        return QrCode::generate(
-            'Hello, World!',
-        );
-    }
+    // public function QR($id)
+    // {
+    //     $asset = m_asset::find($id);
+    //     return QrCode::generate(
+    //         'Hello, World!',
+    //     );
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
-    {
-        // dd('oke');
-    }
+    // public function edit()
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        // dd('oke');
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'warehouse_id' => 'required',
             'date' => 'required',
-            'qr_count' => 'required',
         ]);
         try {
             $asset = m_asset::findOrFail($id);
@@ -154,7 +152,7 @@ class M_assetController extends Controller
         // Buat objek Dompdf
         $dompdf = new Dompdf();
         // Render tampilan ke PDF
-        $html = view('MasterData.asset_pdf', compact('asset'))->render();
+        $html = view('dashboard.Master_Data.Asset.asset_pdf', compact('asset'))->render();
 
         // Muat HTML ke Dompdf
         $dompdf->loadHtml($html);

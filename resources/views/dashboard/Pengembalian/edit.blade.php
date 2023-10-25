@@ -5,7 +5,8 @@
         <div class="card-body m-2">
             <h3>Data Pengembalian</h3>
             <hr class="border">
-            <form action="{{ route('pengembalian.update', [$peminjaman->id]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('dashboard.pengembalian.update', [$peminjaman->id]) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -65,7 +66,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
-                        onclick="window.location.href = '{{ route('pengembalian.index') }}'">Kembali</button>
+                        onclick="window.location.href = '{{ route('dashboard.pengembalian.index') }}'">Kembali</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>

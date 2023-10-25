@@ -26,7 +26,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/pengembalian') }}">
+        <a class="nav-link" href="{{ route('dashboard.pengembalian.index') }}">
             <span class="ml-4">Pengembalian</span>
         </a>
     </li>
@@ -46,17 +46,17 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.index') }}">
+        <a class="nav-link" href="{{ route('dashboard.user.index') }}">
             <span class="ml-4">User</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('asset.index') }}">
+        <a class="nav-link" href="{{ route('dashboard.asset.index') }}">
             <span class="ml-4">Asset</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('warehouse.index') }}">
+        <a class="nav-link" href="{{ route('dashboard.warehouse.index') }}">
             <span class="ml-4">Warehouse</span>
         </a>
     </li>

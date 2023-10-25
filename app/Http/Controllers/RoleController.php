@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\m_role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -13,7 +14,7 @@ class RoleController extends Controller
     public function index()
     {
         $role = m_role::all();
-        return view('MasterData.role.index', compact('role'));
+        return view('dashboard.Master_Data.Role.index', compact('role'));
     }
 
     /**
@@ -34,7 +35,10 @@ class RoleController extends Controller
             'description' => 'required',
         ]);
         try {
+            $currentUser = Auth::user();
             $validatedData = $request->except('_token');
+            $validatedData['created_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai created_by
+            $validatedData['updated_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai updated_by
             m_role::create($validatedData);
             return redirect()->back()->with('success', 'Data role Berhasil Ditambah.');
         } catch (\Throwable $th) {
@@ -54,12 +58,12 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
-    {
-        // dd('oke');
-        $role = m_role::find($id);
-        return view('MasterData.role.edit', compact('role'));
-    }
+    // public function edit($id)
+    // {
+    //     // dd('oke');
+    //     $role = m_role::find($id);
+    //     return view('dashboard.Master_Data.Role.edit', compact('role'));
+    // }
 
     /**
      * Update the specified resource in storage.

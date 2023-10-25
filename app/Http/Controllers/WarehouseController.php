@@ -14,14 +14,14 @@ class WarehouseController extends Controller
     public function index()
     {
         $warehouses = m_warehouse::all();
-        return view('MasterData.warehouse', compact('warehouses'));
+        return view('dashboard.Master_Data.Warehouse.index', compact('warehouses'));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        // return view('dashboard.Master_Data.Warehouse.create');
     }
 
     /**
@@ -53,6 +53,7 @@ class WarehouseController extends Controller
     public function show($id)
     {
         // dd('oke');
+        // return view('dashboard.Master_Data.Warehouse.show');
     }
 
     /**
@@ -61,6 +62,7 @@ class WarehouseController extends Controller
     public function edit()
     {
         // dd('oke');
+        // return view('dashboard.Master_Data.Warehouse.edit');
     }
 
     /**

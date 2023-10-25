@@ -18,7 +18,6 @@
 
                     <label for="qr_count" class="col-form-label">QR:</label>
                     <div>
-                        {{-- <img src="{{ asset($asset->qr_count) }}" alt="QR Code" /> --}}
                         {!! QrCode::size(75)->generate(
                             'Name: ' .
                                 $asset->name .
@@ -35,7 +34,6 @@
                                 'Warehouse ID: ' .
                                 $asset->warehouse_id,
                         ) !!}
-
                     </div>
 
                     <label for="date" class="col-form-label">Tanggal:</label>
@@ -54,7 +52,7 @@
                         @endforeach
                     </select>
                 </div>
-                <a href="{{ route('asset.index') }}" class="btn btn-primary ">Kembali</a>
+                <a href="{{ route('dashboard.asset.index') }}" class="btn btn-primary ">Kembali</a>
             </div>
         </div>
     </div>

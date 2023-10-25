@@ -11,7 +11,7 @@
                     <div class="col-6 text-right">
                         <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal"
                             data-target="#tambahDataModal">
-                            <span class="text">+ Tambah data</span>
+                            <span class="text">Tambah Data Role</span>
                         </a>
                     </div>
                 </div>
@@ -21,8 +21,8 @@
                     <table class="table table-bordered" id="tablebarang" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama Akses</th>
+                                <th class="text-center" style="width: 50px;">No</th>
+                                <th>Nama Role</th>
                                 <th>Deskripsi</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -33,7 +33,7 @@
                             @endphp
                             @foreach ($role as $data_role)
                                 <tr>
-                                    <td>{{ $norole++ }}</td>
+                                    <td class="text-center">{{ $norole++ }}</td>
                                     <td>{{ $data_role->name }}</td>
                                     <td>{{ $data_role->description }}</td>
                                     <td class="text-center">
@@ -41,10 +41,16 @@
                                             data-target="#editDataModal{{ $data_role->id }}">
                                             <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                         </a>
-                                        <a href="{{ route('dashboard.role.destroy', $data_role->id) }}"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            <i class="fa fa-trash text-danger mr-2" style="font-size: 20px"></i>
-                                        </a>
+                                        <form action="{{ route('dashboard.role.destroy', $data_role->id) }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                                style="border: none; background: none; cursor: pointer;">
+                                                <i class="fa fa-trash text-danger" style="font-size: 20px"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
