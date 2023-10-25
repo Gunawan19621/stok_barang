@@ -15,11 +15,13 @@ class M_userController extends Controller
      */
     public function index()
     {
-        // dd('oke');
-        $warehouse = m_warehouse::get();
-        $role = m_role::get();
-        $user = User::get();
-        return view('dashboard.Master_Data.User.index', compact('user', 'role', 'warehouse'));
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'user' => User::get(),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.index', $data);
     }
 
     /**
@@ -27,9 +29,12 @@ class M_userController extends Controller
      */
     public function create()
     {
-        $role = m_role::get();
-        $warehouse = m_warehouse::get();
-        return view('dashboard.Master_Data.User.create', compact('role', 'warehouse'));
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.create', $data);
     }
 
     /**
@@ -65,10 +70,13 @@ class M_userController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        $role = m_role::get();
-        $warehouse = m_warehouse::get();
-        return view('dashboard.Master_Data.User.show', compact('user', 'role', 'warehouse'));
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'user' => User::find($id),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.show', $data);
     }
 
     /**
@@ -76,11 +84,13 @@ class M_userController extends Controller
      */
     public function edit($id)
     {
-        // dd('oke');
-        $user = User::find($id);
-        $role = m_role::get();
-        $warehouse = m_warehouse::get();
-        return view('dashboard.Master_Data.User.edit', compact('user', 'role', 'warehouse'));
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'user' => User::find($id),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.edit', $data);
     }
 
     /**

@@ -13,8 +13,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $role = m_role::all();
-        return view('dashboard.Master_Data.Role.index', compact('role'));
+        $data = [
+            'role' => m_role::all(),
+            'active' => 'menu-role',
+        ];
+        return view('dashboard.Master_Data.Role.index', $data);
     }
 
     /**

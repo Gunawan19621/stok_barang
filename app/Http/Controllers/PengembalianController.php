@@ -12,9 +12,11 @@ class PengembalianController extends Controller
 {
     public function index()
     {
-        // dd('oke');
-        $peminjaman = asset_status::get();
-        return view('dashboard.Pengembalian.index', compact('peminjaman'));
+        $data = [
+            'peminjaman' => asset_status::get(),
+            'active' => 'menu-pengembalian',
+        ];
+        return view('dashboard.Pengembalian.index', $data);
     }
 
     /**
@@ -45,9 +47,12 @@ class PengembalianController extends Controller
      */
     public function edit($id)
     {
-        $warehouse = m_warehouse::get();
-        $peminjaman = asset_status::findOrFail($id);
-        return view('dashboard.Pengembalian.edit', compact('peminjaman', 'warehouse'));
+        $data = [
+            'peminjaman' => asset_status::findOrFail($id),
+            'warehouse' => m_warehouse::get(),
+            'active' => 'menu-pengembalian',
+        ];
+        return view('dashboard.Pengembalian.edit', $data);
     }
 
     /**

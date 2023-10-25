@@ -38,18 +38,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/{id}', [ProfileController::class, 'updateprofile'])->name('profile.updateprofile');
-    Route::post('/profile-update', [ProfileController::class, 'updatePhoto'])->name('profile-update');
+    // Route::post('/profile-update', [ProfileController::class, 'updatePhoto'])->name('profile-update');
     Route::get('/setting', [ProfileController::class, 'setting'])->name('profile.setting');
 });
 
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function () {
     //Halaman dashboard
     Route::middleware('auth')->get('', function () {
-        $reminder = asset_status::whereNull('enter_at')->count();
-        $jumlahAsset = m_asset::count();
-        $jumlahPeminjaman = asset_status::count();
-        $jumlahPengembalian = asset_status::whereNotNull('enter_at')->count();
-        return view('dashboard.index', compact('jumlahAsset', 'jumlahPeminjaman', 'jumlahPengembalian', 'reminder'));
+        $data = [
+            'reminder' => asset_status::whereNull('enter_at')->count(),
+            'jumlahAsset' => m_asset::count(),
+            'jumlahPeminjaman' => asset_status::count(),
+            'jumlahPengembalian' => asset_status::whereNotNull('enter_at')->count(),
+            'active' => 'menu-dashboard',
+        ];
+        return view('dashboard.index', $data);
     });
 
     //Halaman Warehouse

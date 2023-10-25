@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\asset_status;
 use App\Models\m_asset;
 use App\Models\m_warehouse;
+use App\Models\asset_status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PeminjamanController extends Controller
 {
@@ -15,10 +16,15 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $asset = m_asset::all();
-        $peminjaman = asset_status::get();
-        $warehouse = m_warehouse::get();
-        return view('dashboard.Peminjaman.index', compact('asset', 'peminjaman', 'warehouse'));
+
+        $data = [
+            'asset' => m_asset::all(),
+            'peminjaman' => asset_status::get(),
+            'warehouse' => m_warehouse::get(),
+            'active' => 'menu-peminjaman',
+        ];
+
+        return view('dashboard.Peminjaman.index', $data);
     }
 
     /**
@@ -26,10 +32,13 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        $asset = m_asset::all();
-        $peminjaman = asset_status::get();
-        $warehouse = m_warehouse::get();
-        return view('dashboard.Peminjaman.create', compact('asset', 'peminjaman', 'warehouse'));
+        $data = [
+            'asset' => m_asset::all(),
+            'peminjaman' => asset_status::get(),
+            'warehouse' => m_warehouse::get(),
+            'active' => 'menu-peminjaman',
+        ];
+        return view('dashboard.Peminjaman.create', $data);
     }
 
     /**
@@ -72,10 +81,13 @@ class PeminjamanController extends Controller
      */
     public function edit($id)
     {
-        $peminjaman = asset_status::find($id);
-        $asset = m_asset::all();
-        $warehouse = m_warehouse::get();
-        return view('dashboard.Peminjaman.edit', compact('asset', 'peminjaman', 'warehouse'));
+        $data = [
+            'asset' => m_asset::all(),
+            'peminjaman' => asset_status::find($id),
+            'warehouse' => m_warehouse::get(),
+            'active' => 'menu-peminjaman',
+        ];
+        return view('dashboard.Peminjaman.edit', $data);
     }
 
     /**

@@ -13,8 +13,11 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        $warehouses = m_warehouse::all();
-        return view('dashboard.Master_Data.Warehouse.index', compact('warehouses'));
+        $data = [
+            'warehouses' => m_warehouse::all(),
+            'active' => 'menu-warehouse',
+        ];
+        return view('dashboard.Master_Data.Warehouse.index', $data);
     }
     /**
      * Show the form for creating a new resource.

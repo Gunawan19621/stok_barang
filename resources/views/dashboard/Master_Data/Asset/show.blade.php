@@ -22,6 +22,9 @@
                             'Name: ' .
                                 $asset->name .
                                 "\n" .
+                                'ID Asset: ' .
+                                $asset->id .
+                                "\n" .
                                 'Description: ' .
                                 $asset->description .
                                 "\n" .
@@ -29,9 +32,12 @@
                                 $asset->qr_count .
                                 "\n" .
                                 'Date: ' .
-                                $asset->date .
+                                \Carbon\Carbon::parse($asset->date)->format('d-m-Y') .
                                 "\n" .
-                                'Warehouse ID: ' .
+                                'Name WH: ' .
+                                $asset->warehouse->name .
+                                "\n" .
+                                'ID WH: ' .
                                 $asset->warehouse_id,
                         ) !!}
                     </div>
