@@ -18,7 +18,24 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'username',
+        'fullname',
+        'nip',
+        'email',
+        'no_hp',
+        'divisi',
+        'tgl_lahir',
+        'jenis_kelamin',
+        'agama',
+        'foto',
+        'role_id',
+        'warehouse_id',
+        'address',
+        'password',
+        'created_by',
+        'updated_by',
+    ];
 
     public function warehouse()
     {

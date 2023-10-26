@@ -2,13 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class m_asset extends Model
 {
-    use HasFactory;
-    protected $table = 'm_assets', $guarded = ['id'];
+    use HasFactory, SoftDeletes;
+    protected $table = 'm_assets';
+
+    protected $fillable = [
+        'seri',
+        'name',
+        'description',
+        'warehouse_id',
+        'date',
+        'qr_count',
+        'created_by',
+        'updated_by',
+    ];
 
     public function warehouse()
     {
