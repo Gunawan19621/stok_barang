@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use Dompdf\Dompdf;
 use App\Models\m_asset;
+use BaconQrCode\Writer;
 use Barryvdh\DomPDF\PDF;
 use App\Models\m_warehouse;
 use App\Exports\AssetExport;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use BaconQrCode\Renderer\ImageRenderer;
 use Illuminate\Support\Facades\Storage;
-// use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+
 
 class M_assetController extends Controller
 {
@@ -21,9 +26,12 @@ class M_assetController extends Controller
      */
     public function index()
     {
-        $asset = m_asset::get();
-        $warehouse = m_warehouse::all();
-        return view('MasterData.asset', compact('asset', 'warehouse'));
+        $data = [
+            'asset' => m_asset::get(),
+            'warehouse' => m_warehouse::all(),
+            'active' => 'menu-asset',
+        ];
+        return view('dashboard.Master_Data.Asset.index', $data);
     }
 
     /**
@@ -39,41 +47,31 @@ class M_assetController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $latestAsset = \App\Models\m_asset::latest()->first();
-        // Mendapatkan tahun saat ini
         $currentYear = date("Y-m-d");
-        // Menghitung nomor urut untuk kode barang
         if ($latestAsset == null) {
-            // Kode pertama
             $nomorUrut = 1;
         } else {
-            // Kode berikutnya
             $lastCode = substr($latestAsset->seri, 7);
             $nomorUrut = intval($lastCode) + 1;
         }
-        // Menggabungkan semua komponen kode barang
         $seri = 'AST' . $currentYear . '-' . str_pad($nomorUrut, STR_PAD_LEFT);
-        // Validasi input
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'warehouse_id' => 'required',
             'date' => 'required',
+            'qr_count' => 'nullable'
         ]);
         try {
             $currentUser = Auth::user();
-            // Menyiapkan data untuk disimpan
             $validatedData = $request->except('_token');
             $validatedData['seri'] = $seri;
-            $validatedData['created_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai created_by
-            $validatedData['updated_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai updated_by
-            // dd($validatedData);
-            // Menyimpan data ke dalam database
+            $validatedData['created_by'] = $currentUser->fullname;
+            $validatedData['updated_by'] = $currentUser->fullname;
             \App\Models\m_asset::create($validatedData);
             return redirect()->back()->with('success', 'Data asset berhasil ditambah.');
         } catch (\Throwable $th) {
-            // dd($th);
             return redirect()->back()->with('error', 'Data asset gagal ditambah.');
         }
     }
@@ -83,27 +81,29 @@ class M_assetController extends Controller
      */
     public function show($id)
     {
-        // dd('oke');
-        $asset = m_asset::find($id);
-        $warehouse = m_warehouse::all();
-        return view('MasterData.asset.show', compact('asset', 'warehouse'));
+        $data = [
+            'asset' => m_asset::find($id),
+            'warehouse' => m_warehouse::all(),
+            'active' => 'menu-asset',
+        ];
+        return view('dashboard.Master_Data.Asset.show', $data);
     }
 
     // Menampilkan data QR
-    public function QR($id)
-    {
-        $asset = m_asset::find($id);
-        return QrCode::generate(
-            'Hello, World!',
-        );
-    }
+    // public function QR($id)
+    // {
+    //     $asset = m_asset::find($id);
+    //     return QrCode::generate(
+    //         'Hello, World!',
+    //     );
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit()
     {
-        // dd('oke');
+        //
     }
 
     /**
@@ -111,13 +111,11 @@ class M_assetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd('oke');
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'warehouse_id' => 'required',
             'date' => 'required',
-            'qr_count' => 'required',
         ]);
         try {
             $asset = m_asset::findOrFail($id);
@@ -154,7 +152,7 @@ class M_assetController extends Controller
         // Buat objek Dompdf
         $dompdf = new Dompdf();
         // Render tampilan ke PDF
-        $html = view('MasterData.asset_pdf', compact('asset'))->render();
+        $html = view('dashboard.Master_Data.Asset.asset_pdf', compact('asset'))->render();
 
         // Muat HTML ke Dompdf
         $dompdf->loadHtml($html);

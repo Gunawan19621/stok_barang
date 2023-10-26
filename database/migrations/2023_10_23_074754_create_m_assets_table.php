@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('warehouse_id')->nullable();
             $table->foreign('warehouse_id')->references('id')->on('m_warehouses')->onDelete('set null');
-            $table->datetime('date')->nullable();
+            $table->date('date')->nullable();
             $table->string('qr_count', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,15 +19,21 @@ class ProfileController extends Controller
     //halaman setting profile
     public function setting(Request $request): View
     {
+        $data = [
+            'active' => 'menu-profile',
+        ];
         return view('profil.setting', [
             'user' => $request->user(),
-        ]);
+        ], $data);
     }
 
     // Halaman edit profile
     public function edit()
     {
-        return view('profil.profil');
+        $data = [
+            'active' => 'menu-profile',
+        ];
+        return view('profil.profil', $data);
     }
 
     //Proses update Profile
@@ -53,9 +60,13 @@ class ProfileController extends Controller
                     Storage::delete('public/' . $pengguna->foto);
                 }
 
-                // Upload foto baru
-                $fotoPath = $request->file('foto')->store('profile_photos', 'public');
-                $pengguna->foto = $fotoPath;
+                // Generate nama file acak
+                // $randomFileName = Str::random(20) . '.' . $request->file('foto')->getClientOriginalExtension();
+                // $fotoPath = $request->file('foto')->storeAs('public/Profile_foto', $randomFileName);
+                // $pengguna->foto = $randomFileName;
+                $randomFileName = Str::random(20); // Menghasilkan nama file acak dengan panjang 20 karakter
+                $fotoPath = $request->file('foto')->storeAs('public/Profile_foto', $randomFileName);
+                $pengguna->foto = str_replace('public/', '', $fotoPath);
             }
 
             // Update other fields
@@ -76,20 +87,20 @@ class ProfileController extends Controller
     }
 
     //Proses update Profile Photo
-    public function updatePhoto(Request $request)
-    {
-        // dd('okr');
-        $user = User::find(auth()->user()->id);
-        if ($request->hasFile('foto')) {
-            // Mengunggah file foto profil
-            $file = $request->file('foto');
-            $foto = $file->store('profile-fotos');
-            $user->update(['foto' => $foto]);
-        }
+    // public function updatePhoto(Request $request)
+    // {
+    //     // dd('okr');
+    //     $user = User::find(auth()->user()->id);
+    //     if ($request->hasFile('foto')) {
+    //         // Mengunggah file foto profil
+    //         $file = $request->file('foto');
+    //         $foto = $file->store('profile-fotos');
+    //         $user->update(['foto' => $foto]);
+    //     }
 
-        // Logika lain yang diperlukan setelah update foto profil
-        return redirect()->back()->with('success', 'Foto profil berhasil diperbarui.');
-    }
+    //     // Logika lain yang diperlukan setelah update foto profil
+    //     return redirect()->back()->with('success', 'Foto profil berhasil diperbarui.');
+    // }
 
     //Proses update Profile Informasi
     public function update(ProfileUpdateRequest $request): RedirectResponse

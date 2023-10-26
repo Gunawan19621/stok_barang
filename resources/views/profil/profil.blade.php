@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-3 text-center">
                         <label for="foto">Foto Profil</label><br>
-                        @if (auth()->user()->foto === null)
+                        @if (auth()->user()->foto == null)
                             <img src="{{ asset('assets/img/default-profile.png') }}" alt="{{ auth()->user()->name }}"
                                 class="rounded-circle thumb-xl profile-image"
                                 style="width: 155px; height: 155px; cursor: pointer;"><br>

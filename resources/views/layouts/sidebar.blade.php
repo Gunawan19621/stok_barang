@@ -11,7 +11,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ $active == 'menu-dashboard' ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -20,13 +20,13 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <li class="nav-item {{ $active == 'menu-peminjaman' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.peminjaman.index') }}">
             <span class="ml-4">Peminjaman</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/pengembalian') }}">
+    <li class="nav-item {{ $active == 'menu-pengembalian' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard.pengembalian.index') }}">
             <span class="ml-4">Pengembalian</span>
         </a>
     </li>
@@ -40,23 +40,23 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {{ $active == 'menu-role' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.role.index') }}">
             <span class="ml-4">Role</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.index') }}">
+    <li class="nav-item {{ $active == 'menu-user' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard.user.index') }}">
             <span class="ml-4">User</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('asset.index') }}">
+    <li class="nav-item {{ $active == 'menu-asset' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard.asset.index') }}">
             <span class="ml-4">Asset</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('warehouse.index') }}">
+    <li class="nav-item {{ $active == 'menu-warehouse' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard.warehouse.index') }}">
             <span class="ml-4">Warehouse</span>
         </a>
     </li>

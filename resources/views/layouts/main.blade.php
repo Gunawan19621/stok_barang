@@ -27,23 +27,23 @@
                 <!-- Topbar -->
                 @include('layouts.navbar')
 
-                <!-- Begin Page Content -->
-                <!-- <div class="container-fluid"> -->
-                <!-- allert update data foto -->
-                @if (session()->has('success'))
-                    <div id="success-alert" class="alert alert-success floating-alert">
-                        {{ session()->get('success') }}
-                    </div>
-                @elseif(session()->has('error'))
-                    <div id="error-alert" class="alert alert-danger floating-alert">
-                        X {{ session()->get('error') }}
-                    </div>
-                @endif
-                @yield('content')
+                <div class="container-fluid">
+                    <!-- allert update data foto -->
+                    @if (session()->has('success'))
+                        <div id="success-alert" class="alert alert-success floating-alert">
+                            {{ session()->get('success') }}
+                        </div>
+                    @elseif(session()->has('error'))
+                        <div id="error-alert" class="alert alert-danger floating-alert">
+                            X {{ session()->get('error') }}
+                        </div>
+                    @endif
+
+                    <!-- Main Bar -->
+                    @yield('content')
+                </div>
 
             </div>
-            <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -52,15 +52,11 @@
                     </div>
                 </div>
             </footer>
-            <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
-
     </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
+
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>

@@ -15,11 +15,13 @@ class M_userController extends Controller
      */
     public function index()
     {
-        // dd('oke');
-        $warehouse = m_warehouse::get();
-        $role = m_role::get();
-        $user = User::get();
-        return view('MasterData.user', compact('user', 'role', 'warehouse'));
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'user' => User::get(),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.index', $data);
     }
 
     /**
@@ -27,7 +29,12 @@ class M_userController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.create', $data);
     }
 
     /**
@@ -52,7 +59,7 @@ class M_userController extends Controller
             $validatedData['updated_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai updated_by
             $validatedData['password'] = bcrypt($request->input('password')); // Enkripsi password
             user::create($validatedData);
-            return redirect()->back()->with('success', 'Data User Berhasil Ditambah.');
+            return redirect()->route('dashboard.user.index')->with('success', 'Data User berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Data User Gagal Ditambah.');
         }
@@ -63,19 +70,27 @@ class M_userController extends Controller
      */
     public function show($id)
     {
-        // dd('oke');
-        $user = User::find($id);
-        $role = m_role::get();
-        $warehouse = m_warehouse::get();
-        return view('MasterData.update_user', compact('user', 'role', 'warehouse'));
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'user' => User::find($id),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit($id)
     {
-        // dd('oke');
+        $data = [
+            'warehouse' => m_warehouse::get(),
+            'role' => m_role::get(),
+            'user' => User::find($id),
+            'active' => 'menu-user',
+        ];
+        return view('dashboard.Master_Data.User.edit', $data);
     }
 
     /**
@@ -84,14 +99,13 @@ class M_userController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'username' => 'required',
             'fullname' => 'required',
-            'nip' => 'required',
-            'email' => 'required',
-            'no_hp' => 'required',
+            'email' => 'required|email',
             'divisi' => 'required',
-            'address' => 'required',
             'role_id' => 'required',
             'warehouse_id' => 'required',
+            'password' => 'required',
         ]);
         // dd($request->all());
         try {
@@ -102,18 +116,10 @@ class M_userController extends Controller
             $userData['updated_by'] = Auth::user()->fullname;
 
             $user->update($userData);
-            return redirect()->route('user.index')->with('success', 'Data User berhasil diperbaharui');
+            return redirect()->route('dashboard.user.index')->with('success', 'Data User berhasil diperbaharui');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Data User gagal diperbaharui');
         }
-        // try {
-        //     $user = User::findOrFail($id);
-        //     $user->update($request->all());
-
-        //     return redirect()->route('user.index')->with('success', 'Data User berhasil diperbaharui');
-        // } catch (\Throwable $th) {
-        //     return redirect()->back()->with('error', 'Data User gagal diperbaharui');
-        // }
     }
 
     /**
