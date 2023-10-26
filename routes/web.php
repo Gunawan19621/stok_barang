@@ -32,6 +32,9 @@ use App\Http\Controllers\SettingPlatformController;
 
 Route::redirect('/', '/login');
 
+Route::get('/redirect', [\App\Http\Controllers\Auth\RedirectAuthController::class, 'redirectAuth'])->name('redirect')->middleware('auth');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

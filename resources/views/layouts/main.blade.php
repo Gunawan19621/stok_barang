@@ -85,6 +85,8 @@
         </div>
     </div>
 
+    @stack('script')
+
     @include('layouts.script')
 
     <!-- pengaturan datatables -->

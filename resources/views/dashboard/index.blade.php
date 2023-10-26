@@ -115,9 +115,11 @@
                         </div>
                     </div>
                     <!-- Card Body -->
+
+
                     <div class="card-body">
                         <div class="chart-bar">
-                            <canvas id="myBarChart"></canvas>
+                            <canvas id="ChartAssetStatus"></canvas>
                         </div>
                     </div>
                 </div>
@@ -165,4 +167,39 @@
             </div>
         </div>
     </div>
+
+    @push('script')
+        {{-- <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var ctx = document.getElementById('ChartAssetStatus').getContext('2d');
+
+                var myChart = new Chart(ctx, {
+                    type: 'bar', // Atur jenis grafik sesuai kebutuhan Anda
+                    data: {
+                        labels: {!! json_encode($chartData['months']) !!},
+                        datasets: [{
+                            label: 'Exit Pic',
+                            data: {!! json_encode($chartData['exitPicData']) !!},
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: 'Enter Pic',
+                            data: {!! json_encode($chartData['enterPicData']) !!},
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        </script> --}}
+    @endpush
 @endsection
