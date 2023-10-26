@@ -63,6 +63,7 @@ class M_assetController extends Controller
             'date' => 'required',
             'qr_count' => 'nullable'
         ]);
+        // dd($request);
         try {
             $currentUser = Auth::user();
             $validatedData = $request->except('_token');

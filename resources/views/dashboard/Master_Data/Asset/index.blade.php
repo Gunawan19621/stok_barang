@@ -176,7 +176,7 @@
     @endforeach
 
     <!-- Modal Print QR Asset-->
-    @foreach ($asset as $data)
+    {{-- @foreach ($asset as $data)
         <div class="modal fade" id="printQRModal{{ $data['id'] }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -231,5 +231,5 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 @endsection

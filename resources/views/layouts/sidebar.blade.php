@@ -22,12 +22,14 @@
 
     <li class="nav-item {{ $active == 'menu-peminjaman' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.peminjaman.index') }}">
-            <span class="ml-4">Peminjaman</span>
+            <i class="fas fa-fw fa-upload"></i>
+            <span>Peminjaman</span>
         </a>
     </li>
     <li class="nav-item {{ $active == 'menu-pengembalian' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.pengembalian.index') }}">
-            <span class="ml-4">Pengembalian</span>
+            <i class="fas fa-fw fa-download"></i>
+            <span>Pengembalian</span>
         </a>
     </li>
 
@@ -42,22 +44,34 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item {{ $active == 'menu-role' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.role.index') }}">
-            <span class="ml-4">Role</span>
+            <i class="fas fa-solid fa-key"></i>
+            <span>Role</span>
         </a>
     </li>
     <li class="nav-item {{ $active == 'menu-user' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.user.index') }}">
-            <span class="ml-4">User</span>
+            <i class="fas fa-fw fa-user"></i>
+            <span>User</span>
         </a>
     </li>
     <li class="nav-item {{ $active == 'menu-asset' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.asset.index') }}">
-            <span class="ml-4">Asset</span>
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Asset</span>
         </a>
     </li>
     <li class="nav-item {{ $active == 'menu-warehouse' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard.warehouse.index') }}">
-            <span class="ml-4">Warehouse</span>
+            <i class="fas fa-fw fa-table"></i>
+            <span>Warehouse</span>
         </a>
     </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 </ul>
