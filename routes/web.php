@@ -29,9 +29,8 @@ use App\Http\Controllers\SettingPlatformController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+
+Route::redirect('/', '/login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,18 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/setting', [ProfileController::class, 'setting'])->name('profile.setting');
 });
 
+
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function () {
-    //Halaman dashboard
-    Route::middleware('auth')->get('', function () {
-        $data = [
-            'reminder' => asset_status::whereNull('enter_at')->count(),
-            'jumlahAsset' => m_asset::count(),
-            'jumlahPeminjaman' => asset_status::count(),
-            'jumlahPengembalian' => asset_status::whereNotNull('enter_at')->count(),
-            'active' => 'menu-dashboard',
-        ];
-        return view('dashboard.index', $data);
-    });
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.admin');
 
     //Halaman Warehouse
     Route::controller(WarehouseController::class)->group(function () {
@@ -114,5 +105,6 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         Route::delete('pengembalian/delete/{id}', 'destroy')->name('pengembalian.destroy');
     });
 });
+
 
 require __DIR__ . '/auth.php';

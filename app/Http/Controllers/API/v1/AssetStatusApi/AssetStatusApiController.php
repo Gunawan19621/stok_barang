@@ -10,7 +10,7 @@ class AssetStatusApiController extends Controller
 {
     public function index()
     {
-        $m_asset = \App\Models\m_asset::get();
+        $m_asset = \App\Models\m_asset::with(['warehouse'])->get();
 
         return ResponseFormatter::success([
             'message' => 'Data asset berhasil diambil',

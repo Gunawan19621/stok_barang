@@ -64,7 +64,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('dashboard.pengembalian.edit', [$data->id]) }}">
+                                        <a href="{{ route('dashboard.pengembalian.edit', [$data->id]) }}" title="Edit">
                                             <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                         </a>
                                     </td>

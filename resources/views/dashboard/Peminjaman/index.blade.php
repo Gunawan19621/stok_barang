@@ -50,7 +50,7 @@
                                 <td>{{ $data->exit_pic }}</td>
                                 <td>{{ $data->warehouse->name }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('dashboard.peminjaman.edit', $data->id) }}">
+                                    <a href="{{ route('dashboard.peminjaman.edit', $data->id) }}" title="Edit">
                                         <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                     </a>
                                     <form action="{{ route('dashboard.peminjaman.destroy', $data->id) }}" method="POST"
@@ -59,7 +59,7 @@
                                         @method('DELETE')
                                         <button type="submit"
                                             onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                            style="border: none; background: none; cursor: pointer;">
+                                            title="Delete" style="border: none; background: none; cursor: pointer;">
                                             <i class="fa fa-trash text-danger" style="font-size: 20px"></i>
                                         </button>
                                     </form>
