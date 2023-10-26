@@ -20,4 +20,28 @@ class HomeController extends Controller
 
         return view('dashboard.index', $data);
     }
+
+    public function generateChartData()
+    {
+        $months = [];
+        $exitData = [];
+        $enterData = [];
+
+        $monthNames = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $months[] = date("F", mktime(0, 0, 0, $i, 1));
+
+            $exitCount = \App\Models\asset_status::whereMonth('exit_at', $i)->count();
+            $enterCount = \App\Models\asset_status::whereMonth('enter_at', $i)->count();
+
+            $exitData[] = $exitCount;
+            $enterData[] = $enterCount;
+        }
+
+        return compact('months', 'exitData', 'enterData', 'monthNames');
+    }
 }

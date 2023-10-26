@@ -92,13 +92,10 @@
                 </div>
             </div>
 
-            <!-- Area Chart -->
             <div class="col-xl-8 col-lg-7">
                 <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Grafik Peminjaman VS Pengembalian
-                        </h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Grafik Peminjaman VS Pengembalian</h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -114,16 +111,17 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Card Body -->
-
+                    @php
+                        $chartData = app('App\Http\Controllers\HomeController')->generateChartData();
+                    @endphp
 
                     <div class="card-body">
-                        <div class="chart-bar">
-                            <canvas id="ChartAssetStatus"></canvas>
-                        </div>
+                        <canvas id="ChartAssetStatus" style="max-height: 500px;"></canvas> <!-- Atur tinggi chart -->
                     </div>
                 </div>
             </div>
+
+
 
             <!-- Pie Chart -->
             <div class="col-xl-4 col-lg-5">
@@ -169,23 +167,23 @@
     </div>
 
     @push('script')
-        {{-- <script>
+        <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var ctx = document.getElementById('ChartAssetStatus').getContext('2d');
 
                 var myChart = new Chart(ctx, {
-                    type: 'bar', // Atur jenis grafik sesuai kebutuhan Anda
+                    type: 'bar',
                     data: {
-                        labels: {!! json_encode($chartData['months']) !!},
+                        labels: {!! json_encode($chartData['monthNames']) !!},
                         datasets: [{
-                            label: 'Exit Pic',
-                            data: {!! json_encode($chartData['exitPicData']) !!},
+                            label: 'Peminjaman',
+                            data: {!! json_encode($chartData['exitData']) !!},
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
                         }, {
-                            label: 'Enter Pic',
-                            data: {!! json_encode($chartData['enterPicData']) !!},
+                            label: 'Pengembalian',
+                            data: {!! json_encode($chartData['enterData']) !!},
                             backgroundColor: 'rgba(255, 159, 64, 0.2)',
                             borderColor: 'rgba(255, 159, 64, 1)',
                             borderWidth: 1
@@ -200,6 +198,6 @@
                     }
                 });
             });
-        </script> --}}
+        </script>
     @endpush
 @endsection
