@@ -64,10 +64,10 @@
                                             data-target="#editDataModal{{ $data['id'] }}">
                                             <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                         </a>
-                                        <a href="{{ route('hapusPeminjaman.destroy', $data->id) }}"
+                                        {{-- <a href="{{ route('hapusPeminjaman.destroy', $data->id) }}"
                                             onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                             <i class="fa fa-trash text-danger mr-2" style="font-size: 20px"></i>
-                                        </a>
+                                        </a> --}}
                                     </td>
                                 </tr>
                             @endforeach

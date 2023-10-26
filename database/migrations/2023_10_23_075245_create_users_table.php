@@ -24,8 +24,9 @@ return new class extends Migration
             $table->string('jenis_kelamin', 30)->nullable();
             $table->string('agama', 30)->nullable();
             $table->string('foto', 255)->nullable();
-            $table->bigInteger('role_id')->unsigned()->nullable();
-            $table->foreign('role_id')->references('id')->on('m_roles')->onDelete('set null');
+            // $table->bigInteger('role_id')->unsigned()->nullable();
+            // $table->foreign('role_id')->references('id')->on('m_roles')->onDelete('set null');
+            $table->foreignId('role_id')->constrained('m_roles')->onDelete('cascade');
             $table->bigInteger('warehouse_id')->unsigned()->nullable();
             $table->foreign('warehouse_id')->references('id')->on('m_warehouses')->onDelete('set null');
             $table->text('address')->nullable();
