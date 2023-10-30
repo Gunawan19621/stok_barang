@@ -60,15 +60,15 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
     });
 
     //Halaman Asset
-    Route::controller(M_assetController::class)->group(function () {
-        Route::get('asset', 'index')->name('asset.index');
-        Route::post('asset/store', 'store')->name('asset.store');
-        Route::get('asset/{id}', 'show')->name('asset.show');
-        Route::put('asset/{id}', 'update')->name('asset.update');
-        Route::delete('asset/delete/{id}', 'destroy')->name('asset.destroy');
-        Route::get('/assetcetak_pdf', [M_assetController::class, 'cetakpdf'])->name('assetcetakpdf.cetakpdf');
-        Route::get('/assetexport', [M_assetController::class, 'export'])->name('assetexport.export');
-    });
+    // Route::controller(M_assetController::class)->group(function () {
+    //     Route::get('asset', 'index')->name('asset.index');
+    //     Route::post('asset/store', 'store')->name('asset.store');
+    //     Route::get('asset/{id}', 'show')->name('asset.show');
+    //     Route::put('asset/{id}', 'update')->name('asset.update');
+    //     Route::delete('asset/delete/{id}', 'destroy')->name('asset.destroy');
+    //     Route::get('/assetcetak_pdf', [M_assetController::class, 'cetakpdf'])->name('assetcetakpdf.cetakpdf');
+    //     Route::get('/assetexport', [M_assetController::class, 'export'])->name('assetexport.export');
+    // });
 
     //Halaman User
     Route::controller(M_userController::class)->group(function () {
@@ -133,6 +133,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         Route::get('peti/{id}/edit', 'edit')->name('peti.edit');
         Route::put('peti/{id}', 'update')->name('peti.update');
         Route::delete('peti/delete/{id}', 'destroy')->name('peti.destroy');
+        Route::get('peticetak_pdf/{id}', 'cetakpdf')->name('peticetakpdf.cetakpdf');
     });
 });
 

@@ -13,21 +13,29 @@
             <form action="{{ route('dashboard.peminjaman.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="asset_id" class="col-form-label">Nama Asset:</label>
-                    <select class="form-control" name="asset_id" type="text" id="asset_id">
-                        <option disabled selected>Pilih Nama Asset</option>
-                        @foreach ($asset as $data)
-                            <option value="{{ $data->id }}">{{ $data->name }}</option>
+                    {{-- <label for="peti_id" class="col-form-label">Pilih Detail Peti:</label>
+                    <select class="form-control" name="peti_id" type="text" id="peti_id">
+                        <option disabled selected>Pilih Detail Peti</option>
+                        @foreach ($peti as $data_peti)
+                            <option value="{{ $data_peti->id }}">{{ $data_peti->fix_lot }}</option>
+                        @endforeach
+                    </select> --}}
+                    <label for="peti_id" class="col-form-label">Pilih Detail Peti:</label>
+                    <select class="form-control" name="peti_id" type="text" id="peti_id">
+                        <option disabled selected>Pilih Detail Peti</option>
+                        @foreach ($peti as $data_peti)
+                            <option value="{{ $data_peti->id }}" data-warehouse-id="{{ $data_peti->warehouse_id }}">
+                                {{ $data_peti->fix_lot }}
+                            </option>
                         @endforeach
                     </select>
-                    <label for="exit_at" class="col-form-label">Tanggal:</label>
+                    <label for="exit_at" class="col-form-label">Tanggal Peminjaman:</label>
                     <input class="form-control" name="exit_at" type="date" id="exit_at" value="{{ old('exit_at') }}"
-                        placeholder="Masukan Tanggal Keluar" required>
+                        placeholder="Masukan Tanggal Peminjaman" required>
 
-                    <label for="exit_pic" class="col-form-label">PJ Keluar:</label>
-                    <input class="form-control" name="exit_pic" type="text" id="exit_pic" value="{{ old('exit_pic') }}"
-                        placeholder="Masukan Nama PJ Keluar" pattern="[^0-9]+"
-                        oninput="this.value=this.value.replace(/[0-9]/g,'');" required>
+                    <label for="est_pengembalian" class="col-form-label">Estimasi Tanggal Pengembalian:</label>
+                    <input class="form-control" name="est_pengembalian" type="date" id="est_pengembalian"
+                        value="{{ old('est_pengembalian') }}" placeholder="Masukan Estimasi Tanggal Peminjaman" required>
 
                     <label for="exit_warehouse" class="col-form-label">Asal Gudang :</label>
                     <select class="form-control" name="exit_warehouse" type="text" id="exit_warehouse">
@@ -44,4 +52,19 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const petiSelect = document.getElementById('peti_id');
+            const exitWarehouseSelect = document.getElementById('exit_warehouse');
+
+            // Saat pilihan Detail Peti berubah
+            petiSelect.addEventListener('change', function() {
+                const selectedOption = petiSelect.options[petiSelect.selectedIndex];
+                const warehouseId = selectedOption.getAttribute('data-warehouse-id');
+
+                // Atur nilai pilihan Asal Gudang sesuai dengan data peti yang dipilih
+                exitWarehouseSelect.value = warehouseId;
+            });
+        });
+    </script>
 @endsection

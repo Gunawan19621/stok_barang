@@ -32,33 +32,40 @@
                 <input class="form-control" value="{{ \Carbon\Carbon::parse($peti->date_pembuatan)->format('d/m/Y') }}"
                     readonly>
 
-                <label for="fix_lot" class="col-form-label">QR Code:</label>
-                <div>
-                    {!! QrCode::size(75)->generate(
-                        'Nama Customer : ' .
-                            $peti->customer->name .
-                            "\n" .
-                            'Code Customer : ' .
-                            $peti->customer->code_customer .
-                            "\n" .
-                            'Type Peti : ' .
-                            $peti->tipe_peti->type .
-                            "\n" .
-                            'Warehouse : ' .
-                            $peti->warehouse->name .
-                            "\n" .
-                            'Ukuran Peti : ' .
-                            $peti->tipe_peti->size_peti .
-                            "\n" .
-                            'Lot Number : ' .
-                            $peti->customer->lot_no .
-                            "\n" .
-                            'Paking Number : ' .
-                            $peti->packing_no .
-                            "\n" .
-                            'Status Peti : ' .
-                            $peti->status_disposal,
-                    ) !!}
+                <div class="col-md-3">
+                    <label for="fix_lot" class="col-form-label d-flex justify-content-center align-items-center">QR
+                        Code:</label>
+                    <div class="d-flex justify-content-center align-items-center mb-2">
+                        {!! QrCode::size(150)->generate(
+                            'Nama Customer : ' .
+                                $peti->customer->name .
+                                "\n" .
+                                'Code Customer : ' .
+                                $peti->customer->code_customer .
+                                "\n" .
+                                'Type Peti : ' .
+                                $peti->tipe_peti->type .
+                                "\n" .
+                                'Warehouse : ' .
+                                $peti->warehouse->name .
+                                "\n" .
+                                'Ukuran Peti : ' .
+                                $peti->tipe_peti->size_peti .
+                                "\n" .
+                                'Lot Number : ' .
+                                $peti->customer->lot_no .
+                                "\n" .
+                                'Paking Number : ' .
+                                $peti->packing_no .
+                                "\n" .
+                                'Status Peti : ' .
+                                $peti->status_disposal,
+                        ) !!}
+                    </div>
+                    <div class="d-flex justify-content-center mt-2 mb-3">
+                        <a href="{{ route('dashboard.peticetakpdf.cetakpdf', $peti->id) }}" class="btn btn-info">Cetak
+                            Label</a>
+                    </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <a href="{{ route('dashboard.peti.index') }}" class="btn btn-secondary">Kembali</a>

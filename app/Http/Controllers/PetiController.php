@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use App\Models\m_warehouse;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Peti;
+use App\Models\Customer;
 use App\Models\Type_peti;
+use Mockery\Matcher\Type;
+use App\Models\m_warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mockery\Matcher\Type;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PetiController extends Controller
 {
@@ -102,7 +105,35 @@ class PetiController extends Controller
             'warehouse' => m_warehouse::all(),
             'active' => 'menu-peti',
         ];
-        return view('dashboard.Master_Data.Manajemen_Peti.Peti.show', $data);
+
+        $petiqr = Peti::find($id);
+
+        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(
+            'Nama Customer : ' .
+                $petiqr->customer->name .
+                "\n" .
+                'Code Customer : ' .
+                $petiqr->customer->code_customer .
+                "\n" .
+                'Type Peti : ' .
+                $petiqr->tipe_peti->type .
+                "\n" .
+                'Warehouse : ' .
+                $petiqr->warehouse->name .
+                "\n" .
+                'Ukuran Peti : ' .
+                $petiqr->tipe_peti->size_peti .
+                "\n" .
+                'Lot Number : ' .
+                $petiqr->customer->lot_no .
+                "\n" .
+                'Paking Number : ' .
+                $petiqr->packing_no .
+                "\n" .
+                'Status Peti : ' .
+                $petiqr->status_disposal
+        ));
+        return view('dashboard.Master_Data.Manajemen_Peti.Peti.show', compact('qrcode'), $data);
     }
 
     /**
@@ -178,5 +209,56 @@ class PetiController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Data peti gagal dihapus');
         }
+    }
+
+    public function cetakPdf($id)
+    {
+        $peti = Peti::find($id);
+
+        // Generate QR Code
+        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(
+            'Nama Customer : ' .
+                $peti->customer->name .
+                "\n" .
+                'Code Customer : ' .
+                $peti->customer->code_customer .
+                "\n" .
+                'Type Peti : ' .
+                $peti->tipe_peti->type .
+                "\n" .
+                'Warehouse : ' .
+                $peti->warehouse->name .
+                "\n" .
+                'Ukuran Peti : ' .
+                $peti->tipe_peti->size_peti .
+                "\n" .
+                'Lot Number : ' .
+                $peti->customer->lot_no .
+                "\n" .
+                'Paking Number : ' .
+                $peti->packing_no .
+                "\n" .
+                'Status Peti : ' .
+                $peti->status_disposal
+        ));
+
+        // Inisialisasi Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        // Load HTML dari view
+        $html = view('dashboard.Master_Data.Manajemen_Peti.Peti.label_pdf', compact('peti', 'qrcode'))->render();
+
+        // Load HTML ke Dompdf
+        $dompdf->loadHtml($html);
+
+        // Render PDF (portrait A4)
+        $dompdf->setPaper('A4', 'horizontal');
+        $dompdf->render();
+
+        // Menggunakan stream untuk menghasilkan dan mengunduh PDF
+        return $dompdf->stream('Label_Peti.pdf');
     }
 }

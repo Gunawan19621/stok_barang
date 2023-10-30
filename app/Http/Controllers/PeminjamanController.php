@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peti;
 use App\Models\m_asset;
 use App\Models\m_warehouse;
 use App\Models\asset_status;
@@ -33,6 +34,7 @@ class PeminjamanController extends Controller
     public function create()
     {
         $data = [
+            'peti' => Peti::all(),
             'asset' => m_asset::all(),
             'peminjaman' => asset_status::get(),
             'warehouse' => m_warehouse::get(),
@@ -47,10 +49,11 @@ class PeminjamanController extends Controller
     public function store(Request $request)
     {
         // dd('oke');
+        // dd($request->all());
         $request->validate([
-            'asset_id' => 'required',
+            'peti_id' => 'required',
             'exit_at' => 'required',
-            'exit_pic' => 'required',
+            'est_pengembalian' => 'required',
             'exit_warehouse' => 'required',
         ]);
         // dd($request);
@@ -58,8 +61,9 @@ class PeminjamanController extends Controller
             $currentUser = Auth::user();
 
             $validatedData = $request->except('_token');
-            $validatedData['created_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai created_by
-            $validatedData['updated_by'] = $currentUser->id; // Menambahkan ID pengguna sebagai updated_by
+            $validatedData['exit_pic'] = $currentUser->fullname; // Menambahkan ID pengguna sebagai created_by
+            $validatedData['created_by'] = $currentUser->fullname; // Menambahkan ID pengguna sebagai created_by
+            $validatedData['updated_by'] = $currentUser->fullname; // Menambahkan ID pengguna sebagai updated_by
             // dd($validatedData);
             asset_status::create($validatedData);
             return redirect()->route('dashboard.peminjaman.index')->with('success', 'Data peminjaman berhasil ditambah.');

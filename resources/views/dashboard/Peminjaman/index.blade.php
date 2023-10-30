@@ -21,27 +21,30 @@
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th>Nama Asset</th>
+                            <th>Kode Peti</th>
+                            <th>Nama Customer</th>
                             <th>Tgl Peminjaman</th>
                             <th>PJ Keluar</th>
                             <th>Asal Gudang</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th>Nama Asset</th>
-                            <th>Tgl Peminjaman</th>
-                            <th>PJ Keluar</th>
-                            <th>Asal Gudang</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @php
                             $no_peminjaman = 1;
                         @endphp
+                        @forelse ($peminjaman as $data_peminjaman)
+                            <tr>
+                                <td>{{ $no_peminjaman++ }}</td>
+                                <td>{{ $data_peminjaman->peti->customer->code_customer }} -
+                                    {{ $data_peminjaman->peti->tipe_peti->type }}</td>
+                                <td>{{ $data_peminjaman->peti->customer->name }}</td>
+                                <td>{{ $data_peminjaman->exit_at }}</td>
+                            </tr>
+                        @empty
+                            <p>Data Kosong</p>
+                        @endforelse
+                        {{--
                         @foreach ($peminjaman as $data)
                             <tr>
                                 <td class="text-center">{{ $no_peminjaman++ }}</td>
@@ -65,7 +68,7 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>

@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('asset_statuses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('asset_id')->unsigned()->nullable();
-            $table->foreign('asset_id')->references('id')->on('m_assets')->onDelete('set null');
-            $table->datetime('exit_at')->nullable();
+            $table->bigInteger('peti_id')->unsigned()->nullable();
+            $table->foreign('peti_id')->references('id')->on('petis')->onDelete('set null');
+            $table->date('exit_at')->nullable();
+            $table->date('est_pengembalian')->nullable();
             $table->string('exit_pic', 200)->nullable();
             $table->bigInteger('exit_warehouse')->unsigned()->nullable();
-            $table->datetime('enter_at')->nullable();
+            $table->date('enter_at')->nullable();
             $table->string('enter_pic', 200)->nullable();
             $table->bigInteger('enter_warehouse')->unsigned()->nullable();
+            $table->string('kondisi_peti')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by', 200)->nullable();
