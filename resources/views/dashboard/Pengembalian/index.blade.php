@@ -1,8 +1,15 @@
 @extends('layouts.main')
-@section('title', 'Pengembalian')
 @section('content')
+    <style>
+        .table th {
+            white-space: nowrap;
+        }
+
+        .table td {
+            white-space: nowrap;
+        }
+    </style>
     <div class="container-fluid">
-        <!-- <h1 class="h3 mb-2 text-gray-800">Tabel Pengembalian</h1>  -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Data Pengembalian</h6>
@@ -13,13 +20,14 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Asset</th>
+                                <th>Kode Peti</th>
                                 <th>Tgl Peinjaman</th>
-                                <th>PJ Peinjaman</th>
-                                <th>Asal Gudang</th>
+                                <th>PJ Peminjaman</th>
+                                <th>Asal WH Peminjaman</th>
                                 <th>Tgl Pengembalian</th>
                                 <th>PJ Pengembalian</th>
-                                <th>Tujuan Gudang</th>
+                                <th>Tujuan WH Pengembalian</th>
+                                <th>Kondisi Peti</th>
                                 <th>Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -28,11 +36,15 @@
                             @php
                                 $no_peminjaman = 1;
                             @endphp
-                            @foreach ($peminjaman as $data)
+                            {{-- @foreach ($peminjaman as $data)
+
+                            @endforeach --}}
+                            @forelse ($peminjaman as $data)
                                 <tr>
                                     <td>{{ $no_peminjaman++ }}</td>
-                                    <td>{{ $data->asset->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($data->exit_at)->format('d-m-Y') }}</td>
+                                    <td>{{ $data->peti->customer->code_customer }} -
+                                        {{ $data->peti->tipe_peti->type }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($data->exit_at)->format('d/m/Y') }}</td>
                                     <td>{{ $data->exit_pic }}</td>
                                     <td>{{ $data->warehouse->name }}</td>
                                     <td>
@@ -57,6 +69,13 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @if ($data->kondisi_peti)
+                                            {{ $data->kondisi_peti }}
+                                        @else
+                                            <p class="text-center font-weight-bold">-</p>
+                                        @endif
+                                    </td>
+                                    <td>
                                         @if ($data->enter_warehouse === null)
                                             Not Return
                                         @else
@@ -69,7 +88,9 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <p>Data Kosong</p>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

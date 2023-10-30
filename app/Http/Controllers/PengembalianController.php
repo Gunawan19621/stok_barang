@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\asset_status;
+use App\Models\Peti;
 use App\Models\m_asset;
 use App\Models\m_warehouse;
+use App\Models\asset_status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,7 @@ class PengembalianController extends Controller
     public function index()
     {
         $data = [
-            'peminjaman' => asset_status::get(),
+            'peminjaman' => asset_status::all(),
             'active' => 'menu-pengembalian',
         ];
         return view('dashboard.Pengembalian.index', $data);
@@ -48,6 +49,7 @@ class PengembalianController extends Controller
     public function edit($id)
     {
         $data = [
+            'peti' => Peti::get(),
             'peminjaman' => asset_status::findOrFail($id),
             'warehouse' => m_warehouse::get(),
             'active' => 'menu-pengembalian',

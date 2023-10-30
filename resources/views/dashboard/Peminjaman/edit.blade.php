@@ -15,34 +15,39 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="asset_id" class="col-form-label">Nama Asset:</label>
-                    <select class="form-control" name="asset_id" type="text" id="asset_id">
-                        <option disabled selected>Pilih Nama Asset</option>
-                        @foreach ($asset as $data_asset)
-                            <option value="{{ $data_asset->id }}"
-                                @if ($data_asset->id == $peminjaman->id) selected
-                                @else @endif>
-                                {{ $data_asset->name }}</option>
+                    <label for="peti_id" class="col-form-label">Pilih Detail Peti:</label>
+                    <select class="form-control" name="peti_id" id="peti_id">
+                        <option disabled selected>Pilih Detail Peti</option>
+                        @foreach ($peti as $data_peti)
+                            <option value="{{ $data_peti->id }}" data-warehouse-id="{{ $data_peti->warehouse_id }}"
+                                {{ $data_peti->id == $peminjaman->peti_id ? 'selected' : '' }}>
+                                {{ $data_peti->fix_lot }}
+                            </option>
                         @endforeach
                     </select>
-                    <label for="exit_at" class="col-form-label">Tanggal:</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="exit_at" class="col-form-label">Tanggal Peminjaman:</label>
                     <input class="form-control" name="exit_at" type="date" id="exit_at"
-                        value="{{ \Carbon\Carbon::parse($peminjaman->exit_at)->format('Y-m-d') }}"
-                        placeholder="Masukan Tanggal Keluar" required>
+                        value="{{ $peminjaman->exit_at }}" required>
+                </div>
 
-                    <label for="exit_pic" class="col-form-label">PJ Keluar:</label>
-                    <input class="form-control" name="exit_pic" type="text" id="exit_pic"
-                        value="{{ $peminjaman->exit_pic }}" placeholder="Masukan Nama PJ Keluar" pattern="[^0-9]+"
-                        oninput="this.value=this.value.replace(/[0-9]/g,'');" required>
+                <div class="form-group">
+                    <label for="est_pengembalian" class="col-form-label">Estimasi Tanggal Pengembalian:</label>
+                    <input class="form-control" name="est_pengembalian" type="date" id="est_pengembalian"
+                        value="{{ $peminjaman->est_pengembalian }}" required>
+                </div>
 
-                    <label for="exit_warehouse" class="col-form-label">Asal Gudang :</label>
-                    <select class="form-control" name="exit_warehouse" type="text" id="exit_warehouse">
-                        <option disabled selected>Pilih Nama Asset</option>
-                        @foreach ($warehouse as $data_warehouse)
-                            <option value="{{ $data_warehouse->id }}"
-                                @if ($data_warehouse->id == $peminjaman->id) selected
-                                @else @endif>
-                                {{ $data_warehouse->name }}</option>
+                <div class="form-group">
+                    <label for="exit_warehouse" class="col-form-label">Asal Gudang:</label>
+                    <select class="form-control" name="exit_warehouse" id="exit_warehouse">
+                        <option disabled selected>Pilih Asal Gudang</option>
+                        @foreach ($warehouse as $data)
+                            <option value="{{ $data->id }}"
+                                {{ $data->id == $peminjaman->exit_warehouse ? 'selected' : '' }}>
+                                {{ $data->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -53,4 +58,22 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const petiSelect = document.getElementById('peti_id');
+            const exitWarehouseSelect = document.getElementById('exit_warehouse');
+
+            // Saat pilihan Detail Peti berubah
+            petiSelect.addEventListener('change', function() {
+                const selectedOption = petiSelect.options[petiSelect.selectedIndex];
+                const warehouseId = selectedOption.getAttribute('data-warehouse-id');
+
+                // Atur indeks pilihan Asal Gudang sesuai dengan data peti yang dipilih
+                if (warehouseId) {
+                    exitWarehouseSelect.selectedIndex = [...exitWarehouseSelect.options].findIndex(option =>
+                        option.value === warehouseId);
+                }
+            });
+        });
+    </script>
 @endsection

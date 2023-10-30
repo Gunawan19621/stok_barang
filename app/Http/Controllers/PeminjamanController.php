@@ -86,7 +86,7 @@ class PeminjamanController extends Controller
     public function edit($id)
     {
         $data = [
-            'asset' => m_asset::all(),
+            'peti' => Peti::all(),
             'peminjaman' => asset_status::find($id),
             'warehouse' => m_warehouse::get(),
             'active' => 'menu-peminjaman',
@@ -100,10 +100,11 @@ class PeminjamanController extends Controller
     public function update(Request $request, $id)
     {
         // dd('oke');
+        // dd($request->all());
         $request->validate([
-            'asset_id' => 'required',
+            'peti_id' => 'required',
             'exit_at' => 'required',
-            'exit_pic' => 'required',
+            'est_pengembalian' => 'required',
             'exit_warehouse' => 'required',
         ]);
         // dd($request);

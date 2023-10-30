@@ -13,13 +13,6 @@
             <form action="{{ route('dashboard.peminjaman.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    {{-- <label for="peti_id" class="col-form-label">Pilih Detail Peti:</label>
-                    <select class="form-control" name="peti_id" type="text" id="peti_id">
-                        <option disabled selected>Pilih Detail Peti</option>
-                        @foreach ($peti as $data_peti)
-                            <option value="{{ $data_peti->id }}">{{ $data_peti->fix_lot }}</option>
-                        @endforeach
-                    </select> --}}
                     <label for="peti_id" class="col-form-label">Pilih Detail Peti:</label>
                     <select class="form-control" name="peti_id" type="text" id="peti_id">
                         <option disabled selected>Pilih Detail Peti</option>
