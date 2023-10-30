@@ -7,7 +7,7 @@
                     <h5 class="m-0 font-weight-bold text-primary mt-2">Data User</h5>
                 </div>
                 <div class="col-6 text-right">
-                    <a href="{{ route('dashboard.user.create') }}" class="btn btn-success btn-icon-split">
+                    <a href="{{ route('dashboard.customer.create') }}" class="btn btn-success btn-icon-split">
                         <span class="text">+ Tambah data</span>
                     </a>
                 </div>
@@ -18,47 +18,34 @@
                 <table class="table table-bordered" id="tablebarang" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th class="text-center">No</th>
                             <th>Nama</th>
-                            <th>Email</th>
+                            <th>Kode Customer</th>
                             <th>No. HP</th>
                             <th>Alamat</th>
-                            <th>Ditugaskan</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>No. HP</th>
-                            <th>Alamat</th>
-                            <th>Ditugaskan</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @php
-                            $noUser = 1;
+                            $nocustomer = 1;
                         @endphp
-                        @forelse ($user as $data)
+                        @forelse ($customer as $data_customer)
                             <tr>
-                                <td class="text-center">{{ $noUser++ }}</td>
-                                <td>{{ $data->fullname }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ isset($data->no_hp) ? $data->no_hp : '-' }}</td>
-                                <td>{{ isset($data->address) ? $data->address : '-' }}</td>
-                                <td>{{ $data->warehouse->name }}</td>
+                                <td class="text-center">{{ $nocustomer++ }}</td>
+                                <td>{{ $data_customer->name }}</td>
+                                <td>{{ $data_customer->code_customer }}</td>
+                                <td>{{ $data_customer->no_hp }}</td>
+                                <td>{{ $data_customer->address }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('dashboard.user.show', [$data->id]) }}">
+                                    <a href="{{ route('dashboard.customer.show', [$data_customer->id]) }}">
                                         <i class="fa fa-eye mr-2" style="font-size: 20px"></i>
                                     </a>
-                                    <a href="{{ route('dashboard.user.edit', [$data->id]) }}">
+                                    <a href="{{ route('dashboard.customer.edit', [$data_customer->id]) }}">
                                         <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                     </a>
-                                    <form action="{{ route('dashboard.user.destroy', $data->id) }}" method="POST"
-                                        style="display: inline;">
+                                    <form action="{{ route('dashboard.customer.destroy', $data_customer->id) }}"
+                                        method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"

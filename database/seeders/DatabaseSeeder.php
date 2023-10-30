@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             WarehouseSeeder::class,
             UserSeeder::class,
+            Type_Peti::class,
+            Customer::class,
         ]);
     }
 }

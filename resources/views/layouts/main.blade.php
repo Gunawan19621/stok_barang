@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>@yield('title')</title>
 
 <head>
     <meta charset="utf-8">
@@ -93,10 +92,16 @@
     <script>
         $(document).ready(function() {
             $('#tablebarang').DataTable({
-                "searching": true // Aktifkan fitur pencarian
+                paging: true, // Aktifkan paging
+                searching: true, // Aktifkan fitur pencarian
+                scrollX: true, // Aktifkan scroll horizontal
+                pageLength: 10, // Jumlah data per halaman
+                lengthMenu: [10, 25, 50, 100], // Pilihan jumlah data per halaman
+                dom: '<"top"lf<"clear">>rt<"bottom"ip<"clear">>', // Susunan elemen tabel
             });
         });
     </script>
+
     <!-- End pengaturan datatables -->
 
     <!-- Batas waktu alert -->

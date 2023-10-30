@@ -4,11 +4,11 @@
         <div class="card-header py-3">
             <div class="row">
                 <div class="col-6">
-                    <h5 class="m-0 font-weight-bold text-primary mt-2">Data User</h5>
+                    <h5 class="m-0 font-weight-bold text-primary mt-2">Data Tipe Peti</h5>
                 </div>
                 <div class="col-6 text-right">
-                    <a href="{{ route('dashboard.user.create') }}" class="btn btn-success btn-icon-split">
-                        <span class="text">+ Tambah data</span>
+                    <a href="{{ route('dashboard.typepeti.create') }}" class="btn btn-success btn-icon-split">
+                        <span class="text">Tambah Tipe Peti</span>
                     </a>
                 </div>
             </div>
@@ -18,47 +18,32 @@
                 <table class="table table-bordered" id="tablebarang" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>No. HP</th>
-                            <th>Alamat</th>
-                            <th>Ditugaskan</th>
+                            <th class="text-center" style="width: 20px">No</th>
+                            <th>Tipe Peti</th>
+                            <th>Ukuran Peti</th>
+                            <th>Deskripsi Peti</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>No. HP</th>
-                            <th>Alamat</th>
-                            <th>Ditugaskan</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @php
-                            $noUser = 1;
+                            $notype = 1;
                         @endphp
-                        @forelse ($user as $data)
+                        @forelse ($typepeti as $data_typepeti)
                             <tr>
-                                <td class="text-center">{{ $noUser++ }}</td>
-                                <td>{{ $data->fullname }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ isset($data->no_hp) ? $data->no_hp : '-' }}</td>
-                                <td>{{ isset($data->address) ? $data->address : '-' }}</td>
-                                <td>{{ $data->warehouse->name }}</td>
+                                <td class="text-center">{{ $notype++ }}</td>
+                                <td>{{ $data_typepeti->type }}</td>
+                                <td>{{ $data_typepeti->size_peti }}</td>
+                                <td>{{ $data_typepeti->description }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('dashboard.user.show', [$data->id]) }}">
+                                    <a href="{{ route('dashboard.typepeti.show', [$data_typepeti->id]) }}">
                                         <i class="fa fa-eye mr-2" style="font-size: 20px"></i>
                                     </a>
-                                    <a href="{{ route('dashboard.user.edit', [$data->id]) }}">
+                                    <a href="{{ route('dashboard.typepeti.edit', [$data_typepeti->id]) }}">
                                         <i class="fa fa-edit mr-2" style="font-size: 20px"></i>
                                     </a>
-                                    <form action="{{ route('dashboard.user.destroy', $data->id) }}" method="POST"
-                                        style="display: inline;">
+                                    <form action="{{ route('dashboard.typepeti.destroy', $data_typepeti->id) }}"
+                                        method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"

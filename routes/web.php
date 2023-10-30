@@ -1,22 +1,16 @@
 <?php
 
-use App\Models\m_asset;
-use App\Models\asset_status;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PetiController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\M_userController;
 use App\Http\Controllers\M_assetController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Http\Controllers\PengadaanController;
-use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TypePetiController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\PeminjamanController;
-use App\Http\Controllers\BarangMasukController;
-use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\PengembalianController;
-use App\Http\Controllers\SettingPlatformController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +100,39 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(func
         Route::get('pengembalian/{id}/edit', 'edit')->name('pengembalian.edit');
         Route::put('pengembalian/{id}', 'update')->name('pengembalian.update');
         Route::delete('pengembalian/delete/{id}', 'destroy')->name('pengembalian.destroy');
+    });
+
+    //Halaman Customer
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('customer', 'index')->name('customer.index');
+        Route::get('customer/create', 'create')->name('customer.create');
+        Route::post('customer/store', 'store')->name('customer.store');
+        Route::get('customer/{id}', 'show')->name('customer.show');
+        Route::get('customer/{id}/edit', 'edit')->name('customer.edit');
+        Route::put('customer/{id}', 'update')->name('customer.update');
+        Route::delete('customer/delete/{id}', 'destroy')->name('customer.destroy');
+    });
+
+    //Halaman Type Peti
+    Route::controller(TypePetiController::class)->group(function () {
+        Route::get('typepeti', 'index')->name('typepeti.index');
+        Route::get('typepeti/create', 'create')->name('typepeti.create');
+        Route::post('typepeti/store', 'store')->name('typepeti.store');
+        Route::get('typepeti/{id}', 'show')->name('typepeti.show');
+        Route::get('typepeti/{id}/edit', 'edit')->name('typepeti.edit');
+        Route::put('typepeti/{id}', 'update')->name('typepeti.update');
+        Route::delete('typepeti/delete/{id}', 'destroy')->name('typepeti.destroy');
+    });
+
+    //Halaman Peti
+    Route::controller(PetiController::class)->group(function () {
+        Route::get('peti', 'index')->name('peti.index');
+        Route::get('peti/create', 'create')->name('peti.create');
+        Route::post('peti/store', 'store')->name('peti.store');
+        Route::get('peti/{id}', 'show')->name('peti.show');
+        Route::get('peti/{id}/edit', 'edit')->name('peti.edit');
+        Route::put('peti/{id}', 'update')->name('peti.update');
+        Route::delete('peti/delete/{id}', 'destroy')->name('peti.destroy');
     });
 });
 
