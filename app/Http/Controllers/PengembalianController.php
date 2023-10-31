@@ -63,18 +63,32 @@ class PengembalianController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'asset_id' => 'required',
+            'peti_id' => 'required',
             'exit_at' => 'required',
-            'exit_pic' => 'required',
+            'est_pengembalian' => 'required',
+            'exit_warehouse' => 'required',
             'enter_at' => 'required',
-            'enter_pic' => 'required',
             'enter_warehouse' => 'required',
+            'kondisi_peti' => 'required',
         ]);
 
         try {
             $peminjaman = asset_status::findOrFail($id);
-            $peminjaman['updated_by'] = Auth::user()->fullname; // Menambahkan ID pengguna sebagai updated_by
-            $peminjaman->update($request->all());
+
+            // Update atribut-atribut yang diperlukan
+            $peminjaman->enter_pic = Auth::user()->id;
+            $peminjaman->updated_by = Auth::user()->id;
+
+            $peminjaman->peti_id = $request->input('peti_id');
+            $peminjaman->exit_at = $request->input('exit_at');
+            $peminjaman->est_pengembalian = $request->input('est_pengembalian');
+            $peminjaman->exit_warehouse = $request->input('exit_warehouse');
+            $peminjaman->enter_at = $request->input('enter_at');
+            $peminjaman->enter_warehouse = $request->input('enter_warehouse');
+            $peminjaman->kondisi_peti = $request->input('kondisi_peti');
+
+            // dd($peminjaman);
+            $peminjaman->save();
 
             return redirect()->route('dashboard.pengembalian.index')->with('success', 'Data peminjaman berhasil diperbaharui');
         } catch (\Throwable $th) {
@@ -85,21 +99,29 @@ class PengembalianController extends Controller
 
     // public function update(Request $request, $id)
     // {
+    //     // dd($request->all());
     //     $request->validate([
-    //         'asset_id' => 'required',
+    //         'peti_id' => 'required',
     //         'exit_at' => 'required',
-    //         'exit_pic' => 'required',
+    //         'est_pengembalian' => 'required',
+    //         'exit_warehouse' => 'required',
     //         'enter_at' => 'required',
-    //         'enter_pic' => 'required',
     //         'enter_warehouse' => 'required',
+    //         'kondisi_peti' => 'required',
     //     ]);
+    //     // dd($request);
+
     //     try {
     //         $peminjaman = asset_status::findOrFail($id);
-    //         $peminjaman['updated_by'] = Auth::user()->fullname; // Menambahkan ID pengguna sebagai updated_by
+    //         $peminjaman['enter_pic'] = Auth::user()->id; // Menambahkan ID pengguna sebagai updated_by
+    //         $peminjaman['updated_by'] = Auth::user()->id; // Menambahkan ID pengguna sebagai updated_by
+    //         dd($peminjaman);
     //         $peminjaman->update($request->all());
-    //         return redirect()->route('pengembalian.index')->with('success', 'Data peminjaman berhasil diperbaharui');
+
+    //         return redirect()->route('dashboard.pengembalian.index')->with('success', 'Data peminjaman berhasil diperbaharui');
     //     } catch (\Throwable $th) {
-    //         return redirect()->back()->with('error', 'Data peminjaman gagal diperbaharui');
+    //         // Tampilkan pesan kesalahan untuk debugging
+    //         return redirect()->back()->with('error', 'Data peminjaman gagal diperbaharui: ' . $th->getMessage());
     //     }
     // }
 

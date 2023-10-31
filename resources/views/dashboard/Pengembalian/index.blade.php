@@ -22,6 +22,7 @@
                                 <th>No</th>
                                 <th>Kode Peti</th>
                                 <th>Tgl Peinjaman</th>
+                                <th>Estimasi Pengembalian</th>
                                 <th>PJ Peminjaman</th>
                                 <th>Asal WH Peminjaman</th>
                                 <th>Tgl Pengembalian</th>
@@ -45,6 +46,7 @@
                                     <td>{{ $data->peti->customer->code_customer }} -
                                         {{ $data->peti->tipe_peti->type }}</td>
                                     <td>{{ \Carbon\Carbon::parse($data->exit_at)->format('d/m/Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($data->est_pengembalian)->format('d/m/Y') }}</td>
                                     <td>{{ $data->exit_pic }}</td>
                                     <td>{{ $data->warehouse->name }}</td>
                                     <td>
