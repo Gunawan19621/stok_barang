@@ -9,6 +9,11 @@
                 </div>
             </div>
         </div>
+
+
+        @include('layouts.components.alert-prompt')
+
+
         <div class="card-body">
             <form action="{{ route('dashboard.user.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

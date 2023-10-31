@@ -28,7 +28,7 @@
 
                 <div class="container-fluid">
                     <!-- allert update data foto -->
-                    @if (session()->has('success'))
+                    {{-- @if (session()->has('success'))
                         <div id="success-alert" class="alert alert-success floating-alert">
                             {{ session()->get('success') }}
                         </div>
@@ -36,7 +36,7 @@
                         <div id="error-alert" class="alert alert-danger floating-alert">
                             X {{ session()->get('error') }}
                         </div>
-                    @endif
+                    @endif --}}
 
                     <!-- Main Bar -->
                     @yield('content')

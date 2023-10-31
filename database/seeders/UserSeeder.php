@@ -15,10 +15,10 @@ class UserSeeder extends Seeder
     {
         User::create([
             'username' => 'admin',
-            'fullname' => 'Admin User',
-            'nip' => '12345',
+            'fullname' => 'Admin System',
+            'nip' => '1234567890123456',
             'email' => 'admin@gmail.com',
-            'no_hp' => '1234567890',
+            'no_hp' => '085159079010',
             'divisi' => 'Admin Division',
             'tgl_lahir' => '1990-01-01',
             'jenis_kelamin' => 'Laki-laki',
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'foto' => '', // Ganti dengan nama berkas foto jika diperlukan
             'role_id' => 1, // Ganti dengan ID peran yang sesuai
             'warehouse_id' => 1, // Ganti dengan ID gudang yang sesuai
-            'address' => 'Alamat Admin',
+            'address' => 'Jalan Ciwatu',
             'email_verified_at' => now(),
             'password' => bcrypt('admin'),
             'created_by' => 'Seeder',
@@ -35,21 +35,21 @@ class UserSeeder extends Seeder
 
         // User lainnya
         User::create([
-            'username' => 'user1',
-            'fullname' => 'User Satu',
-            'nip' => '54321',
-            'email' => 'user1@gmail.com',
-            'no_hp' => '9876543210',
-            'divisi' => 'Divisi Satu',
+            'username' => 'Operator',
+            'fullname' => 'Operator System',
+            'nip' => '6543210987654321',
+            'email' => 'operator@gmail.com',
+            'no_hp' => '087779767603',
+            'divisi' => 'Operator Gudang',
             'tgl_lahir' => '1985-05-15',
             'jenis_kelamin' => 'Perempuan',
-            'agama' => 'Kristen',
+            'agama' => 'Islam',
             'foto' => '', // Ganti dengan nama berkas foto jika diperlukan
             'role_id' => 2, // Ganti dengan ID peran yang sesuai
             'warehouse_id' => 2, // Ganti dengan ID gudang yang sesuai
-            'address' => 'Alamat User Satu',
+            'address' => 'Jalan Gelarmendala',
             'email_verified_at' => now(),
-            'password' => bcrypt('user1'),
+            'password' => bcrypt('operator'),
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidasiCreateCustomer;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,26 +35,13 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidasiCreateCustomer $request)
     {
-        // dd('oke');
-        $request->validate([
-            'name' => 'required',
-            'code_customer' => 'required',
-            'lot_no' => 'required',
-            'nip' => '',
-            'no_hp' => 'required',
-            'tgl_lahir' => '',
-            'jenis_kelamin' => '',
-            'agama' => '',
-            'address' => 'required',
-        ]);
-
         try {
             $currentUser = Auth::user();
             $validatedData = $request->except('_token');
-            $validatedData['created_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai created_by
-            $validatedData['updated_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai updated_by
+            $validatedData['created_by'] = $currentUser->id; // Menggunakan nama pengguna sebagai created_by
+            $validatedData['updated_by'] = $currentUser->id; // Menggunakan nama pengguna sebagai updated_by
             Customer::create($validatedData);
             return redirect()->route('dashboard.customer.index')->with('success', 'Data customer berhasil ditambahkan');
         } catch (\Throwable $th) {
@@ -95,11 +83,7 @@ class CustomerController extends Controller
             'name' => 'required',
             'code_customer' => 'required',
             'lot_no' => 'required',
-            'nip' => 'required',
-            'no_hp' => 'required',
-            'tgl_lahir' => 'required',
-            'jenis_kelamin' => 'required',
-            'agama' => 'required',
+            'no_tlp' => 'required',
             'address' => 'required',
         ]);
         // dd($request);

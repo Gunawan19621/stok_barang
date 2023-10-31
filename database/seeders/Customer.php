@@ -14,28 +14,20 @@ class Customer extends Seeder
     public function run(): void
     {
         DB::table('customers')->insert([
-            'name' => 'Gunawan',
-            'code_customer' => 'G',
-            'lot_no' => 'CWT',
-            'nip' => '1234567890987654',
-            'no_hp' => '085159079010',
-            // 'tgl_lahir' => '19-06-2001',
-            'jenis_kelamin' => 'Laki-Laki',
-            'agama' => 'Islam',
-            'address' => 'CIwatu',
+            'name' => 'DHARMA',
+            'code_customer' => 'DPM',
+            'lot_no' => 'JKT23',
+            'no_tlp' => '02122344',
+            'address' => 'Jalan Raya Ciwatu',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);
         DB::table('customers')->insert([
-            'name' => 'Andra Ryandra',
-            'code_customer' => 'AR',
-            'lot_no' => 'KA',
-            'nip' => '1234567890987',
-            'no_hp' => '085159079011',
-            // 'tgl_lahir' => '19-06-2001',
-            'jenis_kelamin' => 'Laki-Laki',
-            'agama' => 'Islam',
-            'address' => 'CIwatu',
+            'name' => 'ADHI CHANDRA',
+            'code_customer' => 'ACJ',
+            'lot_no' => 'JKT23',
+            'no_tlp' => '02198765',
+            'address' => 'Jalan Raya Gelarmendala',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

@@ -16,15 +16,15 @@ class RoleSeeder extends Seeder
         // Role Admin
         m_role::create([
             'name' => 'Admin',
-            'description' => 'Peran admin sistem',
+            'description' => 'admin sistem',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);
 
         // Role User
         m_role::create([
-            'name' => 'User',
-            'description' => 'Peran pengguna biasa',
+            'name' => 'Operator',
+            'description' => 'Operator sistem',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

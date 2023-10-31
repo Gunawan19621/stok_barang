@@ -40,7 +40,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
                                     </div>
                                     <form class="user" method="POST" action="{{ route('login') }}">
                                         @csrf
@@ -49,16 +49,26 @@
                                                 aria-describedby="emailHelp" name="email" value="{{ old('email') }}"
                                                 required autofocus autocomplete="username"
                                                 placeholder="Masukan Email anda">
+                                            @if ($errors->has('email'))
+                                                <div class="alert alert-danger">
+                                                    {{ $errors->first('email') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="password"
                                                 name="password" required autocomplete="current-password"
                                                 placeholder="Masukan password anda">
+                                            @if ($errors->has('password'))
+                                                <div class="alert alert-danger">
+                                                    {{ $errors->first('password') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                            <input id="remember_me" type="checkbox" name="remember"
-                                                        class="custom-control-input">
+                                                <input id="remember_me" type="checkbox" name="remember"
+                                                    class="custom-control-input">
                                                 <label for="remember_me" class="custom-control-label">
                                                     <span>Remember Me</span>
                                                 </label>
@@ -79,9 +89,9 @@
                                     <!-- <hr> -->
                                     <!-- <div class="text-center">
                                         @if (Route::has('password.request'))
-                                            <a class="small" href="{{ route('password.request') }}">Forgot your
+<a class="small" href="{{ route('password.request') }}">Forgot your
                                                 password?</a>
-                                        @endif
+@endif
                                     </div> -->
 
                                     <div class="text-center">

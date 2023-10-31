@@ -7,6 +7,7 @@ use App\Models\m_role;
 use App\Models\m_warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ValidasiCreateUser;
 
 class M_userController extends Controller
 {
@@ -40,17 +41,8 @@ class M_userController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidasiCreateUser $request)
     {
-        $request->validate([
-            'username' => 'required',
-            'fullname' => 'required',
-            'email' => 'required|email',
-            'divisi' => 'required',
-            'role_id' => 'required',
-            'warehouse_id' => 'required',
-            'password' => 'required',
-        ]);
 
         try {
             $currentUser = Auth::user();

@@ -1,10 +1,11 @@
 @extends('layouts.main')
 @section('content')
+    @include('layouts.components.alert-prompt')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
                 <div class="col-6">
-                    <h5 class="m-0 font-weight-bold text-primary mt-2">Data User</h5>
+                    <h5 class="m-0 font-weight-bold text-primary mt-2">Data Customer</h5>
                 </div>
                 <div class="col-6 text-right">
                     <a href="{{ route('dashboard.customer.create') }}" class="btn btn-success btn-icon-split">
@@ -21,7 +22,7 @@
                             <th class="text-center">No</th>
                             <th>Nama</th>
                             <th>Kode Customer</th>
-                            <th>No. HP</th>
+                            <th>No. Telepon</th>
                             <th>Alamat</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -35,7 +36,7 @@
                                 <td class="text-center">{{ $nocustomer++ }}</td>
                                 <td>{{ $data_customer->name }}</td>
                                 <td>{{ $data_customer->code_customer }}</td>
-                                <td>{{ $data_customer->no_hp }}</td>
+                                <td>{{ $data_customer->no_tlp }}</td>
                                 <td>{{ $data_customer->address }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('dashboard.customer.show', [$data_customer->id]) }}">

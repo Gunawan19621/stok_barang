@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidasiCreateWarehouse;
+use App\Http\Requests\ValidasiUpdateWarehouse;
 use App\Models\m_warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,13 +32,9 @@ class WarehouseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidasiCreateWarehouse $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-        ]);
+
         try {
             $currentUser = Auth::user();
             $validatedData = $request->except('_token');
@@ -71,15 +69,8 @@ class WarehouseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(ValidasiUpdateWarehouse $request, $id)
     {
-        // dd('oke');
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-        ]);
-        // dd($request);
         try {
             $warehouse = m_warehouse::findOrFail($id);
             $warehouse->update($request->all());

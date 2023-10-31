@@ -26,38 +26,9 @@
                     <input class="form-control" name="lot_no" type="text" id="lot_no" value="{{ $customer->lot_no }}"
                         placeholder="Masukan lot number" required>
 
-                    <label for="nip" class="col-form-label">NIP Customer:</label>
-                    <input class="form-control" name="nip" type="text" id="nip" value="{{ $customer->nip }}"
-                        placeholder="Masukan NIP customer" required>
-
-                    <label for="no_hp" class="col-form-label">No. HP Customer:</label>
-                    <input class="form-control" name="no_hp" type="text" id="no_hp" value="{{ $customer->no_hp }}"
-                        placeholder="Masukan Nomor Handphone customer" required>
-
-                    <label for="tgl_lahir" class="col-form-label">Tanggal Lahir Customer:</label>
-                    <input class="form-control" name="tgl_lahir" type="date" id="tgl_lahir"
-                        value="{{ $customer->tgl_lahir }}" required>
-
-                    <label for="jenis_kelamin" class="col-form-label">Jenis Kelamin Customer:</label>
-                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" required>
-                        <option disabled>Pilih Jenis Kelamin Customer</option>
-                        <option value="Laki-Laki" {{ $customer->jenis_kelamin === 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki
-                        </option>
-                        <option value="Perempuan" {{ $customer->jenis_kelamin === 'Perempuan' ? 'selected' : '' }}>Perempuan
-                        </option>
-                    </select>
-
-                    <label for="agama" class="col-form-label">Agama Customer:</label>
-                    <select class="form-control" name="agama" id="agama" required>
-                        <option disabled selected>Pilih Agama Customer</option>
-                        <option value="Islam" {{ $customer->agama === 'Islam' ? 'selected' : '' }}>Islam</option>
-                        <option value="Kristen" {{ $customer->agama === 'Kristen' ? 'selected' : '' }}>Kristen</option>
-                        <option value="Katolik" {{ $customer->agama === 'Katolik' ? 'selected' : '' }}>Katolik</option>
-                        <option value="Hindu" {{ $customer->agama === 'Hindu' ? 'selected' : '' }}>Hindu</option>
-                        <option value="Buddha" {{ $customer->agama === 'Buddha' ? 'selected' : '' }}>Buddha</option>
-                        <option value="Konghucu" {{ $customer->agama === 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
-                        <option value="Lainnya" {{ $customer->agama === 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
-                    </select>
+                    <label for="no_tlp" class="col-form-label">No. Telepon Customer:</label>
+                    <input class="form-control" name="no_tlp" type="text" id="no_tlp" value="{{ $customer->no_tlp }}"
+                        placeholder="Masukan nomor telepon customer" required>
 
                     <label for="address" class="col-form-label">Alamat Customer:</label>
                     <textarea class="form-control" name="address" id="address" placeholder="Masukkan alamat customer" required>{{ $customer->address }}</textarea>
