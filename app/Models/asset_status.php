@@ -17,12 +17,12 @@ class asset_status extends Model
         'peti_id', //sudah
         'exit_at', //sudah
         'est_pengembalian', //sudah
-        'exit_pic', //sudah
+        'exit_pic', // di controler
         'exit_warehouse', //sudah
-        'enter_at',
-        'enter_pic',
-        'enter_warehouse',
-        'kondisi_peti',
+        'enter_at', // //sudah
+        'enter_pic', // //sudah
+        'enter_warehouse', // //sudah
+        'kondisi_peti', // //sudah
         'created_by',
         'updated_by',
     ];
