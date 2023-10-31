@@ -12,26 +12,35 @@ class PeminjamanApiController extends Controller
 {
     public function index()
     {
-        $peminjaman = \App\Models\asset_status::with(['asset', 'warehouse'])->get();
+        $peminjaman = \App\Models\asset_status::with(['peti.customer', 'peti.tipe_peti', 'warehouse'])->get();
 
         return ResponseFormatter::success([
             'message' => 'Data peminjaman berhasil diambil',
-            'peminjam' => $peminjaman
+            'asset_status' => $peminjaman
+        ]);
+    }
+
+    public function show($id)
+    {
+        $peminjaman = asset_status::with(['peti',  'warehouse'])->find($id);
+
+        return ResponseFormatter::success([
+            'message' => 'Data peminjaman berhasil diambil ID',
+            'asset_status' => $peminjaman
         ]);
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'asset_id' => 'required',
-            'exit_at' => 'required',
-            'exit_pic' => 'required',
-            'exit_warehouse' => 'required',
+
+        $peminjaman = asset_status::create([
+            'asset_id' => $request->asset_id,
+            'exit_at' => $request->exit_at,
+            'exit_pic' => $request->exit_pic,
+            'exit_warehouse' => $request->exit_warehouse,
+            'created_by' => $request->created_by,
+            'updated_by' => $request->updated_by,
         ]);
-
-        $data = $request->all();
-
-        $peminjaman = asset_status::create($data);
 
         return ResponseFormatter::success([
             'message' => 'Data peminjaman berhasil ditambahkan',
