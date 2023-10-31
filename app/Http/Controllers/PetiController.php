@@ -115,8 +115,14 @@ class PetiController extends Controller
                 'Code Customer : ' .
                 $petiqr->customer->code_customer .
                 "\n" .
+                'ID Peti : ' .
+                $petiqr->tipe_peti->id .
+                "\n" .
                 'Type Peti : ' .
                 $petiqr->tipe_peti->type .
+                "\n" .
+                'ID Warehouse : ' .
+                $petiqr->warehouse->id .
                 "\n" .
                 'Warehouse : ' .
                 $petiqr->warehouse->name .
@@ -223,8 +229,14 @@ class PetiController extends Controller
                 'Code Customer : ' .
                 $peti->customer->code_customer .
                 "\n" .
+                'ID Peti : ' .
+                $peti->tipe_peti->id .
+                "\n" .
                 'Type Peti : ' .
                 $peti->tipe_peti->type .
+                "\n" .
+                'ID Warehouse : ' .
+                $peti->warehouse->id .
                 "\n" .
                 'Warehouse : ' .
                 $peti->warehouse->name .

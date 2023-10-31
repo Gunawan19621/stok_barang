@@ -43,8 +43,14 @@
                                 'Code Customer : ' .
                                 $peti->customer->code_customer .
                                 "\n" .
+                                'ID Peti : ' .
+                                $peti->tipe_peti->id .
+                                "\n" .
                                 'Type Peti : ' .
                                 $peti->tipe_peti->type .
+                                "\n" .
+                                'ID Warehouse : ' .
+                                $peti->warehouse->id .
                                 "\n" .
                                 'Warehouse : ' .
                                 $peti->warehouse->name .
