@@ -64,13 +64,16 @@
                                 'Paking Number : ' .
                                 $peti->packing_no .
                                 "\n" .
+                                'Fix Lot : ' .
+                                $peti->fix_lot .
+                                "\n" .
                                 'Status Peti : ' .
                                 $peti->status_disposal,
                         ) !!}
                     </div>
                     <div class="d-flex justify-content-center mt-2 mb-3">
-                        <a href="{{ route('dashboard.peticetakpdf.cetakpdf', $peti->id) }}" class="btn btn-info">Cetak
-                            Label</a>
+                        <a href="{{ route('dashboard.peticetakpdf.cetakpdf', $peti->id) }}" class="btn btn-info"
+                            target="_blank">Cetak Label</a>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
@@ -79,4 +82,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function bukaPdfDiTabBaru() {
+            window.open("{{ route('dashboard.peticetakpdf.cetakpdf', $peti->id) }}", "_blank");
+        }
+    </script>
 @endsection

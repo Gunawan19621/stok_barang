@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidasiCreatePeti;
+use App\Http\Requests\ValidasiUpdatePeti;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\Peti;
@@ -44,21 +46,8 @@ class PetiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidasiCreatePeti $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'tipe_peti_id' => 'required',
-            'warna' => 'required',
-            'customer_id' => 'required',
-            'warehouse_id' => 'required',
-            'jumlah' => 'required|numeric|min:1',
-            'date_pembuatan' => 'required',
-            'status_disposal' => 'nullable',
-            'packing_no' => 'nullable',
-            'fix_lot' => 'nullable',
-        ]);
-        // dd($request);
         try {
             $currenttype = Auth::user();
 
@@ -160,17 +149,8 @@ class PetiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(ValidasiUpdatePeti $request, $id)
     {
-        $request->validate([
-            'tipe_peti_id' => 'required',
-            'warna' => 'required',
-            'customer_id' => 'required',
-            'warehouse_id' => 'required',
-            'status_disposal' => 'nullable',
-            'date_pembuatan' => 'required',
-        ]);
-
         try {
             $currentuser = Auth::user();
             $typepeti = Peti::findOrFail($id);
@@ -219,58 +199,74 @@ class PetiController extends Controller
 
     public function cetakPdf($id)
     {
-        $peti = Peti::find($id);
+        try {
+            $peti = Peti::find($id);
 
-        // Generate QR Code
-        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(
-            'Nama Customer : ' .
-                $peti->customer->name .
-                "\n" .
-                'Code Customer : ' .
-                $peti->customer->code_customer .
-                "\n" .
-                'ID Peti : ' .
-                $peti->tipe_peti->id .
-                "\n" .
-                'Type Peti : ' .
-                $peti->tipe_peti->type .
-                "\n" .
-                'ID Warehouse : ' .
-                $peti->warehouse->id .
-                "\n" .
-                'Warehouse : ' .
-                $peti->warehouse->name .
-                "\n" .
-                'Ukuran Peti : ' .
-                $peti->tipe_peti->size_peti .
-                "\n" .
-                'Lot Number : ' .
-                $peti->customer->lot_no .
-                "\n" .
-                'Paking Number : ' .
-                $peti->packing_no .
-                "\n" .
-                'Status Peti : ' .
-                $peti->status_disposal
-        ));
+            // Generate QR Code
+            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(
+                'Nama Customer : ' .
+                    $peti->customer->name .
+                    "\n" .
+                    'Code Customer : ' .
+                    $peti->customer->code_customer .
+                    "\n" .
+                    'ID Peti : ' .
+                    $peti->tipe_peti->id .
+                    "\n" .
+                    'Type Peti : ' .
+                    $peti->tipe_peti->type .
+                    "\n" .
+                    'ID Warehouse : ' .
+                    $peti->warehouse->id .
+                    "\n" .
+                    'Warehouse : ' .
+                    $peti->warehouse->name .
+                    "\n" .
+                    'Ukuran Peti : ' .
+                    $peti->tipe_peti->size_peti .
+                    "\n" .
+                    'Lot Number : ' .
+                    $peti->customer->lot_no .
+                    "\n" .
+                    'Paking Number : ' .
+                    $peti->packing_no .
+                    "\n" .
+                    'Fix Lot : ' .
+                    $peti->fix_lot .
 
-        // Inisialisasi Dompdf
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-        $dompdf = new Dompdf($options);
+                    'Status Peti : ' .
+                    $peti->status_disposal
+            ));
 
-        // Load HTML dari view
-        $html = view('dashboard.Master_Data.Manajemen_Peti.Peti.label_pdf', compact('peti', 'qrcode'))->render();
+            // Inisialisasi Dompdf
+            $options = new Options();
+            $options->set('isHtml5ParserEnabled', true);
+            $options->set('isRemoteEnabled', true);
+            $options->set('defaultFont', 'Arial');
+            $dompdf = new Dompdf($options);
 
-        // Load HTML ke Dompdf
-        $dompdf->loadHtml($html);
+            // Load HTML dari view
+            $html = view('dashboard.Master_Data.Manajemen_Peti.Peti.label_pdf', compact('peti', 'qrcode'))->render();
+            $dompdf->loadHtml($html);
 
-        // Render PDF (portrait A4)
-        $dompdf->setPaper('A4', 'horizontal');
-        $dompdf->render();
+            // Render PDF (portrait A4)
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $output = $dompdf->output();
 
-        // Menggunakan stream untuk menghasilkan dan mengunduh PDF
-        return $dompdf->stream('Label_Peti.pdf');
+            // Download file PDF dengan nama yang sesuai
+            return response()->stream(
+                function () use ($output) {
+                    echo $output;
+                },
+                200,
+                [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="label_Peti.pdf"',
+                ]
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mencetak PDF.');
+        }
     }
 }

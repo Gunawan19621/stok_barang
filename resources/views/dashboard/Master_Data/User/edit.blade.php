@@ -1,6 +1,8 @@
 @extends('layouts.main')
 @section('title', 'Update Data User')
 @section('content')
+    @include('layouts.components.alert-prompt')
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">

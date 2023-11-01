@@ -9,7 +9,7 @@
             white-space: nowrap;
         }
     </style>
-    <div class="container-fluid">
+    @if (auth()->user()->role_id == 1)
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Data Pengembalian</h6>
@@ -39,7 +39,7 @@
                             @endphp
                             {{-- @foreach ($peminjaman as $data)
 
-                            @endforeach --}}
+                        @endforeach --}}
                             @forelse ($peminjaman as $data)
                                 <tr>
                                     <td>{{ $no_peminjaman++ }}</td>
@@ -98,6 +98,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /.container-fluid -->
+    @else
+        @include('pages.user.Pengembalian.index')
+    @endif
 @endsection

@@ -1,6 +1,8 @@
 @extends('layouts.main')
 @section('title', 'Tambah User')
 @section('content')
+    @include('layouts.components.alert-prompt')
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
@@ -9,11 +11,6 @@
                 </div>
             </div>
         </div>
-
-
-        @include('layouts.components.alert-prompt')
-
-
         <div class="card-body">
             <form action="{{ route('dashboard.user.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

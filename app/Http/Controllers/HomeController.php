@@ -15,10 +15,22 @@ class HomeController extends Controller
             'jumlahAsset' => \App\Models\m_asset::count(),
             'jumlahPeminjaman' => \App\Models\asset_status::count(),
             'jumlahPengembalian' => \App\Models\asset_status::whereNotNull('enter_at')->count(),
-            'active' => 'menu-dashboard',
+            'active' => 'menu-admin',
         ];
 
         return view('dashboard.index', $data);
+    }
+    public function indexUser()
+    {
+        $data = [
+            'reminder' => \App\Models\asset_status::whereNull('enter_at')->count(),
+            'jumlahAsset' => \App\Models\m_asset::count(),
+            'jumlahPeminjaman' => \App\Models\asset_status::count(),
+            'jumlahPengembalian' => \App\Models\asset_status::whereNotNull('enter_at')->count(),
+            'active' => 'menu-user',
+        ];
+
+        return view('pages.user.index', $data);
     }
 
     public function generateChartData()

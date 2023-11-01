@@ -3,66 +3,71 @@
 @section('content')
 
     @include('layouts.components.alert-prompt')
-
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <div class="row">
-                <div class="col-6">
-                    <h5 class="m-0 font-weight-bold text-primary mt-2">Data Warehouse</h5>
-                </div>
-                <div class="col-6 text-right">
-                    <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#tambahDataModal">
-                        <span class="text">Tambah Data Warehouse</span>
-                    </a>
-                    </a>
+    @if (auth()->user()->role_id == 1)
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="m-0 font-weight-bold text-primary mt-2">Data Gudang</h5>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal"
+                            data-target="#tambahDataModal">
+                            <span class="text">Tambah Data Gudang</span>
+                        </a>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="tablebarang" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th class="text-center" style="width: 50px;">No.</th>
-                            <th>Nama Warehouse</th>
-                            <th>Deskripsi</th>
-                            <th>Alamat</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $nowarehouses = 1;
-                        @endphp
-                        @foreach ($warehouses as $data)
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tablebarang" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <td class="text-center" style="width: 50px;">{{ $nowarehouses++ }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->description }}</td>
-                                <td>{{ $data->address }}</td>
-                                <td class="text-center">
-                                    <a href="#" data-toggle="modal" data-target="#editDataModal{{ $data['id'] }}">
-                                        <i class="fa fa-edit" style="font-size: 20px"></i>
-                                    </a>
-                                    <form action="{{ route('dashboard.warehouse.destroy', $data->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                            style="border: none; background: none; cursor: pointer;">
-                                            <i class="fa fa-trash text-danger" style="font-size: 20px"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                <th class="text-center" style="width: 50px;">No.</th>
+                                <th>Nama Gudang</th>
+                                <th>Deskripsi</th>
+                                <th>Alamat</th>
+                                <th class="text-center">Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @php
+                                $nowarehouses = 1;
+                            @endphp
+                            @foreach ($warehouses as $data)
+                                <tr>
+                                    <td class="text-center" style="width: 50px;">{{ $nowarehouses++ }}</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->description }}</td>
+                                    <td>{{ $data->address }}</td>
+                                    <td class="text-center">
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#editDataModal{{ $data['id'] }}">
+                                            <i class="fa fa-edit" style="font-size: 20px"></i>
+                                        </a>
+                                        <form action="{{ route('dashboard.warehouse.destroy', $data->id) }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                                style="border: none; background: none; cursor: pointer;">
+                                                <i class="fa fa-trash text-danger" style="font-size: 20px"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
         </div>
-    </div>
+    @else
+        @include('pages.user.Master_Data.Warehouse.index')
+    @endif
 
     <!-- Modal Tambah-->
     <div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -70,7 +75,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Warehouse</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Gudang</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,7 +111,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Asset</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Gudang</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

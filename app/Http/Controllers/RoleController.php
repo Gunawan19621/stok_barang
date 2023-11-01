@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\m_role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ValidasiCreateRole;
+use App\Http\Requests\ValidasiUpdateRole;
 
 class RoleController extends Controller
 {
@@ -31,12 +33,8 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidasiCreateRole $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
         try {
             $currentUser = Auth::user();
             $validatedData = $request->except('_token');
@@ -71,9 +69,21 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(ValidasiUpdateRole $request, $id)
     {
-        dd('oke');
+        try {
+            $currentUser = Auth::user();
+            $role = m_role::findOrFail($id); // Cari peran berdasarkan ID
+
+            $validatedData = $request->except('_token');
+            $validatedData['updated_by'] = $currentUser->fullname; // Menggunakan nama pengguna sebagai updated_by
+
+            $role->update($validatedData); // Update data peran
+
+            return redirect()->back()->with('success', 'Data role Berhasil Diperbarui.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Data role Gagal Diperbarui.');
+        }
     }
 
     /**

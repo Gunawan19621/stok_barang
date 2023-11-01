@@ -50,7 +50,7 @@
                                                 required autofocus autocomplete="username"
                                                 placeholder="Masukan Email anda">
                                             @if ($errors->has('email'))
-                                                <div class="alert alert-danger">
+                                                <div class="alert alert-danger rounded mt-1">
                                                     {{ $errors->first('email') }}
                                                 </div>
                                             @endif
@@ -59,12 +59,8 @@
                                             <input type="password" class="form-control form-control-user" id="password"
                                                 name="password" required autocomplete="current-password"
                                                 placeholder="Masukan password anda">
-                                            @if ($errors->has('password'))
-                                                <div class="alert alert-danger">
-                                                    {{ $errors->first('password') }}
-                                                </div>
-                                            @endif
                                         </div>
+
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input id="remember_me" type="checkbox" name="remember"
@@ -79,21 +75,7 @@
                                             Login
                                         </button>
                                         <hr>
-                                        <!-- <a href="#" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="#" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a> -->
                                     </form>
-                                    <!-- <hr> -->
-                                    <!-- <div class="text-center">
-                                        @if (Route::has('password.request'))
-<a class="small" href="{{ route('password.request') }}">Forgot your
-                                                password?</a>
-@endif
-                                    </div> -->
-
                                     <div class="text-center">
                                         <label class="small">Copy Rigth SIOPAS</label>
                                     </div>

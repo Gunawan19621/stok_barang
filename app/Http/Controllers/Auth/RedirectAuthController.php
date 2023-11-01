@@ -15,7 +15,7 @@ class RedirectAuthController extends Controller
                 // Admin
                 return redirect()->route('dashboard.home.admin');
             } else {
-                return redirect()->route('dashboard.home.admin');
+                return redirect()->route('dashboard.home.user');
                 // User (role_id selain 1)
                 // return redirect()->route('dashboard.home.user');
             }

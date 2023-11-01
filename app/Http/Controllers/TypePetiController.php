@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidasiCreateType_Peti;
+use App\Http\Requests\ValidasiUpdateType_Peti;
 use App\Models\Type_peti;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,15 +36,8 @@ class TypePetiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ValidasiCreateType_Peti $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'type' => 'required',
-            'size_peti' => 'required',
-            'description' => 'required',
-        ]);
-        // dd($request);
         try {
             $currenttype = Auth::user();
             $validatedData = $request->except('_token');
@@ -84,15 +79,8 @@ class TypePetiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(ValidasiUpdateType_Peti $request, $id)
     {
-        // dd($request->all());
-        $request->validate([
-            'type' => 'required',
-            'size_peti' => 'required',
-            'description' => 'required',
-        ]);
-        // dd($request);
         try {
             $typepeti = Type_peti::findOrFail($id);
             $typepetiData = $request->all();

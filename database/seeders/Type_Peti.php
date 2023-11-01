@@ -15,16 +15,16 @@ class Type_Peti extends Seeder
     public function run(): void
     {
         DB::table('type_petis')->insert([
-            'type' => 'BS',
+            'type' => 'Bagus',
             'size_peti' => '2 X 2 X 2 X 2',
-            'description' => 'Detail BS',
+            'description' => 'Detail Barang Bagus',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);
         DB::table('type_petis')->insert([
-            'type' => 'BCA',
+            'type' => 'Standar',
             'size_peti' => '3 X 3 X 3 X 3',
-            'description' => 'Detail BCA',
+            'description' => 'Detail Barang Standar',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

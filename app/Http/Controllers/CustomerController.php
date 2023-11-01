@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidasiCreateCustomer;
+use App\Http\Requests\ValidasiUpdateCustomer;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,17 +77,8 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(ValidasiUpdateCustomer $request, $id)
     {
-        // dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'code_customer' => 'required',
-            'lot_no' => 'required',
-            'no_tlp' => 'required',
-            'address' => 'required',
-        ]);
-        // dd($request);
         try {
             $customer = Customer::findOrFail($id);
             $customerData = $request->all();

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('type_petis', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('size_peti');
+            $table->string('type', 20);
+            $table->string('size_peti', 25);
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('created_by', 200)->nullable();
-            $table->string('updated_by', 200)->nullable();
+            $table->string('created_by', 50)->nullable();
+            $table->string('updated_by', 50)->nullable();
         });
     }
 

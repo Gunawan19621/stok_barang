@@ -1,7 +1,8 @@
 @extends('layouts.main')
 @section('title', 'Role')
 @section('content')
-    <div class="container-fluid">
+    @include('layouts.components.alert-prompt')
+    @if (auth()->user()->role_id == 1)
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="row">
@@ -59,7 +60,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        @include('pages.user.Master_Data.Role.index')
+    @endif
 
     <!-- Edit Data Modal-->
     <div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
